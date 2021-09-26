@@ -1,19 +1,21 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import "./App.css";
 import { useAudio } from "./AppLogic";
+import Canvas from "./components/Canvas";
 
 import { MyRangeSlider } from "./components/MyRangeSlider";
 
-// Note: For the actual parameters of audio api, I need to divide by 100 the values here, otherwise the rangeslider does not work with 0.01
 const App: React.FC = () => {
-  const { play, pause, volumeControl, pannerControl } = useAudio(
+  const { play, pause, volumeControl, pannerControl, draw } = useAudio(
     "/assets/outfoxing.mp3"
   );
 
   return (
     <Container fluid className="App text-center">
       <p>This is the start of an awesome project</p>
+
+      <Canvas draw={draw} />
       <Form style={{ width: "30%", margin: "0 auto" }}>
         <MyRangeSlider
           onChangeFunction={volumeControl}
