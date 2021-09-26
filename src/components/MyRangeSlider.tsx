@@ -22,8 +22,7 @@ export const MyRangeSlider: React.FC<MyRangeSliderProps> = ({
   step,
   onChangeFunction,
 }) => {
-  const [value, setValue] = React.useState(1);
-
+  const [value, setValue] = React.useState(0);
   useEffect(() => {
     if (defaultValue) setValue(defaultValue);
   }, []);
@@ -33,6 +32,7 @@ export const MyRangeSlider: React.FC<MyRangeSliderProps> = ({
       <Col xs="3"> {label} </Col>
       <Col xs="7">
         <RangeSlider
+          tooltip="off"
           min={min}
           max={max}
           step={step}
