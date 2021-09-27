@@ -1,6 +1,11 @@
 // for cross browser ( '|| window.webkitAudioContext' has been deleted from below due to ts error)
+// audio worklet will be usefull later on when multiple channels are needed
+// I have thought about: all this volume, pan, compression, controlers can be custom hooks, TBC
 
-const useInit = () => {
+// could not make the gain reduction appear and re render, maybe useRef will help. I will try in the future
+import { useEffect, useState } from "react";
+
+const useInit = (audioElement: HTMLAudioElement) => {
   const AudioContext = window.AudioContext;
   const audioCtx = new AudioContext();
 
@@ -16,6 +21,48 @@ const useInit = () => {
   const pannerControl = (pannerValue: number) => {
     panner.pan.value = pannerValue / 100; // divided by 100 due to range slider's value that can not be small as 0.01
   };
+
+  // Compressor
+  const compressor = audioCtx.createDynamicsCompressor();
+  // Compressor control
+  const compressorThreshold = (thresholdValue: number) => {
+    compressor.threshold.value = thresholdValue / 100;
+  };
+  const compressorKnee = (kneeValue: number) => {
+    compressor.knee.value = kneeValue / 100;
+  };
+  const compressorRatio = (ratioValue: number) => {
+    compressor.ratio.value = ratioValue / 100;
+  };
+  const compressorAttack = (attackValue: number) => {
+    compressor.attack.value = attackValue / 100;
+  };
+  const compressorRelease = (releaseValue: number) => {
+    compressor.release.value = releaseValue / 100;
+  };
+  // Connect compressor
+  const connectCompressor = () => {
+    panner.disconnect(analyserNode);
+    panner.connect(compressor);
+    compressor.connect(analyserNode);
+    analyserNode.connect(audioCtx.destination);
+  };
+  // Disconnect compressor
+  const disconnectCompressor = () => {
+    panner.disconnect(compressor);
+    panner.connect(analyserNode);
+    analyserNode.connect(audioCtx.destination);
+  };
+  const [compressorControl] = useState({
+    compressorThreshold: compressorThreshold,
+    compressorKnee: compressorKnee,
+    compressorRatio: compressorRatio,
+    compressorAttack: compressorAttack,
+    compressorRelease: compressorRelease,
+    connectCompressor: connectCompressor,
+    disconnectCompressor: disconnectCompressor,
+  });
+  // END Compressor
 
   // Oscilloscope
   const analyserNode = audioCtx.createAnalyser();
@@ -58,21 +105,22 @@ const useInit = () => {
     canvasCtx.stroke();
   };
 
-  // Init function
-  const init = (audioElement: HTMLAudioElement) => {
-    const sourceNode = audioCtx.createMediaElementSource(audioElement);
+  const sourceNode = audioCtx.createMediaElementSource(audioElement);
 
-    // Connect everything
-    sourceNode
-      .connect(gainNode) // Volume
-      .connect(panner) // Pan
-      .connect(analyserNode) // Oscilloscope
-      .connect(audioCtx.destination); // Destionation
+  // Connect everything
+  sourceNode.connect(gainNode); // Volume
+  gainNode.connect(panner); // Pan
+  panner.connect(analyserNode); // Oscilloscope
+  analyserNode.connect(audioCtx.destination); // Output
 
-    return { audioCtx };
+  return {
+    volumeControl,
+    pannerControl,
+    compressorControl,
+    draw,
+
+    audioCtx,
   };
-
-  return { volumeControl, pannerControl, draw, init };
 };
 
 // Play / pause audio.
@@ -80,9 +128,8 @@ const useAudio = (audioPath: string) => {
   const audioElement = new Audio(audioPath);
 
   // Get the functions from useInit
-  const { volumeControl, pannerControl, draw, init } = useInit();
-  // Init the audio source
-  const { audioCtx } = init(audioElement);
+  const { volumeControl, pannerControl, compressorControl, draw, audioCtx } =
+    useInit(audioElement);
 
   const play = async () => {
     if (audioCtx.state === "running") return;
@@ -102,6 +149,7 @@ const useAudio = (audioPath: string) => {
     pause,
     volumeControl,
     pannerControl,
+    compressorControl,
     draw,
   };
 };
