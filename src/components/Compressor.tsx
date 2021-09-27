@@ -25,20 +25,20 @@ export const Compressor: React.FC<CompressorProps> = ({
           name="compression"
           type="radio"
           label="NO compression"
-          aria-label="compression-checkbox"
+          aria-label="compression-radio"
           onChange={() => compressorControl.disconnectCompressor()}
           defaultChecked
         />
         <Form.Check
           name="compression"
           type="radio"
-          label="With compression"
-          aria-label="compression-checkbox"
+          label="Compression"
+          aria-label="compression-radio"
           onChange={() => compressorControl.connectCompressor()}
         />
       </Form.Group>
       <MyRangeSlider
-        onChangeFunction={compressorControl.compressorThreshold}
+        onChangeFunction={(e) => compressorControl.compressorThreshold(e)}
         label="Threshold"
         min={-10000}
         max={0}
@@ -47,7 +47,7 @@ export const Compressor: React.FC<CompressorProps> = ({
         className="mt-4 mb-4"
       />
       <MyRangeSlider
-        onChangeFunction={compressorControl.compressorKnee}
+        onChangeFunction={(e) => compressorControl.compressorKnee(e)}
         label="Knee"
         min={0}
         max={4000}
@@ -56,7 +56,7 @@ export const Compressor: React.FC<CompressorProps> = ({
         className="mt-4 mb-4"
       />
       <MyRangeSlider
-        onChangeFunction={compressorControl.compressorRatio}
+        onChangeFunction={(e) => compressorControl.compressorRatio(e)}
         label="Ratio"
         min={100}
         max={1996}
@@ -65,7 +65,7 @@ export const Compressor: React.FC<CompressorProps> = ({
         className="mt-4 mb-4"
       />
       <MyRangeSlider
-        onChangeFunction={compressorControl.compressorAttack}
+        onChangeFunction={(e) => compressorControl.compressorAttack(e)}
         label="Attack"
         min={0}
         max={100}
@@ -74,7 +74,7 @@ export const Compressor: React.FC<CompressorProps> = ({
         className="mt-4 mb-4"
       />
       <MyRangeSlider
-        onChangeFunction={compressorControl.compressorRelease}
+        onChangeFunction={(e) => compressorControl.compressorRelease(e)}
         label="Release"
         min={0}
         max={100}

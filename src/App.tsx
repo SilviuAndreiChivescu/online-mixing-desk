@@ -6,10 +6,18 @@ import Canvas from "./components/Canvas";
 
 import { MyRangeSlider } from "./components/MyRangeSlider";
 import { Compressor } from "./components/Compressor";
+import { Filter } from "./components/Filter";
 
 const App: React.FC = () => {
-  const { play, pause, volumeControl, pannerControl, compressorControl, draw } =
-    useAudio("/assets/outfoxing.mp3");
+  const {
+    play,
+    pause,
+    volumeControl,
+    pannerControl,
+    compressorControl,
+    biquadFilterControl,
+    draw,
+  } = useAudio("/assets/outfoxing.mp3");
 
   return (
     <Container fluid className="App text-center">
@@ -36,6 +44,9 @@ const App: React.FC = () => {
         />
 
         <Compressor compressorControl={compressorControl} />
+
+        <Filter biquadFilterControl={biquadFilterControl} />
+
         <Button onClick={play}>Play</Button>
         <Button className="ms-5" onClick={pause}>
           Pause

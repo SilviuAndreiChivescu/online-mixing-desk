@@ -40,18 +40,23 @@ const useInit = (audioElement: HTMLAudioElement) => {
   const compressorRelease = (releaseValue: number) => {
     compressor.release.value = releaseValue / 100;
   };
+
   // Connect compressor
   const connectCompressor = () => {
-    panner.disconnect(analyserNode);
-    panner.connect(compressor);
-    compressor.connect(analyserNode);
-    analyserNode.connect(audioCtx.destination);
+    gainNode.disconnect(); // Disconnect from gainNode so other effects can be chained as well and work independently or with each other
+    gainNode
+      .connect(compressor) // Connect compressor
+      .connect(panner) // Connect to panner
+      .connect(analyserNode) // Oscilloscope
+      .connect(audioCtx.destination); // Output
   };
   // Disconnect compressor
   const disconnectCompressor = () => {
-    panner.disconnect(compressor);
-    panner.connect(analyserNode);
-    analyserNode.connect(audioCtx.destination);
+    gainNode.disconnect();
+    gainNode
+      .connect(panner)
+      .connect(analyserNode)
+      .connect(audioCtx.destination);
   };
   const [compressorControl] = useState({
     compressorThreshold: compressorThreshold,
@@ -63,6 +68,37 @@ const useInit = (audioElement: HTMLAudioElement) => {
     disconnectCompressor: disconnectCompressor,
   });
   // END Compressor
+
+  // Biquad Filter
+  const biquadFilter = audioCtx.createBiquadFilter();
+  const biquadFilterFreq = (value: number) => {
+    biquadFilter.frequency.value = value;
+  };
+  // Function to set type of filter
+  const biquadFilterType = (value: BiquadFilterType) => {
+    biquadFilter.type = value;
+  };
+
+  const connectBiquadFilter = () => {
+    panner.disconnect();
+    panner
+      .connect(biquadFilter) // Biquad Filter
+      .connect(analyserNode)
+      .connect(audioCtx.destination);
+  };
+
+  const disconnectBiquadFilter = () => {
+    panner.disconnect();
+    panner.connect(analyserNode).connect(audioCtx.destination);
+  };
+
+  const [biquadFilterControl] = useState({
+    connectBiquadFilter: connectBiquadFilter,
+    disconnectBiquadFilter: disconnectBiquadFilter,
+    biquadFilterType: biquadFilterType,
+    biquadFilterFreq: biquadFilterFreq,
+  });
+  // END Biquad Filter
 
   // Oscilloscope
   const analyserNode = audioCtx.createAnalyser();
@@ -108,17 +144,18 @@ const useInit = (audioElement: HTMLAudioElement) => {
   const sourceNode = audioCtx.createMediaElementSource(audioElement);
 
   // Connect everything
-  sourceNode.connect(gainNode); // Volume
-  gainNode.connect(panner); // Pan
-  panner.connect(analyserNode); // Oscilloscope
-  analyserNode.connect(audioCtx.destination); // Output
+  sourceNode
+    .connect(gainNode) // Volume
+    .connect(panner) // Pan
+    .connect(analyserNode) // Oscilloscope
+    .connect(audioCtx.destination); // Output
 
   return {
     volumeControl,
     pannerControl,
     compressorControl,
+    biquadFilterControl,
     draw,
-
     audioCtx,
   };
 };
@@ -128,12 +165,18 @@ const useAudio = (audioPath: string) => {
   const audioElement = new Audio(audioPath);
 
   // Get the functions from useInit
-  const { volumeControl, pannerControl, compressorControl, draw, audioCtx } =
-    useInit(audioElement);
+  const {
+    volumeControl,
+    pannerControl,
+    compressorControl,
+    biquadFilterControl,
+    draw,
+    audioCtx,
+  } = useInit(audioElement);
 
-  const play = async () => {
+  const play = () => {
     if (audioCtx.state === "running") return;
-    await audioCtx.resume();
+    audioCtx.resume();
 
     audioElement.play();
   };
@@ -150,6 +193,7 @@ const useAudio = (audioPath: string) => {
     volumeControl,
     pannerControl,
     compressorControl,
+    biquadFilterControl,
     draw,
   };
 };
