@@ -1,18 +1,16 @@
 import React, { useRef, useEffect } from "react";
 import { useCanvasRef } from "./CanvasLogic";
 
-interface CanvasProps {
+interface OscilloscopeProps {
   draw: (
     canvas: HTMLCanvasElement,
     canvasCtx: CanvasRenderingContext2D
   ) => void;
 }
 
-const Canvas: React.FC<CanvasProps> = (props) => {
+export const Oscilloscope: React.FC<OscilloscopeProps> = (props) => {
   const { draw } = props;
   const { canvasRef } = useCanvasRef(draw);
 
   return <canvas ref={canvasRef} {...props} />;
 };
-
-export default Canvas;

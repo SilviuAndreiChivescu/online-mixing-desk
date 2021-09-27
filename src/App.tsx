@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import "./App.css";
 import { useAudio } from "./AppLogic";
-import Canvas from "./components/Canvas";
+import { Oscilloscope } from "./components/Oscilloscope";
 
 import { MyRangeSlider } from "./components/MyRangeSlider";
 import { Compressor } from "./components/Compressor";
@@ -23,7 +23,7 @@ const App: React.FC = () => {
     <Container fluid className="App text-center">
       <p>This is the start of an awesome project</p>
 
-      <Canvas draw={draw} />
+      <Oscilloscope draw={draw} />
       <Form style={{ width: "30%", margin: "0 auto" }}>
         <MyRangeSlider
           onChangeFunction={volumeControl}
