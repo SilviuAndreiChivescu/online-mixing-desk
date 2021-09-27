@@ -24,7 +24,7 @@ const App: React.FC = () => {
       <p>This is the start of an awesome project</p>
 
       <Oscilloscope draw={draw} />
-      <Form style={{ width: "30%", margin: "0 auto" }}>
+      <section style={{ width: "30%", margin: "0 auto" }}>
         <MyRangeSlider
           onChangeFunction={volumeControl}
           label="Volume"
@@ -51,7 +51,7 @@ const App: React.FC = () => {
         <Button className="ms-5" onClick={pause}>
           Pause
         </Button>
-      </Form>
+      </section>
     </Container>
   );
 };

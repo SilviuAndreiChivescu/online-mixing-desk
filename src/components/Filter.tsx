@@ -8,6 +8,9 @@ interface FilterProps {
     disconnectBiquadFilter: () => void;
     biquadFilterType: (e: any) => void; // takes e of type any because with the correct type 'BiquadFilterType', can't take string from radio buttons, even if 'BiquadFilterType' is string of name 'lowpass', still can not
     biquadFilterFreq: (e: number) => void;
+    biquadFilterDetune: (e: number) => void;
+    biquadFilterQ: (e: number) => void;
+    biquadFilterGain: (e: number) => void;
   };
 }
 
@@ -38,7 +41,7 @@ export const Filter: React.FC<FilterProps> = ({ biquadFilterControl }) => {
           />
         </Col>
       </Row>
-      <Button
+      {/* <Button
         onClick={() =>
           setFreqRowCount([
             ...freqRowCount,
@@ -46,12 +49,15 @@ export const Filter: React.FC<FilterProps> = ({ biquadFilterControl }) => {
           ])
         }
       >
-        {" "}
-        Add another frequency{" "}
-      </Button>
+        Add another frequency
+      </Button> */}
       {freqRowCount.map((e) => {
         return (
-          <FrequencyRow key={e} biquadFilterControl={biquadFilterControl} />
+          <FrequencyRow
+            key={e}
+            e={e}
+            biquadFilterControl={biquadFilterControl}
+          />
         );
       })}
     </Form.Group>
@@ -59,18 +65,21 @@ export const Filter: React.FC<FilterProps> = ({ biquadFilterControl }) => {
 };
 
 interface FrequencyRowProps {
-  key: number;
+  e: number;
   biquadFilterControl: {
     biquadFilterType: (e: any) => void; // takes e of type any because with the correct type 'BiquadFilterType', can't take string from radio buttons, even if 'BiquadFilterType' is string of name 'lowpass', still can not
     biquadFilterFreq: (e: number) => void;
+    biquadFilterDetune: (e: number) => void;
+    biquadFilterQ: (e: number) => void;
+    biquadFilterGain: (e: number) => void;
   };
 }
 const FrequencyRow: React.FC<FrequencyRowProps> = ({
-  key,
+  e,
   biquadFilterControl,
 }) => {
   return (
-    <section key={key}>
+    <section>
       <MyRangeSlider
         onChangeFunction={(e) => biquadFilterControl.biquadFilterFreq(e)}
         label="Frequency"
@@ -80,13 +89,40 @@ const FrequencyRow: React.FC<FrequencyRowProps> = ({
         step={1}
         className="mt-4 mb-4"
       />
+      <MyRangeSlider
+        onChangeFunction={(e) => biquadFilterControl.biquadFilterDetune(e)}
+        label="Detune"
+        min={0}
+        max={15000000}
+        defaultValue={0}
+        step={1000}
+        className="mt-4 mb-4"
+      />
+      <MyRangeSlider
+        onChangeFunction={(e) => biquadFilterControl.biquadFilterQ(e)}
+        label="Q"
+        min={0}
+        max={100000}
+        defaultValue={0}
+        step={100}
+        className="mt-4 mb-4"
+      />
+      <MyRangeSlider
+        onChangeFunction={(e) => biquadFilterControl.biquadFilterGain(e)}
+        label="Gain"
+        min={-4000}
+        max={4000}
+        defaultValue={0}
+        step={1000}
+        className="mt-4 mb-4"
+      />
       <p>Type of filter: </p>
       <Form>
         <Row xs={4} lg={4} xl={4}>
           <Col>
             <Form.Check
               value="lowpass"
-              name={`typeNo${key}`}
+              name={`typeNo${e}`}
               type="radio"
               label="lowpass"
               aria-label="type-radio"
@@ -99,7 +135,7 @@ const FrequencyRow: React.FC<FrequencyRowProps> = ({
           <Col>
             <Form.Check
               value="highpass"
-              name={`typeNo${key}`}
+              name={`typeNo${e}`}
               type="radio"
               label="highpass"
               aria-label="type-radio"
@@ -111,7 +147,7 @@ const FrequencyRow: React.FC<FrequencyRowProps> = ({
           <Col>
             <Form.Check
               value="bandpass"
-              name={`typeNo${key}`}
+              name={`typeNo${e}`}
               type="radio"
               label="bandpass"
               aria-label="type-radio"
@@ -123,7 +159,7 @@ const FrequencyRow: React.FC<FrequencyRowProps> = ({
           <Col>
             <Form.Check
               value="lowshelf"
-              name={`typeNo${key}`}
+              name={`typeNo${e}`}
               type="radio"
               label="lowshelf"
               aria-label="type-radio"
@@ -135,7 +171,7 @@ const FrequencyRow: React.FC<FrequencyRowProps> = ({
           <Col>
             <Form.Check
               value="highshelf"
-              name={`typeNo${key}`}
+              name={`typeNo${e}`}
               type="radio"
               label="highshelf"
               aria-label="type-radio"
@@ -147,7 +183,7 @@ const FrequencyRow: React.FC<FrequencyRowProps> = ({
           <Col>
             <Form.Check
               value="peaking"
-              name={`typeNo${key}`}
+              name={`typeNo${e}`}
               type="radio"
               label="peaking"
               aria-label="type-radio"
@@ -159,7 +195,7 @@ const FrequencyRow: React.FC<FrequencyRowProps> = ({
           <Col>
             <Form.Check
               value="notch"
-              name={`typeNo${key}`}
+              name={`typeNo${e}`}
               type="radio"
               label="notch"
               aria-label="type-radio"
@@ -171,7 +207,7 @@ const FrequencyRow: React.FC<FrequencyRowProps> = ({
           <Col>
             <Form.Check
               value="allpass"
-              name={`typeNo${key}`}
+              name={`typeNo${e}`}
               type="radio"
               label="allpass"
               aria-label="type-radio"
