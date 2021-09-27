@@ -5,11 +5,11 @@ import { useAudio } from "./AppLogic";
 import Canvas from "./components/Canvas";
 
 import { MyRangeSlider } from "./components/MyRangeSlider";
+import { Compressor } from "./components/Compressor";
 
 const App: React.FC = () => {
-  const { play, pause, volumeControl, pannerControl, draw } = useAudio(
-    "/assets/outfoxing.mp3"
-  );
+  const { play, pause, volumeControl, pannerControl, compressorControl, draw } =
+    useAudio("/assets/outfoxing.mp3");
 
   return (
     <Container fluid className="App text-center">
@@ -34,6 +34,8 @@ const App: React.FC = () => {
           step={1}
           className="mt-4 mb-4"
         />
+
+        <Compressor compressorControl={compressorControl} />
         <Button onClick={play}>Play</Button>
         <Button className="ms-5" onClick={pause}>
           Pause
