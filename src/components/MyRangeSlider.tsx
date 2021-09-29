@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Col, Form, Row } from "react-bootstrap";
 import RangeSlider from "react-bootstrap-range-slider";
@@ -22,10 +22,7 @@ export const MyRangeSlider: React.FC<MyRangeSliderProps> = ({
   step,
   onChangeFunction,
 }) => {
-  const [value, setValue] = React.useState(0);
-  useEffect(() => {
-    if (defaultValue) setValue(defaultValue);
-  }, []);
+  const [value, setValue] = useState(defaultValue || 0);
 
   return (
     <Form.Group className={className} as={Row}>
@@ -38,13 +35,13 @@ export const MyRangeSlider: React.FC<MyRangeSliderProps> = ({
           step={step}
           value={value}
           onChange={(e) => {
-            setValue(parseInt(e.target.value));
-            onChangeFunction(parseInt(e.target.value));
+            setValue(parseFloat(e.target.value));
+            onChangeFunction(parseFloat(e.target.value));
           }}
         />
       </Col>
       <Col xs="2">
-        <Form.Control className="text-center" disabled value={value / 100} />
+        <Form.Control className="text-center" disabled value={value} />
       </Col>
     </Form.Group>
   );

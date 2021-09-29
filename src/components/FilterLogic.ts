@@ -9,17 +9,17 @@ const useBiquadFilter = (
 
   // Set freq
   const biquadFilterFreq = (value: number) => {
-    biquadFilter.frequency.value = value / 100;
+    biquadFilter.frequency.value = value;
   };
 
   // Set Q
   const biquadFilterQ = (value: number) => {
-    biquadFilter.Q.value = value / 100;
+    biquadFilter.Q.value = value;
   };
 
   // Set gain
   const biquadFilterGain = (value: number) => {
-    biquadFilter.gain.value = value / 100;
+    biquadFilter.gain.value = value;
   };
 
   // Function to set type of filter

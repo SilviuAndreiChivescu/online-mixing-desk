@@ -13,15 +13,14 @@ const useInit = (audioElement: HTMLAudioElement) => {
 
   // Gain
   const gainNode = audioCtx.createGain();
-  const volumeControl = (volumeValue: number) => {
-    gainNode.gain.value = volumeValue / 100; // divided by 100 due to range slider's value that can not be small as 0.01
+  const gainControl = (gainValue: number) => {
+    gainNode.gain.value = gainValue;
   };
 
   // Panning
-  const pannerOptions = { pan: 0 };
-  const panner = new StereoPannerNode(audioCtx, pannerOptions);
+  const panner = new StereoPannerNode(audioCtx, { pan: 0 });
   const pannerControl = (pannerValue: number) => {
-    panner.pan.value = pannerValue / 100; // divided by 100 due to range slider's value that can not be small as 0.01
+    panner.pan.value = pannerValue;
   };
 
   // Oscilloscope
@@ -51,7 +50,7 @@ const useInit = (audioElement: HTMLAudioElement) => {
     .connect(audioCtx.destination); // Output
 
   return {
-    volumeControl,
+    gainControl,
     pannerControl,
     compressorControl,
     biquadFilterControl,
@@ -66,7 +65,7 @@ const useAudio = (audioPath: string) => {
 
   // Get the functions from useInit
   const {
-    volumeControl,
+    gainControl,
     pannerControl,
     compressorControl,
     biquadFilterControl,
@@ -90,7 +89,7 @@ const useAudio = (audioPath: string) => {
   return {
     play,
     pause,
-    volumeControl,
+    gainControl,
     pannerControl,
     compressorControl,
     biquadFilterControl,

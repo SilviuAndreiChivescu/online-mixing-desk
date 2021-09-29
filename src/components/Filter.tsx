@@ -184,9 +184,9 @@ const FrequencyRow: React.FC<FrequencyRowProps> = ({
       <MyRangeSlider
         onChangeFunction={(e) => biquadFilterControl.biquadFilterFreq(e)}
         label="Frequency"
-        min={1000}
-        max={2205000}
-        defaultValue={35000}
+        min={10}
+        max={22050}
+        defaultValue={350}
         step={1}
         className="mt-4 mb-4"
       />
@@ -194,18 +194,18 @@ const FrequencyRow: React.FC<FrequencyRowProps> = ({
         onChangeFunction={(e) => biquadFilterControl.biquadFilterQ(e)}
         label="Q"
         min={0}
-        max={100000}
-        defaultValue={0}
+        max={1000}
+        defaultValue={1}
         step={100}
         className="mt-4 mb-4"
       />
       <MyRangeSlider
         onChangeFunction={(e) => biquadFilterControl.biquadFilterGain(e)}
         label="Gain"
-        min={-4000}
-        max={4000}
+        min={-40}
+        max={40}
         defaultValue={0}
-        step={1000}
+        step={10}
         className="mt-4 mb-4"
       />
     </section>

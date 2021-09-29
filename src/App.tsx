@@ -12,7 +12,7 @@ const App: React.FC = () => {
   const {
     play,
     pause,
-    volumeControl,
+    gainControl,
     pannerControl,
     compressorControl,
     biquadFilterControl,
@@ -46,20 +46,20 @@ const App: React.FC = () => {
         className="text-start"
       >
         <MyRangeSlider
-          onChangeFunction={volumeControl}
-          label="Volume"
+          onChangeFunction={gainControl}
+          label="Gain"
           min={0}
-          max={200}
-          defaultValue={100}
-          step={10}
+          max={2}
+          defaultValue={1}
+          step={0.1}
         />
         <MyRangeSlider
           onChangeFunction={pannerControl}
           label="Pan"
-          min={-100}
-          max={100}
+          min={-1}
+          max={1}
           defaultValue={0}
-          step={1}
+          step={0.01}
           className="mt-4 mb-4"
         />
         <Row>

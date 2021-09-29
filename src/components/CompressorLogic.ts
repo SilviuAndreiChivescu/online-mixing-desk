@@ -9,19 +9,19 @@ const useCompressor = (
   const compressor = audioCtx.createDynamicsCompressor();
   // Compressor control
   const compressorThreshold = (thresholdValue: number) => {
-    compressor.threshold.value = thresholdValue / 100;
+    compressor.threshold.value = thresholdValue;
   };
   const compressorKnee = (kneeValue: number) => {
-    compressor.knee.value = kneeValue / 100;
+    compressor.knee.value = kneeValue;
   };
   const compressorRatio = (ratioValue: number) => {
-    compressor.ratio.value = ratioValue / 100;
+    compressor.ratio.value = ratioValue;
   };
   const compressorAttack = (attackValue: number) => {
-    compressor.attack.value = attackValue / 100;
+    compressor.attack.value = attackValue;
   };
   const compressorRelease = (releaseValue: number) => {
-    compressor.release.value = releaseValue / 100;
+    compressor.release.value = releaseValue;
   };
 
   // Connect compressor

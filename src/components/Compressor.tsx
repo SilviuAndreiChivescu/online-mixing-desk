@@ -40,46 +40,46 @@ export const Compressor: React.FC<CompressorProps> = ({
       <MyRangeSlider
         onChangeFunction={(e) => compressorControl.compressorThreshold(e)}
         label="Threshold"
-        min={-10000}
+        min={-100}
         max={0}
-        defaultValue={-2400}
-        step={1000}
+        defaultValue={-24}
+        step={10}
         className="mt-4 mb-4"
       />
       <MyRangeSlider
         onChangeFunction={(e) => compressorControl.compressorKnee(e)}
         label="Knee"
         min={0}
-        max={4000}
-        defaultValue={3200}
-        step={400}
+        max={40}
+        defaultValue={32}
+        step={4}
         className="mt-4 mb-4"
       />
       <MyRangeSlider
         onChangeFunction={(e) => compressorControl.compressorRatio(e)}
         label="Ratio"
-        min={100}
-        max={1996}
-        defaultValue={1048}
-        step={237}
+        min={1}
+        max={19.8}
+        defaultValue={10.4}
+        step={4.7}
         className="mt-4 mb-4"
       />
       <MyRangeSlider
         onChangeFunction={(e) => compressorControl.compressorAttack(e)}
         label="Attack"
         min={0}
-        max={100}
-        defaultValue={0}
-        step={10}
+        max={1}
+        defaultValue={0.003}
+        step={0.1}
         className="mt-4 mb-4"
       />
       <MyRangeSlider
         onChangeFunction={(e) => compressorControl.compressorRelease(e)}
         label="Release"
         min={0}
-        max={100}
-        defaultValue={30}
-        step={10}
+        max={1}
+        defaultValue={0.3}
+        step={0.1}
         className="mt-4 mb-4"
       />
     </>
