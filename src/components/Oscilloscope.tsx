@@ -32,5 +32,5 @@ export const Oscilloscope: React.FC<OscilloscopeProps> = (props) => {
     };
   }, []);
 
-  return <canvas ref={canvasRef} {...props} />;
+  return <canvas ref={canvasRef} />;
 };
