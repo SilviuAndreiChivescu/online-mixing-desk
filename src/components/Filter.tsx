@@ -7,9 +7,7 @@ interface FilterProps {
     connectBiquadFilter: () => void;
     disconnectBiquadFilter: () => void;
     biquadFilterType: (e: any) => void; // takes e of type any because with the correct type 'BiquadFilterType', can't take string from radio buttons, even if 'BiquadFilterType' is string of name 'lowpass', still can not
-    biquadFilterFreq: (e: number) => void;
-    biquadFilterQ: (e: number) => void;
-    biquadFilterGain: (e: number) => void;
+    biquadFilterParams: (e: React.ChangeEvent<HTMLInputElement>) => void;
   };
 }
 
@@ -67,9 +65,7 @@ interface FrequencyRowProps {
   e: number;
   biquadFilterControl: {
     biquadFilterType: (e: any) => void; // takes e of type any because with the correct type 'BiquadFilterType', can't take string from radio buttons, even if 'BiquadFilterType' is string of name 'lowpass', still can not
-    biquadFilterFreq: (e: number) => void;
-    biquadFilterQ: (e: number) => void;
-    biquadFilterGain: (e: number) => void;
+    biquadFilterParams: (e: React.ChangeEvent<HTMLInputElement>) => void;
   };
 }
 const FrequencyRow: React.FC<FrequencyRowProps> = ({
@@ -182,7 +178,8 @@ const FrequencyRow: React.FC<FrequencyRowProps> = ({
       </Form>
       {/* END Type of Filter */}
       <MyRangeSlider
-        onChangeFunction={(e) => biquadFilterControl.biquadFilterFreq(e)}
+        onChangeFunction={(e) => biquadFilterControl.biquadFilterParams(e)}
+        id="frequency"
         label="Frequency"
         min={10}
         max={22050}
@@ -191,7 +188,8 @@ const FrequencyRow: React.FC<FrequencyRowProps> = ({
         className="mt-4 mb-4"
       />
       <MyRangeSlider
-        onChangeFunction={(e) => biquadFilterControl.biquadFilterQ(e)}
+        onChangeFunction={(e) => biquadFilterControl.biquadFilterParams(e)}
+        id="Q"
         label="Q"
         min={0}
         max={1000}
@@ -200,7 +198,8 @@ const FrequencyRow: React.FC<FrequencyRowProps> = ({
         className="mt-4 mb-4"
       />
       <MyRangeSlider
-        onChangeFunction={(e) => biquadFilterControl.biquadFilterGain(e)}
+        onChangeFunction={(e) => biquadFilterControl.biquadFilterParams(e)}
+        id="gain"
         label="Gain"
         min={-40}
         max={40}

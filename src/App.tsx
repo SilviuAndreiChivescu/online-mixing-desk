@@ -46,7 +46,7 @@ const App: React.FC = () => {
         className="text-start"
       >
         <MyRangeSlider
-          onChangeFunction={gainControl}
+          onChangeFunction={(e) => gainControl(e)}
           label="Gain"
           min={0}
           max={2}
@@ -54,7 +54,7 @@ const App: React.FC = () => {
           step={0.1}
         />
         <MyRangeSlider
-          onChangeFunction={pannerControl}
+          onChangeFunction={(e) => pannerControl(e)}
           label="Pan"
           min={-1}
           max={1}

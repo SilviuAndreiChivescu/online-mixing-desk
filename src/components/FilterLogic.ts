@@ -7,19 +7,14 @@ const useBiquadFilter = (
 ) => {
   const biquadFilter = audioCtx.createBiquadFilter();
 
-  // Set freq
-  const biquadFilterFreq = (value: number) => {
-    biquadFilter.frequency.value = value;
-  };
-
-  // Set Q
-  const biquadFilterQ = (value: number) => {
-    biquadFilter.Q.value = value;
-  };
-
-  // Set gain
-  const biquadFilterGain = (value: number) => {
-    biquadFilter.gain.value = value;
+  // Set Biquad Filter's Params: Frequency, Q, Gain
+  const biquadFilterParams = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Take the id and value
+    const { id, value } = e.target;
+    // Make type of proprieties to please Typescript
+    type biquadFilterProperties = "frequency" | "Q" | "gain";
+    // Change the particular property taken from id to the value taken from the slider
+    biquadFilter[id as biquadFilterProperties].value = parseFloat(value);
   };
 
   // Function to set type of filter
@@ -40,13 +35,12 @@ const useBiquadFilter = (
     panner.connect(analyserNode).connect(audioCtx.destination);
   };
 
+  // Object with all filter's functions
   const [biquadFilterControl] = useState({
     connectBiquadFilter: connectBiquadFilter,
     disconnectBiquadFilter: disconnectBiquadFilter,
     biquadFilterType: biquadFilterType,
-    biquadFilterFreq: biquadFilterFreq,
-    biquadFilterQ: biquadFilterQ,
-    biquadFilterGain: biquadFilterGain,
+    biquadFilterParams: biquadFilterParams,
   });
 
   return { biquadFilterControl };

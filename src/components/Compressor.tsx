@@ -6,11 +6,7 @@ interface CompressorProps {
   compressorControl: {
     disconnectCompressor: () => void;
     connectCompressor: () => void;
-    compressorThreshold: (threholdValue: number) => void;
-    compressorKnee: (kneeValue: number) => void;
-    compressorRatio: (ratioValue: number) => void;
-    compressorAttack: (attackValue: number) => void;
-    compressorRelease: (releaseValue: number) => void;
+    compressorParams: (e: React.ChangeEvent<HTMLInputElement>) => void;
   };
 }
 
@@ -38,7 +34,8 @@ export const Compressor: React.FC<CompressorProps> = ({
         />
       </Form.Group>
       <MyRangeSlider
-        onChangeFunction={(e) => compressorControl.compressorThreshold(e)}
+        onChangeFunction={(e) => compressorControl.compressorParams(e)}
+        id="threshold"
         label="Threshold"
         min={-100}
         max={0}
@@ -47,7 +44,8 @@ export const Compressor: React.FC<CompressorProps> = ({
         className="mt-4 mb-4"
       />
       <MyRangeSlider
-        onChangeFunction={(e) => compressorControl.compressorKnee(e)}
+        onChangeFunction={(e) => compressorControl.compressorParams(e)}
+        id="knee"
         label="Knee"
         min={0}
         max={40}
@@ -56,7 +54,8 @@ export const Compressor: React.FC<CompressorProps> = ({
         className="mt-4 mb-4"
       />
       <MyRangeSlider
-        onChangeFunction={(e) => compressorControl.compressorRatio(e)}
+        onChangeFunction={(e) => compressorControl.compressorParams(e)}
+        id="ratio"
         label="Ratio"
         min={1}
         max={19.8}
@@ -65,7 +64,8 @@ export const Compressor: React.FC<CompressorProps> = ({
         className="mt-4 mb-4"
       />
       <MyRangeSlider
-        onChangeFunction={(e) => compressorControl.compressorAttack(e)}
+        onChangeFunction={(e) => compressorControl.compressorParams(e)}
+        id="attack"
         label="Attack"
         min={0}
         max={1}
@@ -74,7 +74,8 @@ export const Compressor: React.FC<CompressorProps> = ({
         className="mt-4 mb-4"
       />
       <MyRangeSlider
-        onChangeFunction={(e) => compressorControl.compressorRelease(e)}
+        onChangeFunction={(e) => compressorControl.compressorParams(e)}
+        id="release"
         label="Release"
         min={0}
         max={1}

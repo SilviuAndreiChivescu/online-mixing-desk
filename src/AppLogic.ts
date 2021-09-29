@@ -13,14 +13,16 @@ const useInit = (audioElement: HTMLAudioElement) => {
 
   // Gain
   const gainNode = audioCtx.createGain();
-  const gainControl = (gainValue: number) => {
-    gainNode.gain.value = gainValue;
+  const gainControl = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    gainNode.gain.value = parseFloat(value);
   };
 
   // Panning
   const panner = new StereoPannerNode(audioCtx, { pan: 0 });
-  const pannerControl = (pannerValue: number) => {
-    panner.pan.value = pannerValue;
+  const pannerControl = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    panner.pan.value = parseFloat(value);
   };
 
   // Oscilloscope

@@ -4,16 +4,18 @@ import { Col, Form, Row } from "react-bootstrap";
 import RangeSlider from "react-bootstrap-range-slider";
 
 interface MyRangeSliderProps {
+  id?: string;
   label: string;
   className?: string;
   min?: number;
   max?: number;
   defaultValue?: number;
   step?: number;
-  onChangeFunction: (value: number) => void;
+  onChangeFunction: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const MyRangeSlider: React.FC<MyRangeSliderProps> = ({
+  id,
   label,
   className,
   min,
@@ -29,6 +31,7 @@ export const MyRangeSlider: React.FC<MyRangeSliderProps> = ({
       <Col xs="3"> {label} </Col>
       <Col xs="7">
         <RangeSlider
+          id={id}
           tooltip="off"
           min={min}
           max={max}
@@ -36,7 +39,7 @@ export const MyRangeSlider: React.FC<MyRangeSliderProps> = ({
           value={value}
           onChange={(e) => {
             setValue(parseFloat(e.target.value));
-            onChangeFunction(parseFloat(e.target.value));
+            onChangeFunction(e);
           }}
         />
       </Col>

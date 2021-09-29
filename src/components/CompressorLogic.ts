@@ -6,22 +6,22 @@ const useCompressor = (
   panner: StereoPannerNode,
   analyserNode: AnalyserNode
 ) => {
+  // Create compressor
   const compressor = audioCtx.createDynamicsCompressor();
-  // Compressor control
-  const compressorThreshold = (thresholdValue: number) => {
-    compressor.threshold.value = thresholdValue;
-  };
-  const compressorKnee = (kneeValue: number) => {
-    compressor.knee.value = kneeValue;
-  };
-  const compressorRatio = (ratioValue: number) => {
-    compressor.ratio.value = ratioValue;
-  };
-  const compressorAttack = (attackValue: number) => {
-    compressor.attack.value = attackValue;
-  };
-  const compressorRelease = (releaseValue: number) => {
-    compressor.release.value = releaseValue;
+
+  // Set Compressor's Params: Threshold, Knee, Ratio, Attack, Release
+  const compressorParams = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Take the id and value
+    const { id, value } = e.target;
+    // Make type of proprieties to please Typescript
+    type compressorProperties =
+      | "threshold"
+      | "knee"
+      | "ratio"
+      | "attack"
+      | "release";
+    // Change the particular property taken from id to the value taken from the slider
+    compressor[id as compressorProperties].value = parseFloat(value);
   };
 
   // Connect compressor
@@ -42,11 +42,7 @@ const useCompressor = (
       .connect(audioCtx.destination);
   };
   const [compressorControl] = useState({
-    compressorThreshold: compressorThreshold,
-    compressorKnee: compressorKnee,
-    compressorRatio: compressorRatio,
-    compressorAttack: compressorAttack,
-    compressorRelease: compressorRelease,
+    compressorParams: compressorParams,
     connectCompressor: connectCompressor,
     disconnectCompressor: disconnectCompressor,
   });
