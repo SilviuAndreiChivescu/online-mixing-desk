@@ -1,4 +1,3 @@
-// for cross browser ( '|| window.webkitAudioContext' has been deleted from below due to ts error)
 // audio worklet will be usefull later on when multiple channels are needed
 
 // could not make the gain reduction appear and re render, maybe useRef will help. I will try in the future
@@ -8,11 +7,11 @@ import { useBiquadFilter } from "./components/FilterLogic";
 import { useOscilloscope } from "./components/OscilloscopeLogic";
 
 const useInit = (audioElement: HTMLAudioElement) => {
-  const AudioContext = window.AudioContext;
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
   const audioCtx = new AudioContext();
   const sourceNode = audioCtx.createMediaElementSource(audioElement);
 
-  // Volume
+  // Gain
   const gainNode = audioCtx.createGain();
   const volumeControl = (volumeValue: number) => {
     gainNode.gain.value = volumeValue / 100; // divided by 100 due to range slider's value that can not be small as 0.01
@@ -43,6 +42,7 @@ const useInit = (audioElement: HTMLAudioElement) => {
     analyserNode
   );
 
+  // the signal flow is actually different, its source -> gain -> filter(s) -> effects? -> compression -> panning -> output
   // Connect everything
   sourceNode
     .connect(gainNode) // Volume
