@@ -8,7 +8,6 @@ interface FilterProps {
     disconnectBiquadFilter: () => void;
     biquadFilterType: (e: any) => void; // takes e of type any because with the correct type 'BiquadFilterType', can't take string from radio buttons, even if 'BiquadFilterType' is string of name 'lowpass', still can not
     biquadFilterFreq: (e: number) => void;
-    biquadFilterDetune: (e: number) => void;
     biquadFilterQ: (e: number) => void;
     biquadFilterGain: (e: number) => void;
   };
@@ -69,7 +68,6 @@ interface FrequencyRowProps {
   biquadFilterControl: {
     biquadFilterType: (e: any) => void; // takes e of type any because with the correct type 'BiquadFilterType', can't take string from radio buttons, even if 'BiquadFilterType' is string of name 'lowpass', still can not
     biquadFilterFreq: (e: number) => void;
-    biquadFilterDetune: (e: number) => void;
     biquadFilterQ: (e: number) => void;
     biquadFilterGain: (e: number) => void;
   };
@@ -80,42 +78,6 @@ const FrequencyRow: React.FC<FrequencyRowProps> = ({
 }) => {
   return (
     <section>
-      <MyRangeSlider
-        onChangeFunction={(e) => biquadFilterControl.biquadFilterFreq(e)}
-        label="Frequency"
-        min={1000}
-        max={2205000}
-        defaultValue={35000}
-        step={1}
-        className="mt-4 mb-4"
-      />
-      <MyRangeSlider
-        onChangeFunction={(e) => biquadFilterControl.biquadFilterDetune(e)}
-        label="Detune"
-        min={0}
-        max={15000000}
-        defaultValue={0}
-        step={1000}
-        className="mt-4 mb-4"
-      />
-      <MyRangeSlider
-        onChangeFunction={(e) => biquadFilterControl.biquadFilterQ(e)}
-        label="Q"
-        min={0}
-        max={100000}
-        defaultValue={0}
-        step={100}
-        className="mt-4 mb-4"
-      />
-      <MyRangeSlider
-        onChangeFunction={(e) => biquadFilterControl.biquadFilterGain(e)}
-        label="Gain"
-        min={-4000}
-        max={4000}
-        defaultValue={0}
-        step={1000}
-        className="mt-4 mb-4"
-      />
       <p>Type of filter: </p>
       <Form>
         <Row xs={4} lg={4} xl={4}>
@@ -218,6 +180,34 @@ const FrequencyRow: React.FC<FrequencyRowProps> = ({
           </Col>
         </Row>
       </Form>
+      {/* END Type of Filter */}
+      <MyRangeSlider
+        onChangeFunction={(e) => biquadFilterControl.biquadFilterFreq(e)}
+        label="Frequency"
+        min={1000}
+        max={2205000}
+        defaultValue={35000}
+        step={1}
+        className="mt-4 mb-4"
+      />
+      <MyRangeSlider
+        onChangeFunction={(e) => biquadFilterControl.biquadFilterQ(e)}
+        label="Q"
+        min={0}
+        max={100000}
+        defaultValue={0}
+        step={100}
+        className="mt-4 mb-4"
+      />
+      <MyRangeSlider
+        onChangeFunction={(e) => biquadFilterControl.biquadFilterGain(e)}
+        label="Gain"
+        min={-4000}
+        max={4000}
+        defaultValue={0}
+        step={1000}
+        className="mt-4 mb-4"
+      />
     </section>
   );
 };

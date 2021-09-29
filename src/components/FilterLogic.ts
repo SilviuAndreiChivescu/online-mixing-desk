@@ -12,11 +12,6 @@ const useBiquadFilter = (
     biquadFilter.frequency.value = value / 100;
   };
 
-  // Set detune
-  const biquadFilterDetune = (value: number) => {
-    biquadFilter.detune.value = value / 100;
-  };
-
   // Set Q
   const biquadFilterQ = (value: number) => {
     biquadFilter.Q.value = value / 100;
@@ -50,7 +45,6 @@ const useBiquadFilter = (
     disconnectBiquadFilter: disconnectBiquadFilter,
     biquadFilterType: biquadFilterType,
     biquadFilterFreq: biquadFilterFreq,
-    biquadFilterDetune: biquadFilterDetune,
     biquadFilterQ: biquadFilterQ,
     biquadFilterGain: biquadFilterGain,
   });
