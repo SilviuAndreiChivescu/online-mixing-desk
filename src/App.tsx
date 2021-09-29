@@ -51,7 +51,7 @@ const App: React.FC = () => {
           min={0}
           max={200}
           defaultValue={100}
-          step={1}
+          step={10}
         />
         <MyRangeSlider
           onChangeFunction={pannerControl}
