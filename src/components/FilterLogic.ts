@@ -21,18 +21,15 @@ const useBiquadFilter = (
   const biquadFilterType = (value: BiquadFilterType) => {
     biquadFilter.type = value;
   };
-
+  // It needs an output, so that if prev connection in the chain gets decconnected, then it does not break the chain
   const connectBiquadFilter = () => {
     panner.disconnect();
-    panner
-      .connect(biquadFilter) // Biquad Filter
-      .connect(analyserNode)
-      .connect(audioCtx.destination);
+    panner.connect(biquadFilter).connect(analyserNode);
   };
 
   const disconnectBiquadFilter = () => {
     panner.disconnect();
-    panner.connect(analyserNode).connect(audioCtx.destination);
+    panner.connect(analyserNode);
   };
 
   // Object with all filter's functions

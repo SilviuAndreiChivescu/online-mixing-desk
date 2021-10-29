@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useCompressor } from "./components/CompressorLogic";
 import { useBiquadFilter } from "./components/FilterLogic";
 import { useOscilloscope } from "./components/OscilloscopeLogic";
+import { useReverb } from "./components/ReverbLogic";
 
 const useInit = (audioElement: HTMLAudioElement) => {
   const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -24,6 +25,9 @@ const useInit = (audioElement: HTMLAudioElement) => {
     const { value } = e.target;
     panner.pan.value = parseFloat(value);
   };
+
+  // Reverb
+  const { convolver, chooseImpulse } = useReverb(audioCtx);
 
   // Oscilloscope
   const { analyserNode, draw } = useOscilloscope(audioCtx);
@@ -48,6 +52,7 @@ const useInit = (audioElement: HTMLAudioElement) => {
   sourceNode
     .connect(gainNode) // Volume
     .connect(panner) // Pan
+    .connect(convolver) // Convolver
     .connect(analyserNode) // Oscilloscope
     .connect(audioCtx.destination); // Output
 
@@ -58,6 +63,7 @@ const useInit = (audioElement: HTMLAudioElement) => {
     biquadFilterControl,
     draw,
     audioCtx,
+    chooseImpulse,
   };
 };
 
@@ -73,6 +79,7 @@ const useAudio = (audioPath: string) => {
     biquadFilterControl,
     draw,
     audioCtx,
+    chooseImpulse,
   } = useInit(audioElement);
 
   const play = () => {
@@ -96,6 +103,7 @@ const useAudio = (audioPath: string) => {
     compressorControl,
     biquadFilterControl,
     draw,
+    chooseImpulse,
   };
 };
 
