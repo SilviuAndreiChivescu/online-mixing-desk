@@ -3,6 +3,7 @@
 // could not make the gain reduction appear and re render, maybe useRef will help. I will try in the future
 import { useEffect, useState } from "react";
 import { useCompressor } from "./components/CompressorLogic";
+import { useDistortion } from "./components/Distortion";
 import { useBiquadFilter } from "./components/FilterLogic";
 import { useOscilloscope } from "./components/OscilloscopeLogic";
 import { useReverb } from "./components/ReverbLogic";
@@ -29,6 +30,9 @@ const useInit = (audioElement: HTMLAudioElement) => {
   // Reverb
   const { convolver, chooseImpulse } = useReverb(audioCtx);
 
+  // Distortion
+  const { distortion } = useDistortion(audioCtx);
+
   // Oscilloscope
   const { analyserNode, draw } = useOscilloscope(audioCtx);
 
@@ -52,7 +56,8 @@ const useInit = (audioElement: HTMLAudioElement) => {
   sourceNode
     .connect(gainNode) // Volume
     .connect(panner) // Pan
-    .connect(convolver) // Convolver
+    // .connect(convolver) // Convolver
+    // .connect(distortion) // Distortion
     .connect(analyserNode) // Oscilloscope
     .connect(audioCtx.destination); // Output
 

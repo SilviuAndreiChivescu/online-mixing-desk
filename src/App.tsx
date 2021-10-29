@@ -44,8 +44,7 @@ const App: React.FC = () => {
         className="text-start"
       >
         {/* Reverb */}
-        <Reverb chooseImpulse={chooseImpulse} />
-        {/* END Reverb */}
+        {/* <Reverb chooseImpulse={chooseImpulse} /> */}
 
         {/* Gain and Panning */}
         {/* <MyRangeSlider
