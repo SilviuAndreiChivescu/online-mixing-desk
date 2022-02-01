@@ -1,9 +1,8 @@
 const useGain = (audioCtx: AudioContext) => {
   // Create Gain Node
   const gainNode = audioCtx.createGain();
-  const gainControl = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    gainNode.gain.value = parseFloat(value);
+  const gainControl = (gainValue: number) => {
+    gainNode.gain.value = gainValue;
   };
   return [gainNode, gainControl];
 };
