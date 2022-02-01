@@ -19,7 +19,7 @@ const useReverb = (audioCtx: AudioContext) => {
 
   chooseImpulse("LargeHall.mp3"); // this probably needs deleted or changed (needs to be the value from the checkbox on UI)
 
-  return [convolver, chooseImpulse];
+  return [convolver, chooseImpulse] as const;
 };
 
 export { useReverb };

@@ -3,6 +3,6 @@ const usePanner = (audioCtx: AudioContext) => {
   const pannerControl = (pannerValue: number) => {
     panner.pan.value = pannerValue;
   };
-  return [panner, pannerControl];
+  return [panner, pannerControl] as const;
 };
 export { usePanner };

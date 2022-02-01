@@ -10,7 +10,7 @@ const useBiquadFilterResonant = (
     biquadFilter["frequency"].value = cutOffValue;
   };
 
-  return [biquadFilter, biquadFilterCutOffFreqControl];
+  return [biquadFilter, biquadFilterCutOffFreqControl] as const;
 };
 
 // highshelf, peaking, lowshelf
@@ -27,7 +27,7 @@ const useBiquadFilterNonResonant = (
     biquadFilter["gain"].value = gainValue;
   };
 
-  return [biquadFilter, biquadFilterGainControl];
+  return [biquadFilter, biquadFilterGainControl] as const;
 };
 
 export { useBiquadFilterResonant, useBiquadFilterNonResonant };

@@ -4,6 +4,6 @@ const useGain = (audioCtx: AudioContext) => {
   const gainControl = (gainValue: number) => {
     gainNode.gain.value = gainValue;
   };
-  return [gainNode, gainControl];
+  return [gainNode, gainControl] as const;
 };
 export { useGain };
