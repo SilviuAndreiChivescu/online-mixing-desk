@@ -5,7 +5,6 @@ const useCompressor = (
   audioCtx: AudioContext,
   pannerNode: StereoPannerNode
 ) => {
-  // V2
   const [compressorOutput] = useGain(audioCtx);
   const compressor = audioCtx.createDynamicsCompressor();
   // Control Compressor's Params: Threshold, Knee, Ratio, Attack, Release
@@ -60,7 +59,6 @@ const useCompressor = (
 
     pannerNode.connect(compressorOutput);
   };
-  // END V2
 
   // Put everything to export into an object
   const [compressorFunctions] = useState({
