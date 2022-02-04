@@ -69,9 +69,10 @@ const useCompressor = (
       dryWetKnob: dryWetKnob,
       setDryWetKnob: setDryWetKnob,
     },
+    compressorOutput: compressorOutput,
   });
 
-  return { compressorFunctions };
+  return [compressorFunctions] as const;
 };
 
 export { useCompressor };
