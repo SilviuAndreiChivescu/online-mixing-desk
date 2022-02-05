@@ -33,7 +33,7 @@ export const Compressor: React.FC<CompressorProps> = ({
           onChange={() => compressorControl.connectCompressor()}
         />
       </Form.Group>
-      <MyRangeSlider
+      {/* <MyRangeSlider
         onChangeFunction={(e) => compressorControl.compressorParams(e)}
         id="threshold"
         label="Threshold"
@@ -82,7 +82,7 @@ export const Compressor: React.FC<CompressorProps> = ({
         defaultValue={0.3}
         step={0.1}
         className="mt-4 mb-4"
-      />
+      /> */}
     </>
   );
 };

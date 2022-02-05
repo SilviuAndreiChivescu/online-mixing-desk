@@ -177,7 +177,7 @@ const FrequencyRow: React.FC<FrequencyRowProps> = ({
         </Row>
       </Form>
       {/* END Type of Filter */}
-      <MyRangeSlider
+      {/* <MyRangeSlider
         onChangeFunction={(e) => biquadFilterControl.biquadFilterParams(e)}
         id="frequency"
         label="Frequency"
@@ -206,7 +206,7 @@ const FrequencyRow: React.FC<FrequencyRowProps> = ({
         defaultValue={0}
         step={10}
         className="mt-4 mb-4"
-      />
+      /> */}
     </section>
   );
 };
