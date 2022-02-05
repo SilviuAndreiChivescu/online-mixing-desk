@@ -5,7 +5,7 @@ import { useAudio } from "./AppLogic";
 import { Oscilloscope } from "./components/Oscilloscope";
 
 import { MyRangeSlider } from "./components/MyRangeSlider";
-import { Compressor } from "./components/Compressor";
+// import { Compressor } from "./components/Compressor";
 import { Filter } from "./components/Filter";
 
 import Reverb from "./components/Reverb";
@@ -78,25 +78,94 @@ import { useInit } from "./hooks/useInit";
 // };
 
 const App: React.FC = () => {
-  const [channelOneFunctions] = useInit();
-  const { play, pause } = channelOneFunctions;
+  const [channelOneFunctions, channelOneUI, setChannelOneUI] = useInit();
+
   return (
-    <div className="App">
+    <div className="App text-center">
       <Container>
-        <Row>
-          <Col>
-            <Button className="mt-5" onClick={play}>
-              Play
-            </Button>
-          </Col>
-          <Col>
-            <Button className=" mt-5" onClick={pause}>
-              Pause
-            </Button>
-          </Col>
-        </Row>
+        <ChannelOne
+          channelOneFunctions={channelOneFunctions}
+          channelOneUI={channelOneUI}
+          setChannelOneUI={setChannelOneUI}
+        />
       </Container>
     </div>
+  );
+};
+
+interface ChannelOneProps {
+  channelOneFunctions: any;
+  channelOneUI: any;
+  setChannelOneUI: any;
+}
+
+const ChannelOne: React.FC<ChannelOneProps> = ({
+  channelOneFunctions,
+  channelOneUI,
+  setChannelOneUI,
+}) => {
+  const { play, pause, EQFunctions } = channelOneFunctions;
+  const { controlHigh, controlMid, controlLow } = EQFunctions.EQControl;
+  const {} = channelOneUI;
+  return (
+    <>
+      <Row>
+        <Col>
+          <Button className="mt-5" onClick={play}>
+            Play
+          </Button>
+        </Col>
+        <Col>
+          <Button className=" mt-5" onClick={pause}>
+            Pause
+          </Button>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <Button
+            className=" mt-5"
+            onClick={() =>
+              setChannelOneUI({ ...channelOneUI, eqOn: !channelOneUI.eqOn })
+            }
+          >
+            EQ On / Off
+          </Button>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <MyRangeSlider
+            onChangeFunction={controlHigh}
+            label="Hi"
+            min={-40}
+            max={40}
+            defaultValue={0}
+            step={1}
+          />
+        </Col>
+        <Col>
+          <MyRangeSlider
+            onChangeFunction={controlMid}
+            label="Mid"
+            min={-40}
+            max={40}
+            defaultValue={0}
+            step={1}
+          />
+        </Col>
+        <Col>
+          <MyRangeSlider
+            onChangeFunction={controlLow}
+            label="Low"
+            min={-40}
+            max={40}
+            defaultValue={0}
+            step={1}
+          />
+        </Col>
+      </Row>
+    </>
   );
 };
 
