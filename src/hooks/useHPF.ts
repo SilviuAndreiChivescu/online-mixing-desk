@@ -11,8 +11,6 @@ const useHPF = (audioCtx: AudioContext, EQOutput: GainNode) => {
 
   // Connect HPF
   const connectHPF = () => {
-    EQOutput.disconnect();
-
     EQOutput.connect(highPass).connect(HPFOutput);
   };
 
