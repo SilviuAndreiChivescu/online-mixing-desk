@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCompressor } from "./useCompressor";
 import { useEQ } from "./useEQ";
 import { useFXUnit } from "./useFXUnit";
@@ -12,9 +12,10 @@ const useChannelLine = (
   withoutCueNode: GainNode
 ) => {
   //*** UI states
+  // AM RAMAS AICI, DEGEABA AM FACUT ATATEA USE STATES AICI DACA EU LE BAG DUPA IN OBJ, PT CA GEN DUPA OBJ ALA TRE MODIFICAT CU SETSATTE U LUI
+  //   FA CE AM FKT CU EQ ON USPR PT TOATE PROB
+  // TESTEAZA ACU EQ CA MERGE SIGURO
   const [channelOn, setChannelOn] = useState(false);
-  const [eqOn, setEqOn] = useState(false);
-  const [eqValues, setEqValues] = useState({ hi: 0.5, mid: 0.5, low: 0.5 }); // todo change these (and below and at gain and slider and at compressor UI and at master filter UI) to correspond to actual defaults
   const [hpfOn, setHpfOn] = useState(false);
   const [hpfValue, setHpfValue] = useState(0);
   const [cueOn, setCueOn] = useState(false);
@@ -35,14 +36,16 @@ const useChannelLine = (
   const [fxUnitOn, setFxUnitOn] = useState(false);
   // ** END FXUnit UI
 
-  // EXPORT ALL UI STATES IN AN OBJ
-  const [UI] = useState({
+  // UI STATES
+  const [UI, setUI] = useState({
+    eqOn: false,
+    // AM RAMAS AICI, AM REALIZAT CA TRE SA FAC STATE U AICI, NU SA FAC UN USESTATE ABOVE SI SA INCERC SA PUN STATU AICI DUPA HAHA
+    // SI ACU AM TERMINAT DE VERIFICAT EQ SI MERGE BLANA BOMBA, CONTINUA DE AICI CU VERIFICATU SI FA CLEAN UP SI MODIFICARI AS NEEDED
+    // GL HF, BE PROUD!
+    // I had here eqValues, but I found out that I can use the state inside the myrangeslider with ease
+    // todo change these (and below and at gain and slider and at compressor UI and at master filter UI) to correspond to actual defaults
     channelOn: channelOn,
     setChannelOn: setChannelOn,
-    eqOn: eqOn,
-    setEqOn: setEqOn,
-    eqValues: eqValues,
-    setEqValues: eqValues,
     hpfOn: hpfOn,
     setHpfOn: setHpfOn,
     hpfValue: hpfValue,
@@ -82,20 +85,22 @@ const useChannelLine = (
   const [analyserNode] = useGain(audioCtx);
   const [pannerNode, controlPannerNode] = usePanner(audioCtx);
 
-  // Connections
   // rest of the nodes are already connected inside the custom hooks that have them (by passing the node in the args)
-  audioSourceNode.connect(channelGainNode).connect(analyserNode);
   const [EQFunctions] = useEQ(audioCtx, analyserNode);
   const [HPFFunctions] = useHPF(audioCtx, EQFunctions.EQOutput);
 
-  HPFFunctions.HPFOutput.connect(pannerNode);
   const [compressorFunctions] = useCompressor(audioCtx, pannerNode);
   const [FXUnitFunctions] = useFXUnit(
     audioCtx,
     compressorFunctions.compressorOutput
   );
-
-  FXUnitFunctions.FXUnitOutput.connect(sliderVolumeNode);
+  // Connections
+  // The connections below need to be made in a useEffect hook because needs to be rerendered only at mounting, otherwise it breaks when rerenders
+  useEffect(() => {
+    audioSourceNode.connect(channelGainNode).connect(analyserNode);
+    HPFFunctions.HPFOutput.connect(pannerNode);
+    FXUnitFunctions.FXUnitOutput.connect(sliderVolumeNode);
+  }, []);
 
   // Cue On
   const connectCue = () => {
@@ -138,6 +143,6 @@ const useChannelLine = (
     compressorFunctions: compressorFunctions,
     FXUnitFunctions: FXUnitFunctions,
   });
-  return [channelLineFunctions, UI] as const;
+  return [channelLineFunctions, UI, setUI] as const;
 };
 export { useChannelLine };
