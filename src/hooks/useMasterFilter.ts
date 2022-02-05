@@ -4,7 +4,7 @@ import { useGain } from "./useGain";
 
 const useMasterFilter = (
   audioCtx: AudioContext,
-  channelVolumeNode: GainNode
+  sliderVolumeNode: GainNode
 ) => {
   const [masterFilterOutput] = useGain(audioCtx);
   const [highPass, controlHighPassCutOff] = useBiquadFilterResonant(
@@ -20,16 +20,16 @@ const useMasterFilter = (
 
   // Connect Master Filter
   const connectMasterFilter = () => {
-    channelVolumeNode.disconnect();
+    sliderVolumeNode.disconnect();
 
-    channelVolumeNode.connect(highPass);
+    sliderVolumeNode.connect(highPass);
   };
 
   // Disconnect Master Filter
   const disconnectMasterFilter = () => {
-    channelVolumeNode.disconnect();
+    sliderVolumeNode.disconnect();
 
-    channelVolumeNode.connect(masterFilterOutput);
+    sliderVolumeNode.connect(masterFilterOutput);
   };
 
   // Put everything to export into an object
