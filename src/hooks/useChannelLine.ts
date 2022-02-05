@@ -15,36 +15,15 @@ const useChannelLine = (
   const [channelOn, setChannelOn] = useState(false);
   const [eqOn, setEqOn] = useState(false);
   const [eqValues, setEqValues] = useState({ hi: 0.5, mid: 0.5, low: 0.5 }); // todo change these (and below and at gain and slider and at compressor UI and at master filter UI) to correspond to actual defaults
+  const [hpfOn, setHpfOn] = useState(false);
   const [hpfValue, setHpfValue] = useState(0);
-  const [sendsValue, setSendsValue] = useState({
-    compressor: false,
-    fxUnit: false,
-  });
   const [cueOn, setCueOn] = useState(false);
   const [gainValue, setGainValue] = useState(0);
   const [sliderValue, setSliderValue] = useState(0);
-  // EXPORT ALL UI STATES IN AN OBJ
-  const [UI] = useState({
-    channelOn: channelOn,
-    setChannelOn: setChannelOn,
-    eqOn: eqOn,
-    setEqOn: setEqOn,
-    eqValues: eqValues,
-    setEqValues: eqValues,
-    hpfValue: hpfValue,
-    setHpfValue: setHpfValue,
-    sendsValue: sendsValue,
-    setSendsValue: setSendsValue,
-    cueOn: cueOn,
-    setCueOn: setCueOn,
-    gainValue: gainValue,
-    setGainValue: setGainValue,
-    sliderValue: sliderValue,
-    setSliderValue: setSliderValue,
-  });
 
   // ** Compressor UI
   // dry wet knob state is already comning from compressor hook
+  const [compressorOn, setCompressorOn] = useState(false);
   const [thresholdValue, setThresholdValue] = useState(0);
   const [ratioValue, setRatioValue] = useState(0);
   const [releaseValue, setReleaseValue] = useState(0);
@@ -53,22 +32,49 @@ const useChannelLine = (
 
   // ** FXUnit UI todo delete later
   // dry wet knob state is already comning from FXUnit hook
+  const [fxUnitOn, setFxUnitOn] = useState(false);
   // ** END FXUnit UI
 
-  const [masterFilterOn, setMasterFilterOn] = useState(false);
-  const [masterFilterValues, setMasterFilterValues] = useState({
-    hpf: 0.5,
-    lpf: 0.5,
-  }); // todo change these AND BELOW AT BOOTH (and below and at gain and slider and at compressor UI) to correspond to actual defaults
-
-  const [boothValue, setBoothValue] = useState(0);
-  const [masterValue, setMasterValue] = useState(0);
-  const [headphonesValue, setHeadphonesValue] = useState(0);
-  // cue mix already coming from useMaster hook
+  // EXPORT ALL UI STATES IN AN OBJ
+  const [UI] = useState({
+    channelOn: channelOn,
+    setChannelOn: setChannelOn,
+    eqOn: eqOn,
+    setEqOn: setEqOn,
+    eqValues: eqValues,
+    setEqValues: eqValues,
+    hpfOn: hpfOn,
+    setHpfOn: setHpfOn,
+    hpfValue: hpfValue,
+    setHpfValue: setHpfValue,
+    cueOn: cueOn,
+    setCueOn: setCueOn,
+    gainValue: gainValue,
+    setGainValue: setGainValue,
+    sliderValue: sliderValue,
+    setSliderValue: setSliderValue,
+    compressorOn: compressorOn,
+    setCompressorOn: setCompressorOn,
+    fxUnitOn: fxUnitOn,
+    setFxUnitOn: setFxUnitOn,
+  });
   //*** END UI states
 
   // todo change this to live audio after testing
   const audioElement = new Audio("/assets/outfoxing.mp3");
+
+  const play = () => {
+    if (audioCtx.state === "running") return;
+    audioCtx.resume();
+    audioElement.play();
+  };
+
+  const pause = async () => {
+    await audioCtx.suspend();
+
+    audioElement.pause();
+  };
+
   const audioSourceNode = audioCtx.createMediaElementSource(audioElement);
   const [channelGainNode, controlChannelGainNode] = useGain(audioCtx);
   const [sliderVolumeNode, controlSliderVolumeNode] = useGain(audioCtx);
@@ -86,8 +92,8 @@ const useChannelLine = (
 
   // Connections
   // rest of the nodes are already connected inside the custom hooks that have them
-  channelGainNode.connect(analyserNode);
-
+  audioSourceNode.connect(channelGainNode).connect(analyserNode);
+  // audioSource works, try with different connections, if u connect master filter etc
   HPFFunctions.HPFOutput.connect(pannerNode);
 
   FXUnitFunctions.FXUnitOutput.connect(sliderVolumeNode);
@@ -104,6 +110,9 @@ const useChannelLine = (
     sliderVolumeNode.disconnect(withoutCueNode);
   };
 
+  // todo I don't know if I really need these or I can just connect it as I have it
+  // and only pause and play? or even better, see how it is for live audio
+
   // Channel ON
   const connectChannel = () => {
     audioSourceNode.connect(channelGainNode);
@@ -116,6 +125,8 @@ const useChannelLine = (
 
   // Put everything to export into an object
   const [channelLineFunctions] = useState({
+    play: play,
+    pause: pause,
     connectCue: connectCue,
     disconnectCue: disconnectCue,
     connectChannel: connectChannel,
@@ -124,6 +135,10 @@ const useChannelLine = (
     controlSliderVolumeNode: controlSliderVolumeNode,
     controlPannerNode: controlPannerNode,
     controlChannelGainNode: controlChannelGainNode,
+    EQFunctions: EQFunctions,
+    HPFFunctions: HPFFunctions,
+    compressorFunctions: compressorFunctions,
+    FXUnitFunctions: FXUnitFunctions,
   });
   return [channelLineFunctions, UI] as const;
 };
