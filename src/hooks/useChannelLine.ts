@@ -78,23 +78,22 @@ const useChannelLine = (
   const audioSourceNode = audioCtx.createMediaElementSource(audioElement);
   const [channelGainNode, controlChannelGainNode] = useGain(audioCtx);
   const [sliderVolumeNode, controlSliderVolumeNode] = useGain(audioCtx);
-
   // todo, this needs to be changed to actual analyser node after testing, also in useEQ file change the type
   const [analyserNode] = useGain(audioCtx);
   const [pannerNode, controlPannerNode] = usePanner(audioCtx);
-  const [compressorFunctions] = useCompressor(audioCtx, pannerNode);
+
+  // Connections
+  // rest of the nodes are already connected inside the custom hooks that have them (by passing the node in the args)
+  audioSourceNode.connect(channelGainNode).connect(analyserNode);
   const [EQFunctions] = useEQ(audioCtx, analyserNode);
   const [HPFFunctions] = useHPF(audioCtx, EQFunctions.EQOutput);
+
+  HPFFunctions.HPFOutput.connect(pannerNode);
+  const [compressorFunctions] = useCompressor(audioCtx, pannerNode);
   const [FXUnitFunctions] = useFXUnit(
     audioCtx,
     compressorFunctions.compressorOutput
   );
-
-  // Connections
-  // rest of the nodes are already connected inside the custom hooks that have them
-  audioSourceNode.connect(channelGainNode).connect(analyserNode);
-  // audioSource works, try with different connections, if u connect master filter etc
-  HPFFunctions.HPFOutput.connect(pannerNode);
 
   FXUnitFunctions.FXUnitOutput.connect(sliderVolumeNode);
 
