@@ -25,6 +25,9 @@ export const MyRangeSlider: React.FC<MyRangeSliderProps> = ({
   onChangeFunction,
 }) => {
   const [value, setValue] = useState(defaultValue || 0);
+  useEffect(() => {
+    onChangeFunction(value);
+  }, [value]);
   return (
     <Form.Group className={className} as={Row}>
       <Col xs="3"> {label} </Col>
@@ -36,10 +39,7 @@ export const MyRangeSlider: React.FC<MyRangeSliderProps> = ({
           max={max}
           step={step}
           value={value}
-          onChange={(e) => {
-            onChangeFunction(parseFloat(e.target.value));
-            setValue(parseFloat(e.target.value));
-          }}
+          onChange={(e) => setValue(parseFloat(e.target.value))}
         />
       </Col>
       <Col xs="2">
