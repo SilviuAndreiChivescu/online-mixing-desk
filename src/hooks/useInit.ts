@@ -10,7 +10,7 @@ const useInit = () => {
   const [masterFunctions] = useMaster(audioCtx);
 
   // todo - 6 channels of these connected accordingly after testing
-  const [channelOneFunctions, channelOneUI] = useChannelLine(
+  const [channelOneFunctions, channelOneUI, setChannelOneUI] = useChannelLine(
     audioCtx,
     masterFunctions.cueNode,
     masterFunctions.withoutCueNode
@@ -65,21 +65,24 @@ const useInit = () => {
   }, [masterFilterOn]);
 
   //* Connections
+  // The connections below need to be made in a useEffect hook otherwise it breaks when rerenders
   //todo check here for back / front / headphones stuff
-  // Booth
-  masterFilterFunctions.masterFilterOutput
-    .connect(masterFunctions.booth.node)
-    .connect(audioCtx.destination); // destination (back left and right) - todo
-  // Master
-  masterFilterFunctions.masterFilterOutput
-    .connect(masterFunctions.master.node)
-    .connect(audioCtx.destination); // destination (front left and right) - todo
+  useEffect(() => {
+    // Booth
+    masterFilterFunctions.masterFilterOutput
+      .connect(masterFunctions.booth.node)
+      .connect(audioCtx.destination); // destination (back left and right) - todo
+    // Master
+    masterFilterFunctions.masterFilterOutput
+      .connect(masterFunctions.master.node)
+      .connect(audioCtx.destination); // destination (front left and right) - todo
 
-  // HeadPhones
-  masterFilterCueFunctions.masterFilterOutput
-    .connect(masterFunctions.headphones.node)
-    .connect(audioCtx.destination); // destination headhpones L and R
+    // HeadPhones
+    masterFilterCueFunctions.masterFilterOutput
+      .connect(masterFunctions.headphones.node)
+      .connect(audioCtx.destination); // destination headhpones L and R
+  }, []);
 
-  return [channelOneFunctions];
+  return [channelOneFunctions, channelOneUI, setChannelOneUI] as const;
 };
 export { useInit };
