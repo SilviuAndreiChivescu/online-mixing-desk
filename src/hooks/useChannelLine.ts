@@ -30,7 +30,7 @@ const useChannelLine = (
 
   // Connections
   // rest of the nodes are already connected inside the custom hooks that have them
-  audioSourceNode.connect(channelGainNode).connect(analyserNode);
+  channelGainNode.connect(analyserNode);
 
   HPFFunctions.HPFOutput.connect(pannerNode);
 
@@ -48,10 +48,22 @@ const useChannelLine = (
     sliderVolumeNode.disconnect(withoutCueNode);
   };
 
+  // Channel ON
+  const connectChannel = () => {
+    audioSourceNode.connect(channelGainNode);
+  };
+
+  // Channel OFF
+  const disconnectChannel = () => {
+    audioSourceNode.disconnect();
+  };
+
   // Put everything to export into an object
   const [channelLineFunctions] = useState({
     connectCue: connectCue,
     disconnectCue: disconnectCue,
+    connectChannel: connectChannel,
+    disconnectChannel: disconnectChannel,
     sliderVolumeNode: sliderVolumeNode,
     controlSliderVolumeNode: controlSliderVolumeNode,
     controlPannerNode: controlPannerNode,
