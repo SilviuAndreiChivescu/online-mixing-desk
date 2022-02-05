@@ -11,7 +11,7 @@ interface MyRangeSliderProps {
   max?: number;
   defaultValue?: number;
   step?: number;
-  onChangeFunction: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeFunction: (e: number) => void;
 }
 
 export const MyRangeSlider: React.FC<MyRangeSliderProps> = ({
@@ -25,7 +25,6 @@ export const MyRangeSlider: React.FC<MyRangeSliderProps> = ({
   onChangeFunction,
 }) => {
   const [value, setValue] = useState(defaultValue || 0);
-
   return (
     <Form.Group className={className} as={Row}>
       <Col xs="3"> {label} </Col>
@@ -38,8 +37,8 @@ export const MyRangeSlider: React.FC<MyRangeSliderProps> = ({
           step={step}
           value={value}
           onChange={(e) => {
+            onChangeFunction(parseFloat(e.target.value));
             setValue(parseFloat(e.target.value));
-            onChangeFunction(e);
           }}
         />
       </Col>
