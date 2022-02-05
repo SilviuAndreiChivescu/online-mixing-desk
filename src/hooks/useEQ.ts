@@ -26,8 +26,6 @@ const useEQ = (audioCtx: AudioContext, analyserNode: any) => {
 
   // Connect EQ
   const connectEQ = () => {
-    analyserNode.disconnect();
-
     analyserNode.connect(high);
   };
 
