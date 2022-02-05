@@ -11,6 +11,39 @@ const useChannelLine = (
   cueNode: GainNode,
   withoutCueNode: GainNode
 ) => {
+  //*** UI states
+  const [channelOn, setChannelOn] = useState(false);
+  const [eqOn, setEqOn] = useState(false);
+  const [eqValues, setEqValues] = useState({ hi: 0.5, mid: 0.5, low: 0.5 }); // todo change these (and below and at gain and slider) to correspond to actual defaults
+  const [hpfValue, setHpfValue] = useState(0);
+  const [sendsValue, setSendsValue] = useState({
+    compressor: false,
+    fxUnit: false,
+  });
+  const [cueOn, setCueOn] = useState(false);
+  const [gainValue, setGainValue] = useState(0);
+  const [sliderValue, setSliderValue] = useState(0);
+  // EXPORT ALL UI STATES IN AN OBJ
+  const [UI] = useState({
+    channelOn: channelOn,
+    setChannelOn: setChannelOn,
+    eqOn: eqOn,
+    setEqOn: setEqOn,
+    eqValues: eqValues,
+    setEqValues: eqValues,
+    hpfValue: hpfValue,
+    setHpfValue: setHpfValue,
+    sendsValue: sendsValue,
+    setSendsValue: setSendsValue,
+    cueOn: cueOn,
+    setCueOn: setCueOn,
+    gainValue: gainValue,
+    setGainValue: setGainValue,
+    sliderValue: sliderValue,
+    setSliderValue: setSliderValue,
+  });
+  //*** END UI states
+
   // todo change this to live audio after testing
   const audioElement = new Audio("/assets/outfoxing.mp3");
   const audioSourceNode = audioCtx.createMediaElementSource(audioElement);
@@ -69,6 +102,6 @@ const useChannelLine = (
     controlPannerNode: controlPannerNode,
     controlChannelGainNode: controlChannelGainNode,
   });
-  return [channelLineFunctions] as const;
+  return [channelLineFunctions, UI] as const;
 };
 export { useChannelLine };
