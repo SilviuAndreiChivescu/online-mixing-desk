@@ -28,6 +28,8 @@ const useMaster = (audioCtx: AudioContext) => {
 
   // Put everything to export into an object
   const [masterFunctions] = useState({
+    cueNode: cueNode,
+    withoutCueNode: withoutCueNode,
     cueNodesCombined: cueNodesCombined,
     booth: {
       node: boothNode,
