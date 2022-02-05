@@ -9,12 +9,12 @@ const useInit = () => {
   const [masterFunctions] = useMaster(audioCtx);
 
   // todo - 6 channels of these connected accordingly after testing
-  const [channelOneFunctions] = useChannelLine(
+  const [channelOneFunctions, UI] = useChannelLine(
     audioCtx,
     masterFunctions.cueNode,
     masterFunctions.withoutCueNode
   );
-
+  // todo I need some main states here for UI for compressor and fx unit
   const [masterFilterFunctions] = useMasterFilter(
     audioCtx,
     channelOneFunctions.sliderVolumeNode

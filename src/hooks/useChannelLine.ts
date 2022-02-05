@@ -14,7 +14,7 @@ const useChannelLine = (
   //*** UI states
   const [channelOn, setChannelOn] = useState(false);
   const [eqOn, setEqOn] = useState(false);
-  const [eqValues, setEqValues] = useState({ hi: 0.5, mid: 0.5, low: 0.5 }); // todo change these (and below and at gain and slider) to correspond to actual defaults
+  const [eqValues, setEqValues] = useState({ hi: 0.5, mid: 0.5, low: 0.5 }); // todo change these (and below and at gain and slider and at compressor UI and at master filter UI) to correspond to actual defaults
   const [hpfValue, setHpfValue] = useState(0);
   const [sendsValue, setSendsValue] = useState({
     compressor: false,
@@ -42,6 +42,29 @@ const useChannelLine = (
     sliderValue: sliderValue,
     setSliderValue: setSliderValue,
   });
+
+  // ** Compressor UI
+  // dry wet knob state is already comning from compressor hook
+  const [thresholdValue, setThresholdValue] = useState(0);
+  const [ratioValue, setRatioValue] = useState(0);
+  const [releaseValue, setReleaseValue] = useState(0);
+  const [attackValue, setAttackValue] = useState(0);
+  // ** END Compressor UI
+
+  // ** FXUnit UI todo delete later
+  // dry wet knob state is already comning from FXUnit hook
+  // ** END FXUnit UI
+
+  const [masterFilterOn, setMasterFilterOn] = useState(false);
+  const [masterFilterValues, setMasterFilterValues] = useState({
+    hpf: 0.5,
+    lpf: 0.5,
+  }); // todo change these AND BELOW AT BOOTH (and below and at gain and slider and at compressor UI) to correspond to actual defaults
+
+  const [boothValue, setBoothValue] = useState(0);
+  const [masterValue, setMasterValue] = useState(0);
+  const [headphonesValue, setHeadphonesValue] = useState(0);
+  // cue mix already coming from useMaster hook
   //*** END UI states
 
   // todo change this to live audio after testing
