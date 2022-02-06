@@ -16,6 +16,9 @@ import HPF from "./components/HPF";
 import EQ from "./components/EQ";
 import Panner from "./components/Panner";
 import Gain from "./components/Gain";
+import Compressor from "./components/Compressor";
+
+//todo change all any types to actual types?
 
 // const App: React.FC = () => {
 //   const {
@@ -137,6 +140,11 @@ const ChannelOne: React.FC<ChannelOneProps> = ({
         HPFFunctions={HPFFunctions}
       />
       <Panner channelOneFunctions={channelOneFunctions} />
+      <Compressor
+        setChannelOneUI={setChannelOneUI}
+        channelOneUI={channelOneUI}
+        compressorFunctions={channelOneFunctions.compressorFunctions}
+      />
     </>
   );
 };
