@@ -14,6 +14,7 @@ import Reverb from "./components/Reverb";
 import { useInit } from "./hooks/useInit";
 import HPF from "./components/HPF";
 import EQ from "./components/EQ";
+import Panner from "./components/Panner";
 
 // const App: React.FC = () => {
 //   const {
@@ -133,6 +134,7 @@ const ChannelOne: React.FC<ChannelOneProps> = ({
         channelOneUI={channelOneUI}
         HPFFunctions={HPFFunctions}
       />
+      <Panner channelOneFunctions={channelOneFunctions} />
     </>
   );
 };
