@@ -19,14 +19,6 @@ const useChannelLine = (
   const [cueOn, setCueOn] = useState(false);
   const [sliderValue, setSliderValue] = useState(0);
 
-  // ** Compressor UI
-  // dry wet knob state is already comning from compressor hook
-  const [thresholdValue, setThresholdValue] = useState(0);
-  const [ratioValue, setRatioValue] = useState(0);
-  const [releaseValue, setReleaseValue] = useState(0);
-  const [attackValue, setAttackValue] = useState(0);
-  // ** END Compressor UI
-
   // ** FXUnit UI todo delete later
   // dry wet knob state is already comning from FXUnit hook
   const [fxUnitOn, setFxUnitOn] = useState(false);
@@ -37,6 +29,7 @@ const useChannelLine = (
     eqOn: false,
     hpfOn: false,
     compressorOn: false,
+    // aici am ramas, sa continui checku, prob fx unit acu si dupa master filter etc..
 
     // todo change these (and below and at gain and slider and at compressor UI and at master filter UI) to correspond to actual defaults
     channelOn: channelOn, //todo this and below needs to be rethinked when I put to live audio
