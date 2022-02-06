@@ -42,8 +42,11 @@ export const MyRangeSlider: React.FC<MyRangeSliderProps> = ({
           onChange={(e) => setValue(parseFloat(e.target.value))}
         />
       </Col>
-      <Col xs="2">
-        <Form.Control className="text-center" disabled value={value} />
+      <Col
+        className="border d-flex justify-content-center align-items-center"
+        xs="2"
+      >
+        {value}
       </Col>
     </Form.Group>
   );
