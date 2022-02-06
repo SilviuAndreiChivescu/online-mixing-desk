@@ -26,9 +26,8 @@ const useCompressor = (
   const [dryGainNode, dryGainControl] = useGain(audioCtx);
   const [wetGainNode, wetGainControl] = useGain(audioCtx);
 
-  // Dry Wet Mix Controller Knob (100 means full wet)
-  const [dryWetKnob, setDryWetKnob] = useState(0.5);
-  useEffect(() => {
+  // Dry Wet Mix Controller Knob (1 means full wet)
+  const setDryWetKnob = (dryWetKnob: number) => {
     if (dryWetKnob > 0.5) {
       dryGainControl(1 - 2 * (dryWetKnob - 0.5));
       wetGainControl(1);
@@ -36,14 +35,16 @@ const useCompressor = (
       wetGainControl(1 - 2 * (0.5 - dryWetKnob));
       dryGainControl(1);
     }
-  }, [dryWetKnob]);
+  };
 
   // Connect compressor to wetGainNode and to compressor output
   //todo check later - If this doesn't work, it should not be on the same line the two connects
-  compressor.connect(wetGainNode).connect(compressorOutput);
+  useEffect(() => {
+    compressor.connect(wetGainNode).connect(compressorOutput);
 
-  // Connect dryGainNode to compressor output
-  dryGainNode.connect(compressorOutput);
+    // Connect dryGainNode to compressor output
+    dryGainNode.connect(compressorOutput);
+  }, []);
 
   // Connect compressor
   const connectCompressor = () => {
@@ -65,10 +66,7 @@ const useCompressor = (
     compressorControl: compressorControl,
     connectCompressor: connectCompressor,
     disconnectCompressor: disconnectCompressor,
-    compressorDryWet: {
-      dryWetKnob: dryWetKnob,
-      setDryWetKnob: setDryWetKnob,
-    },
+    setDryWetKnob: setDryWetKnob,
     compressorOutput: compressorOutput,
   });
 
