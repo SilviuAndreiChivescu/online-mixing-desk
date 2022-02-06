@@ -24,7 +24,10 @@ export const MyRangeSlider: React.FC<MyRangeSliderProps> = ({
   step,
   onChangeFunction,
 }) => {
-  const [value, setValue] = useState(defaultValue || 0);
+  const [value, setValue] = useState(0);
+  useEffect(() => {
+    if (defaultValue) setValue(defaultValue);
+  }, []);
   useEffect(() => {
     onChangeFunction(value);
   }, [value]);
