@@ -16,8 +16,6 @@ const useChannelLine = (
   //   FA CE AM FKT CU EQ ON USPR PT TOATE PROB
   // TESTEAZA ACU EQ CA MERGE SIGURO
   const [channelOn, setChannelOn] = useState(false);
-  const [hpfOn, setHpfOn] = useState(false);
-  const [hpfValue, setHpfValue] = useState(0);
   const [cueOn, setCueOn] = useState(false);
   const [gainValue, setGainValue] = useState(0);
   const [sliderValue, setSliderValue] = useState(0);
@@ -39,17 +37,12 @@ const useChannelLine = (
   // UI STATES
   const [UI, setUI] = useState({
     eqOn: false,
-    // AM RAMAS AICI, AM REALIZAT CA TRE SA FAC STATE U AICI, NU SA FAC UN USESTATE ABOVE SI SA INCERC SA PUN STATU AICI DUPA HAHA
-    // SI ACU AM TERMINAT DE VERIFICAT EQ SI MERGE BLANA BOMBA, CONTINUA DE AICI CU VERIFICATU SI FA CLEAN UP SI MODIFICARI AS NEEDED
-    // GL HF, BE PROUD!
-    // I had here eqValues, but I found out that I can use the state inside the myrangeslider with ease
+    hpfOn: false,
+
     // todo change these (and below and at gain and slider and at compressor UI and at master filter UI) to correspond to actual defaults
-    channelOn: channelOn,
+    channelOn: channelOn, //todo this and below needs to be rethinked when I put to live audio
     setChannelOn: setChannelOn,
-    hpfOn: hpfOn,
-    setHpfOn: setHpfOn,
-    hpfValue: hpfValue,
-    setHpfValue: setHpfValue,
+
     cueOn: cueOn,
     setCueOn: setCueOn,
     gainValue: gainValue,

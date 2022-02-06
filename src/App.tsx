@@ -12,6 +12,7 @@ import Reverb from "./components/Reverb";
 
 // v2
 import { useInit } from "./hooks/useInit";
+import HPF from "./components/HPF";
 
 // const App: React.FC = () => {
 //   const {
@@ -99,13 +100,13 @@ interface ChannelOneProps {
   setChannelOneUI: any;
 }
 
+// This needs to be renamed to Channel, because I will use them all like one, don't think I ll make one for each channel
 const ChannelOne: React.FC<ChannelOneProps> = ({
   channelOneFunctions,
   channelOneUI,
   setChannelOneUI,
 }) => {
-  const { play, pause, EQFunctions } = channelOneFunctions;
-  const { controlHigh, controlMid, controlLow } = EQFunctions.EQControl;
+  const { play, pause, EQFunctions, HPFFunctions } = channelOneFunctions;
   const {} = channelOneUI;
   return (
     <>
@@ -121,10 +122,37 @@ const ChannelOne: React.FC<ChannelOneProps> = ({
           </Button>
         </Col>
       </Row>
+      <EQ
+        setChannelOneUI={setChannelOneUI}
+        channelOneUI={channelOneUI}
+        EQFunctions={EQFunctions}
+      />
+      <HPF
+        setChannelOneUI={setChannelOneUI}
+        channelOneUI={channelOneUI}
+        HPFFunctions={HPFFunctions}
+      />
+    </>
+  );
+};
+
+export default App;
+
+interface EQProps {
+  EQFunctions: any;
+  setChannelOneUI: any;
+  channelOneUI: any;
+}
+
+function EQ({ EQFunctions, setChannelOneUI, channelOneUI }: EQProps) {
+  const { controlHigh, controlMid, controlLow } = EQFunctions.EQControl;
+
+  return (
+    <section className="border align-items-center mt-2 mb-2">
       <Row>
         <Col>
           <Button
-            className=" mt-5"
+            className="mt-2 mb-2"
             onClick={() =>
               setChannelOneUI({ ...channelOneUI, eqOn: !channelOneUI.eqOn })
             }
@@ -165,8 +193,6 @@ const ChannelOne: React.FC<ChannelOneProps> = ({
           />
         </Col>
       </Row>
-    </>
+    </section>
   );
-};
-
-export default App;
+}
