@@ -32,7 +32,7 @@ function EQ({ EQFunctions, setChannelOneUI, channelOneUI }: EQProps) {
       </Row>
       <Row>
         {slidersInfo.map((e: any) => (
-          <Col>
+          <Col key={e.label}>
             <MyRangeSlider
               onChangeFunction={e.onChangeFunction}
               label={e.label}
