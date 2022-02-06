@@ -13,6 +13,7 @@ import Reverb from "./components/Reverb";
 // v2
 import { useInit } from "./hooks/useInit";
 import HPF from "./components/HPF";
+import EQ from "./components/EQ";
 
 // const App: React.FC = () => {
 //   const {
@@ -137,62 +138,3 @@ const ChannelOne: React.FC<ChannelOneProps> = ({
 };
 
 export default App;
-
-interface EQProps {
-  EQFunctions: any;
-  setChannelOneUI: any;
-  channelOneUI: any;
-}
-
-function EQ({ EQFunctions, setChannelOneUI, channelOneUI }: EQProps) {
-  const { controlHigh, controlMid, controlLow } = EQFunctions.EQControl;
-
-  return (
-    <section className="border align-items-center mt-2 mb-2">
-      <Row>
-        <Col>
-          <Button
-            className="mt-2 mb-2"
-            onClick={() =>
-              setChannelOneUI({ ...channelOneUI, eqOn: !channelOneUI.eqOn })
-            }
-          >
-            EQ On / Off
-          </Button>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <MyRangeSlider
-            onChangeFunction={controlHigh}
-            label="Hi"
-            min={-40}
-            max={40}
-            defaultValue={0}
-            step={1}
-          />
-        </Col>
-        <Col>
-          <MyRangeSlider
-            onChangeFunction={controlMid}
-            label="Mid"
-            min={-40}
-            max={40}
-            defaultValue={0}
-            step={1}
-          />
-        </Col>
-        <Col>
-          <MyRangeSlider
-            onChangeFunction={controlLow}
-            label="Low"
-            min={-40}
-            max={40}
-            defaultValue={0}
-            step={1}
-          />
-        </Col>
-      </Row>
-    </section>
-  );
-}
