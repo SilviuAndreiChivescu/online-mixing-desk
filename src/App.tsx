@@ -15,6 +15,7 @@ import { useInit } from "./hooks/useInit";
 import HPF from "./components/HPF";
 import EQ from "./components/EQ";
 import Panner from "./components/Panner";
+import Gain from "./components/Gain";
 
 // const App: React.FC = () => {
 //   const {
@@ -124,6 +125,7 @@ const ChannelOne: React.FC<ChannelOneProps> = ({
           </Button>
         </Col>
       </Row>
+      <Gain channelOneFunctions={channelOneFunctions} />
       <EQ
         setChannelOneUI={setChannelOneUI}
         channelOneUI={channelOneUI}

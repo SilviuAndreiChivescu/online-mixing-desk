@@ -17,7 +17,6 @@ const useChannelLine = (
   // TESTEAZA ACU EQ CA MERGE SIGURO
   const [channelOn, setChannelOn] = useState(false);
   const [cueOn, setCueOn] = useState(false);
-  const [gainValue, setGainValue] = useState(0);
   const [sliderValue, setSliderValue] = useState(0);
 
   // ** Compressor UI
@@ -45,8 +44,6 @@ const useChannelLine = (
 
     cueOn: cueOn,
     setCueOn: setCueOn,
-    gainValue: gainValue,
-    setGainValue: setGainValue,
     sliderValue: sliderValue,
     setSliderValue: setSliderValue,
     compressorOn: compressorOn,
