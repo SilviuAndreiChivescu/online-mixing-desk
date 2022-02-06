@@ -21,7 +21,6 @@ const useChannelLine = (
 
   // ** Compressor UI
   // dry wet knob state is already comning from compressor hook
-  const [compressorOn, setCompressorOn] = useState(false);
   const [thresholdValue, setThresholdValue] = useState(0);
   const [ratioValue, setRatioValue] = useState(0);
   const [releaseValue, setReleaseValue] = useState(0);
@@ -37,6 +36,7 @@ const useChannelLine = (
   const [UI, setUI] = useState({
     eqOn: false,
     hpfOn: false,
+    compressorOn: false,
 
     // todo change these (and below and at gain and slider and at compressor UI and at master filter UI) to correspond to actual defaults
     channelOn: channelOn, //todo this and below needs to be rethinked when I put to live audio
@@ -46,8 +46,6 @@ const useChannelLine = (
     setCueOn: setCueOn,
     sliderValue: sliderValue,
     setSliderValue: setSliderValue,
-    compressorOn: compressorOn,
-    setCompressorOn: setCompressorOn,
     fxUnitOn: fxUnitOn,
     setFxUnitOn: setFxUnitOn,
   });
