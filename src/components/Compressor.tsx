@@ -8,7 +8,9 @@ interface CompressorProps {
   channelUI: any;
   compressorFunctions: any;
 }
-
+// I have an idea about the below, I can make an state obj above the compressor component
+// which will have all the functions to control the compressor + the values of the thingies
+// coming from their .value, and the "dropdown" to change channel will change value of the state obj default to use that one and so on
 // todo, aici cand o sa fac cu multiple compressors pe un singur ala poate o sa fie mai fucked up
 // ca ai vaz cu rerenderingu si alea, sper ca nu
 function Compressor({
