@@ -4,11 +4,11 @@ import { MyRangeSlider } from "./MyRangeSlider";
 
 interface EQProps {
   EQFunctions: any;
-  setChannelOneUI: any;
-  channelOneUI: any;
+  setChannelUI: any;
+  channelUI: any;
 }
 
-function EQ({ EQFunctions, setChannelOneUI, channelOneUI }: EQProps) {
+function EQ({ EQFunctions, setChannelUI, channelUI }: EQProps) {
   const { controlHigh, controlMid, controlLow } = EQFunctions.EQControl;
 
   const [slidersInfo] = useState([
@@ -23,7 +23,7 @@ function EQ({ EQFunctions, setChannelOneUI, channelOneUI }: EQProps) {
           <Button
             className="mt-2 mb-2"
             onClick={() =>
-              setChannelOneUI({ ...channelOneUI, eqOn: !channelOneUI.eqOn })
+              setChannelUI({ ...channelUI, eqOn: !channelUI.eqOn })
             }
           >
             EQ On / Off

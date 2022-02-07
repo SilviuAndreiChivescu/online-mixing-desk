@@ -2,16 +2,16 @@ import React from "react";
 import { Col, Row } from "react-bootstrap";
 import { MyRangeSlider } from "./MyRangeSlider";
 interface GainProps {
-  channelOneFunctions: any;
+  channelFunctions: any;
 }
 
-function Gain({ channelOneFunctions }: GainProps) {
+function Gain({ channelFunctions }: GainProps) {
   return (
     <section className="border align-items-center mt-2 mb-2">
       <Row>
         <Col>
           <MyRangeSlider
-            onChangeFunction={channelOneFunctions.controlChannelGainNode}
+            onChangeFunction={channelFunctions.controlChannelGainNode}
             label="Gain"
             min={0}
             max={2}

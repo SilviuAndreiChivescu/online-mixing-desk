@@ -4,11 +4,11 @@ import { MyRangeSlider } from "./MyRangeSlider";
 
 interface HPFProps {
   HPFFunctions: any;
-  setChannelOneUI: any;
-  channelOneUI: any;
+  setChannelUI: any;
+  channelUI: any;
 }
 
-function HPF({ HPFFunctions, setChannelOneUI, channelOneUI }: HPFProps) {
+function HPF({ HPFFunctions, setChannelUI, channelUI }: HPFProps) {
   const { controlHighPassCutOff } = HPFFunctions;
   return (
     <section className="border align-items-center mt-2 mb-2">
@@ -17,7 +17,7 @@ function HPF({ HPFFunctions, setChannelOneUI, channelOneUI }: HPFProps) {
           <Button
             className=""
             onClick={() =>
-              setChannelOneUI({ ...channelOneUI, hpfOn: !channelOneUI.hpfOn })
+              setChannelUI({ ...channelUI, hpfOn: !channelUI.hpfOn })
             }
           >
             HPF On / Off

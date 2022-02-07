@@ -17,6 +17,7 @@ import EQ from "./components/EQ";
 import Panner from "./components/Panner";
 import Gain from "./components/Gain";
 import Compressor from "./components/Compressor";
+import FXUnit from "./components/FXUnit";
 
 //todo change all any types to actual types?
 
@@ -128,23 +129,24 @@ const ChannelOne: React.FC<ChannelOneProps> = ({
           </Button>
         </Col>
       </Row>
-      <Gain channelOneFunctions={channelOneFunctions} />
+      <Gain channelFunctions={channelOneFunctions} />
       <EQ
-        setChannelOneUI={setChannelOneUI}
-        channelOneUI={channelOneUI}
+        setChannelUI={setChannelOneUI}
+        channelUI={channelOneUI}
         EQFunctions={EQFunctions}
       />
       <HPF
-        setChannelOneUI={setChannelOneUI}
-        channelOneUI={channelOneUI}
+        setChannelUI={setChannelOneUI}
+        channelUI={channelOneUI}
         HPFFunctions={HPFFunctions}
       />
-      <Panner channelOneFunctions={channelOneFunctions} />
+      <Panner channelFunctions={channelOneFunctions} />
       <Compressor
-        setChannelOneUI={setChannelOneUI}
-        channelOneUI={channelOneUI}
+        setChannelUI={setChannelOneUI}
+        channelUI={channelOneUI}
         compressorFunctions={channelOneFunctions.compressorFunctions}
       />
+      <FXUnit setChannelUI={setChannelOneUI} channelUI={channelOneUI} />
     </>
   );
 };

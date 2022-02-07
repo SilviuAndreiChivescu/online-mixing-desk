@@ -3,16 +3,16 @@ import { Col, Row } from "react-bootstrap";
 import { MyRangeSlider } from "./MyRangeSlider";
 
 interface PannerProps {
-  channelOneFunctions: any;
+  channelFunctions: any;
 }
 
-function Panner({ channelOneFunctions }: PannerProps) {
+function Panner({ channelFunctions }: PannerProps) {
   return (
     <section className="border align-items-center mt-2 mb-2">
       <Row>
         <Col>
           <MyRangeSlider
-            onChangeFunction={channelOneFunctions.controlPannerNode}
+            onChangeFunction={channelFunctions.controlPannerNode}
             label="Panner"
             min={-1}
             max={1}

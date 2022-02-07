@@ -4,16 +4,16 @@ import MyCompressorSlider from "./MyCompressorSlider";
 import { MyRangeSlider } from "./MyRangeSlider";
 
 interface CompressorProps {
-  setChannelOneUI: any;
-  channelOneUI: any;
+  setChannelUI: any;
+  channelUI: any;
   compressorFunctions: any;
 }
 
-// am ramas aici, faceam compressor component si sa il testez, vezi cum e cu alea de le controlezi
-// poate te inspiri din old compressor si logica lui
+// todo, aici cand o sa fac cu multiple compressors pe un singur ala poate o sa fie mai fucked up
+// ca ai vaz cu rerenderingu si alea, sper ca nu
 function Compressor({
-  setChannelOneUI,
-  channelOneUI,
+  setChannelUI,
+  channelUI,
   compressorFunctions,
 }: CompressorProps) {
   const [slidersInfo] = useState([
@@ -30,9 +30,9 @@ function Compressor({
           <Button
             className="mt-2 mb-2"
             onClick={() =>
-              setChannelOneUI({
-                ...channelOneUI,
-                compressorOn: !channelOneUI.compressorOn,
+              setChannelUI({
+                ...channelUI,
+                compressorOn: !channelUI.compressorOn,
               })
             }
           >
