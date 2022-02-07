@@ -18,6 +18,7 @@ import Panner from "./components/Panner";
 import Gain from "./components/Gain";
 import Compressor from "./components/Compressor";
 import FXUnit from "./components/FXUnit";
+import VolumeSlider from "./components/VolumeSlider";
 
 //todo change all any types to actual types?
 
@@ -91,7 +92,7 @@ const App: React.FC = () => {
   return (
     <div className="App text-center">
       <Container>
-        <ChannelOne
+        <ChannelLine
           channelOneFunctions={channelOneFunctions}
           channelOneUI={channelOneUI}
           setChannelOneUI={setChannelOneUI}
@@ -101,20 +102,18 @@ const App: React.FC = () => {
   );
 };
 
-interface ChannelOneProps {
+interface ChannelLineProps {
   channelOneFunctions: any;
   channelOneUI: any;
   setChannelOneUI: any;
 }
 
-// This needs to be renamed to Channel, because I will use them all like one, don't think I ll make one for each channel
-const ChannelOne: React.FC<ChannelOneProps> = ({
+const ChannelLine: React.FC<ChannelLineProps> = ({
   channelOneFunctions,
   channelOneUI,
   setChannelOneUI,
 }) => {
   const { play, pause, EQFunctions, HPFFunctions } = channelOneFunctions;
-  const {} = channelOneUI;
   return (
     <>
       <Row>
@@ -141,6 +140,7 @@ const ChannelOne: React.FC<ChannelOneProps> = ({
         HPFFunctions={HPFFunctions}
       />
       <Panner channelFunctions={channelOneFunctions} />
+      <VolumeSlider channelFunctions={channelOneFunctions} />
       <Compressor
         setChannelUI={setChannelOneUI}
         channelUI={channelOneUI}
