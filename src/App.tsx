@@ -20,6 +20,7 @@ import Compressor from "./components/Compressor";
 import FXUnit from "./components/FXUnit";
 import VolumeSlider from "./components/VolumeSlider";
 import MasterFilter from "./components/MasterFilter";
+import Master from "./components/Master";
 
 //todo change all any types to actual types?
 
@@ -92,35 +93,51 @@ const App: React.FC = () => {
     channelOneFunctions,
     channelOneUI,
     setChannelOneUI,
+    channelTwoFunctions,
+    channelTwoUI,
+    setChannelTwoUI,
     masterFilterToExport,
+    masterFunctions,
   ] = useInit();
 
   return (
     <div className="App text-center">
       <Container>
-        <ChannelLine
-          channelOneFunctions={channelOneFunctions}
-          channelOneUI={channelOneUI}
-          setChannelOneUI={setChannelOneUI}
-        />
+        <Row>
+          <Col>
+            <ChannelLine
+              channelFunctions={channelOneFunctions}
+              channelUI={channelOneUI}
+              setChannelUI={setChannelOneUI}
+            />
+          </Col>
+          <Col>
+            <ChannelLine
+              channelFunctions={channelTwoFunctions}
+              channelUI={channelTwoUI}
+              setChannelUI={setChannelTwoUI}
+            />
+          </Col>
+        </Row>
         <MasterFilter masterFilterToExport={masterFilterToExport} />
+        <Master masterFunctions={masterFunctions} />
       </Container>
     </div>
   );
 };
 
 interface ChannelLineProps {
-  channelOneFunctions: any;
-  channelOneUI: any;
-  setChannelOneUI: any;
+  channelFunctions: any;
+  channelUI: any;
+  setChannelUI: any;
 }
 
 const ChannelLine: React.FC<ChannelLineProps> = ({
-  channelOneFunctions,
-  channelOneUI,
-  setChannelOneUI,
+  channelFunctions,
+  channelUI,
+  setChannelUI,
 }) => {
-  const { play, pause, EQFunctions, HPFFunctions } = channelOneFunctions;
+  const { play, pause, EQFunctions, HPFFunctions } = channelFunctions;
   return (
     <>
       <Row>
@@ -135,25 +152,25 @@ const ChannelLine: React.FC<ChannelLineProps> = ({
           </Button>
         </Col>
       </Row>
-      <Gain channelFunctions={channelOneFunctions} />
+      <Gain channelFunctions={channelFunctions} />
       <EQ
-        setChannelUI={setChannelOneUI}
-        channelUI={channelOneUI}
+        setChannelUI={setChannelUI}
+        channelUI={channelUI}
         EQFunctions={EQFunctions}
       />
       <HPF
-        setChannelUI={setChannelOneUI}
-        channelUI={channelOneUI}
+        setChannelUI={setChannelUI}
+        channelUI={channelUI}
         HPFFunctions={HPFFunctions}
       />
-      <Panner channelFunctions={channelOneFunctions} />
-      <VolumeSlider channelFunctions={channelOneFunctions} />
+      <Panner channelFunctions={channelFunctions} />
+      <VolumeSlider channelFunctions={channelFunctions} />
       <Row>
         <Col>
           <Button
             className="mt-2 mb-2"
             onClick={() =>
-              setChannelOneUI({ ...channelOneUI, cueOn: !channelOneUI.cueOn })
+              setChannelUI({ ...channelUI, cueOn: !channelUI.cueOn })
             }
           >
             Cue On / Off
@@ -161,14 +178,14 @@ const ChannelLine: React.FC<ChannelLineProps> = ({
         </Col>
       </Row>
       <Compressor
-        setChannelUI={setChannelOneUI}
-        channelUI={channelOneUI}
-        compressorFunctions={channelOneFunctions.compressorFunctions}
+        setChannelUI={setChannelUI}
+        channelUI={channelUI}
+        compressorFunctions={channelFunctions.compressorFunctions}
       />
       <FXUnit
-        setChannelUI={setChannelOneUI}
-        channelUI={channelOneUI}
-        FXUnitFunctions={channelOneFunctions.FXUnitFunctions}
+        setChannelUI={setChannelUI}
+        channelUI={channelUI}
+        FXUnitFunctions={channelFunctions.FXUnitFunctions}
       />
     </>
   );

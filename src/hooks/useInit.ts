@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useChannelLine } from "./useChannelLine";
+import { useGain } from "./useGain";
 import { useMaster } from "./useMaster";
 import { useMasterFilter } from "./useMasterFilter";
 
@@ -15,10 +16,22 @@ const useInit = () => {
     masterFunctions.cueNode,
     masterFunctions.withoutCueNode
   );
+  const [channelTwoFunctions, channelTwoUI, setChannelTwoUI] = useChannelLine(
+    audioCtx,
+    masterFunctions.cueNode,
+    masterFunctions.withoutCueNode
+  );
   // todo I need some main states here for UI for compressor and fx unit
+  // Combine all audio signal coming from each channel to pass to masterFilter as one
+  const [sliderVolumeNodesCombined] = useGain(audioCtx);
+  useEffect(() => {
+    channelOneFunctions.sliderVolumeNode.connect(sliderVolumeNodesCombined);
+    channelTwoFunctions.sliderVolumeNode.connect(sliderVolumeNodesCombined);
+  }, []);
+
   const [masterFilterFunctions] = useMasterFilter(
     audioCtx,
-    channelOneFunctions.sliderVolumeNode
+    sliderVolumeNodesCombined
   );
 
   const [masterFilterCueFunctions] = useMasterFilter(
@@ -33,6 +46,7 @@ const useInit = () => {
     setMasterFilterOn: setMasterFilterOn,
   });
   // These connections will be made based on the value of the buttons (for now I need it to make it first on render so I can test - delete this () late)
+  // Channel 1
   useEffect(() => {
     if (channelOneUI.eqOn) channelOneFunctions.EQFunctions.connectEQ();
     else channelOneFunctions.EQFunctions.disconnectEQ();
@@ -60,6 +74,35 @@ const useInit = () => {
     else channelOneFunctions.disconnectCue();
   }, [channelOneUI.cueOn]);
 
+  // Channel 2
+  useEffect(() => {
+    if (channelTwoUI.eqOn) channelTwoFunctions.EQFunctions.connectEQ();
+    else channelTwoFunctions.EQFunctions.disconnectEQ();
+  }, [channelTwoUI.eqOn]);
+
+  useEffect(() => {
+    if (channelTwoUI.hpfOn) channelTwoFunctions.HPFFunctions.connectHPF();
+    else channelTwoFunctions.HPFFunctions.disconnectHPF();
+  }, [channelTwoUI.hpfOn]);
+
+  useEffect(() => {
+    if (channelTwoUI.compressorOn)
+      channelTwoFunctions.compressorFunctions.connectCompressor();
+    else channelTwoFunctions.compressorFunctions.disconnectCompressor();
+  }, [channelTwoUI.compressorOn]);
+
+  useEffect(() => {
+    if (channelTwoUI.fxUnitOn)
+      channelTwoFunctions.FXUnitFunctions.connectFXUnit();
+    else channelTwoFunctions.FXUnitFunctions.disconnectFXUnit();
+  }, [channelTwoUI.fxUnitOn]);
+
+  useEffect(() => {
+    if (channelTwoUI.cueOn) channelTwoFunctions.connectCue();
+    else channelTwoFunctions.disconnectCue();
+  }, [channelTwoUI.cueOn]);
+
+  // Master Filter
   useEffect(() => {
     if (masterFilterOn) {
       masterFilterFunctions.connectMasterFilter();
@@ -93,6 +136,9 @@ const useInit = () => {
     channelOneFunctions,
     channelOneUI,
     setChannelOneUI,
+    channelTwoFunctions,
+    channelTwoUI,
+    setChannelTwoUI,
     masterFilterToExport,
     masterFunctions,
   ] as const;
