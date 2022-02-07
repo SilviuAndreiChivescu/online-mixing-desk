@@ -60,8 +60,18 @@ const useInit = () => {
   }, [channelOneUI.fxUnitOn]);
 
   useEffect(() => {
-    if (masterFilterOn) masterFilterFunctions.connectMasterFilter();
-    else masterFilterFunctions.disconnectMasterFilter();
+    if (channelOneUI.cueOn) channelOneFunctions.connectCue();
+    else channelOneFunctions.disconnectCue();
+  }, [channelOneUI.cueOn]);
+
+  useEffect(() => {
+    if (masterFilterOn) {
+      masterFilterFunctions.connectMasterFilter();
+      masterFilterCueFunctions.connectMasterFilter();
+    } else {
+      masterFilterFunctions.disconnectMasterFilter();
+      masterFilterCueFunctions.disconnectMasterFilter();
+    }
   }, [masterFilterOn]);
 
   //* Connections

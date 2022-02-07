@@ -14,10 +14,7 @@ const useChannelLine = (
   //*** UI states
   // AM RAMAS AICI, DEGEABA AM FACUT ATATEA USE STATES AICI DACA EU LE BAG DUPA IN OBJ, PT CA GEN DUPA OBJ ALA TRE MODIFICAT CU SETSATTE U LUI
   //   FA CE AM FKT CU EQ ON USPR PT TOATE PROB
-  // TESTEAZA ACU EQ CA MERGE SIGURO
   const [channelOn, setChannelOn] = useState(false);
-  const [cueOn, setCueOn] = useState(false);
-  const [sliderValue, setSliderValue] = useState(0);
 
   // UI STATES
   const [UI, setUI] = useState({
@@ -25,16 +22,12 @@ const useChannelLine = (
     hpfOn: false,
     compressorOn: false,
     fxUnitOn: false,
+    cueOn: false,
     // aici am ramas, sa continui checku, prob fx unit acu si dupa master filter etc..
 
     // todo change these (and below and at gain and slider and at compressor UI and at master filter UI) to correspond to actual defaults
     channelOn: channelOn, //todo this and below needs to be rethinked when I put to live audio
     setChannelOn: setChannelOn,
-
-    cueOn: cueOn,
-    setCueOn: setCueOn,
-    sliderValue: sliderValue,
-    setSliderValue: setSliderValue,
   });
   //*** END UI states
 
@@ -69,28 +62,33 @@ const useChannelLine = (
     audioCtx,
     compressorFunctions.compressorOutput
   );
+
   // Connections
   // The connections below need to be made in a useEffect hook because needs to be rerendered only at mounting, otherwise it breaks when rerenders
+  const [connectionNode] = useGain(audioCtx);
   useEffect(() => {
     audioSourceNode.connect(channelGainNode).connect(analyserNode);
     HPFFunctions.HPFOutput.connect(pannerNode);
     FXUnitFunctions.FXUnitOutput.connect(sliderVolumeNode);
+    sliderVolumeNode.connect(connectionNode);
   }, []);
 
   // Cue On
   const connectCue = () => {
     FXUnitFunctions.FXUnitOutput.connect(cueNode);
-    sliderVolumeNode.connect(withoutCueNode);
+    connectionNode.connect(withoutCueNode);
   };
 
   // Cue Off
   const disconnectCue = () => {
-    FXUnitFunctions.FXUnitOutput.disconnect(cueNode);
-    sliderVolumeNode.disconnect(withoutCueNode);
+    FXUnitFunctions.FXUnitOutput.disconnect();
+    connectionNode.disconnect();
+    FXUnitFunctions.FXUnitOutput.connect(sliderVolumeNode);
   };
-
   // todo I don't know if I really need these or I can just connect it as I have it
   // and only pause and play? or even better, see how it is for live audio
+  // because before I had in the first useEffect I did not have as connected the audioSourceNode, so I
+  // could use the below
   // Channel ON
   const connectChannel = () => {
     audioSourceNode.connect(channelGainNode);

@@ -141,6 +141,18 @@ const ChannelLine: React.FC<ChannelLineProps> = ({
       />
       <Panner channelFunctions={channelOneFunctions} />
       <VolumeSlider channelFunctions={channelOneFunctions} />
+      <Row>
+        <Col>
+          <Button
+            className="mt-2 mb-2"
+            onClick={() =>
+              setChannelOneUI({ ...channelOneUI, cueOn: !channelOneUI.cueOn })
+            }
+          >
+            Cue On / Off
+          </Button>
+        </Col>
+      </Row>
       <Compressor
         setChannelUI={setChannelOneUI}
         channelUI={channelOneUI}
