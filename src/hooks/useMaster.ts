@@ -7,12 +7,13 @@ const useMaster = (audioCtx: AudioContext) => {
 
   // Combine both withoutCueNode and cueNode into one so it's easier to connect & disconnect
   const [cueNodesCombined] = useGain(audioCtx);
-  withoutCueNode.connect(cueNodesCombined);
-  cueNode.connect(cueNodesCombined);
+  useEffect(() => {
+    withoutCueNode.connect(cueNodesCombined);
+    cueNode.connect(cueNodesCombined);
+  }, []);
 
   // Cue Mix Controller Knob (100 means full master (without cue))
-  const [cueMixKnob, setCueMixKnob] = useState(0.5);
-  useEffect(() => {
+  const setCueMixKnob = (cueMixKnob: number) => {
     if (cueMixKnob > 0.5) {
       cueNodeControl(1 - 2 * (cueMixKnob - 0.5));
       withoutCueNodeControl(1);
@@ -20,7 +21,7 @@ const useMaster = (audioCtx: AudioContext) => {
       withoutCueNodeControl(1 - 2 * (0.5 - cueMixKnob));
       cueNodeControl(1);
     }
-  }, [cueMixKnob]);
+  };
 
   const [boothNode, boothNodeControl] = useGain(audioCtx);
   const [masterNode, masterNodeControl] = useGain(audioCtx);
@@ -43,10 +44,8 @@ const useMaster = (audioCtx: AudioContext) => {
       node: headphonesNode,
       control: headphonesNodeControl,
     },
-    cueMix: {
-      cueMixKnob: cueMixKnob,
-      setCueMixKnob: setCueMixKnob,
-    },
+
+    setCueMixKnob: setCueMixKnob,
   });
   return [masterFunctions] as const;
 };

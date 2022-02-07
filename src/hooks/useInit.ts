@@ -26,7 +26,7 @@ const useInit = () => {
     masterFunctions.cueNodesCombined
   );
 
-  const [masterFilterOn, setMasterFilterOn] = useState(true);
+  const [masterFilterOn, setMasterFilterOn] = useState(false);
   const [masterFilterToExport] = useState({
     masterFilterFunctions: masterFilterFunctions,
     masterFilterCueFunctions: masterFilterCueFunctions,
@@ -94,6 +94,7 @@ const useInit = () => {
     channelOneUI,
     setChannelOneUI,
     masterFilterToExport,
+    masterFunctions,
   ] as const;
 };
 export { useInit };
