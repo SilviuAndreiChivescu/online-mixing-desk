@@ -146,7 +146,11 @@ const ChannelOne: React.FC<ChannelOneProps> = ({
         channelUI={channelOneUI}
         compressorFunctions={channelOneFunctions.compressorFunctions}
       />
-      <FXUnit setChannelUI={setChannelOneUI} channelUI={channelOneUI} />
+      <FXUnit
+        setChannelUI={setChannelOneUI}
+        channelUI={channelOneUI}
+        FXUnitFunctions={channelOneFunctions.FXUnitFunctions}
+      />
     </>
   );
 };

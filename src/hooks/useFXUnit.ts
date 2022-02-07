@@ -10,9 +10,8 @@ const useFXUnit = (audioCtx: AudioContext, compressorOutput: GainNode) => {
   const [dryGainNode, dryGainControl] = useGain(audioCtx);
   const [wetGainNode, wetGainControl] = useGain(audioCtx);
 
-  // Dry Wet Mix Controller Knob (100 means full wet)
-  const [dryWetKnob, setDryWetKnob] = useState(0.5);
-  useEffect(() => {
+  // Dry Wet Mix Controller Knob (1 means full wet)
+  const setDryWetKnob = (dryWetKnob: number) => {
     if (dryWetKnob > 0.5) {
       dryGainControl(1 - 2 * (dryWetKnob - 0.5));
       wetGainControl(1);
@@ -20,13 +19,15 @@ const useFXUnit = (audioCtx: AudioContext, compressorOutput: GainNode) => {
       wetGainControl(1 - 2 * (0.5 - dryWetKnob));
       dryGainControl(1);
     }
-  }, [dryWetKnob]);
+  };
 
-  // Connect reverb to wetGainNode and to FXUnit output
-  convolver.connect(wetGainNode).connect(FXUnitOutput);
+  useEffect(() => {
+    // Connect reverb to wetGainNode and to FXUnit output
+    convolver.connect(wetGainNode).connect(FXUnitOutput);
 
-  // Connect dryGainNode to FXUnit output
-  dryGainNode.connect(FXUnitOutput);
+    // Connect dryGainNode to FXUnit output
+    dryGainNode.connect(FXUnitOutput);
+  }, []);
 
   // Connect FX Unit
   const connectFXUnit = () => {
@@ -49,10 +50,7 @@ const useFXUnit = (audioCtx: AudioContext, compressorOutput: GainNode) => {
     connectFXUnit: connectFXUnit,
     disconnectFXUnit: disconnectFXUnit,
     FXUnitOutput: FXUnitOutput,
-    FXUnitDryWet: {
-      dryWetKnob: dryWetKnob,
-      setDryWetKnob: setDryWetKnob,
-    },
+    setDryWetKnob: setDryWetKnob,
   });
 
   return [FXUnitFunctions] as const;

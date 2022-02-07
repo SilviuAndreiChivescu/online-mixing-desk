@@ -12,7 +12,10 @@ const useReverb = (audioCtx: AudioContext) => {
 
   const chooseImpulse = async (impulseUrl: string) => {
     try {
-      convolver.buffer = await getImpulseBuffer(audioCtx, impulseUrl);
+      convolver.buffer = await getImpulseBuffer(
+        audioCtx,
+        `/assets/impulses/${impulseUrl}`
+      );
       console.log(`using ${impulseUrl}`); // this probably needs deleted
     } catch (err) {
       console.log(err);

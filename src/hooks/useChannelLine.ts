@@ -19,16 +19,12 @@ const useChannelLine = (
   const [cueOn, setCueOn] = useState(false);
   const [sliderValue, setSliderValue] = useState(0);
 
-  // ** FXUnit UI todo delete later
-  // dry wet knob state is already comning from FXUnit hook
-  const [fxUnitOn, setFxUnitOn] = useState(false);
-  // ** END FXUnit UI
-
   // UI STATES
   const [UI, setUI] = useState({
     eqOn: false,
     hpfOn: false,
     compressorOn: false,
+    fxUnitOn: false,
     // aici am ramas, sa continui checku, prob fx unit acu si dupa master filter etc..
 
     // todo change these (and below and at gain and slider and at compressor UI and at master filter UI) to correspond to actual defaults
@@ -39,8 +35,6 @@ const useChannelLine = (
     setCueOn: setCueOn,
     sliderValue: sliderValue,
     setSliderValue: setSliderValue,
-    fxUnitOn: fxUnitOn,
-    setFxUnitOn: setFxUnitOn,
   });
   //*** END UI states
 
