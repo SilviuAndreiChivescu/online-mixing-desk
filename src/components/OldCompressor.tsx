@@ -53,7 +53,7 @@ export const Compressor: React.FC<CompressorProps> = ({
         step={4}
         className="mt-4 mb-4"
       /> */}
-      <MyRangeSlider
+      {/* <MyRangeSlider
         onChangeFunction={(e) => compressorControl.compressorParams(e)}
         id="ratio"
         label="Ratio"
@@ -83,7 +83,7 @@ export const Compressor: React.FC<CompressorProps> = ({
         defaultValue={0.3}
         step={0.1}
         className="mt-4 mb-4"
-      />
+      /> */}
     </>
   );
 };
