@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
-import MyCompressorSlider from "./MyCompressorSlider";
 import MyDropdown from "./MyDropdown";
 import { MyRangeSlider } from "./MyRangeSlider";
 interface FXUnitProps {

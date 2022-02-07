@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useBiquadFilterResonant } from "./useBiquadFilter";
 import { useGain } from "./useGain";
 
@@ -16,7 +16,9 @@ const useMasterFilter = (
     "lowpass"
   );
 
-  highPass.connect(lowPass).connect(masterFilterOutput);
+  useEffect(() => {
+    highPass.connect(lowPass).connect(masterFilterOutput);
+  }, []);
 
   // Connect Master Filter
   const connectMasterFilter = () => {
