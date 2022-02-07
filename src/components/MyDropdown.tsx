@@ -29,7 +29,7 @@ function MyDropdown({ chooseImpulse }: MyDropdownProps) {
 
       <Dropdown.Menu>
         {dropDownInfo.map((el: any) => (
-          <Dropdown.Item eventKey={`${el.replaceAll(" ", "")}.wav`}>
+          <Dropdown.Item key={el} eventKey={`${el.replaceAll(" ", "")}.wav`}>
             {el}
           </Dropdown.Item>
         ))}
