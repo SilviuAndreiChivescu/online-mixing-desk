@@ -1,8 +1,6 @@
-// audio worklet will be usefull later on when multiple channels are needed
-
 // could not make the gain reduction appear and re render, maybe useRef will help. I will try in the future
 import { useEffect, useState } from "react";
-import { useCompressor } from "./components/CompressorLogic";
+import { useCompressor } from "./components/OldCompressorLogic";
 import { useDistortion } from "./components/Distortion";
 import { useBiquadFilter } from "./components/FilterLogic";
 import { useOscilloscope } from "./components/OscilloscopeLogic";
@@ -57,7 +55,7 @@ const useInit = (audioElement: HTMLAudioElement) => {
     .connect(gainNode) // Volume
     .connect(panner) // Pan
     // .connect(convolver) // Convolver
-    // .connect(distortion) // Distortion
+    .connect(distortion) // Distortion
     .connect(analyserNode) // Oscilloscope
     .connect(audioCtx.destination); // Output
 
