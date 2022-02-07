@@ -26,16 +26,12 @@ const useInit = () => {
     masterFunctions.cueNodesCombined
   );
 
-  const [masterFilterOn, setMasterFilterOn] = useState(false);
-  const [masterFilterValues, setMasterFilterValues] = useState({
-    hpf: 0.5,
-    lpf: 0.5,
-  }); // todo change these AND BELOW AT BOOTH (and below and at gain and slider and at compressor UI) to correspond to actual defaults
-
-  const [boothValue, setBoothValue] = useState(1);
-  const [masterValue, setMasterValue] = useState(1);
-  const [headphonesValue, setHeadphonesValue] = useState(1);
-
+  const [masterFilterOn, setMasterFilterOn] = useState(true);
+  const [masterFilterToExport] = useState({
+    masterFilterFunctions: masterFilterFunctions,
+    masterFilterCueFunctions: masterFilterCueFunctions,
+    setMasterFilterOn: setMasterFilterOn,
+  });
   // These connections will be made based on the value of the buttons (for now I need it to make it first on render so I can test - delete this () late)
   useEffect(() => {
     if (channelOneUI.eqOn) channelOneFunctions.EQFunctions.connectEQ();
@@ -93,6 +89,11 @@ const useInit = () => {
       .connect(audioCtx.destination); // destination headhpones L and R
   }, []);
 
-  return [channelOneFunctions, channelOneUI, setChannelOneUI] as const;
+  return [
+    channelOneFunctions,
+    channelOneUI,
+    setChannelOneUI,
+    masterFilterToExport,
+  ] as const;
 };
 export { useInit };

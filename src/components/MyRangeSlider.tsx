@@ -12,6 +12,7 @@ interface MyRangeSliderProps {
   defaultValue?: number;
   step?: number;
   onChangeFunction: (e: number) => void;
+  onChangeOptional?: (e: number) => void;
 }
 
 export const MyRangeSlider: React.FC<MyRangeSliderProps> = ({
@@ -23,6 +24,7 @@ export const MyRangeSlider: React.FC<MyRangeSliderProps> = ({
   defaultValue,
   step,
   onChangeFunction,
+  onChangeOptional,
 }) => {
   const [value, setValue] = useState(0);
   useEffect(() => {
@@ -30,6 +32,7 @@ export const MyRangeSlider: React.FC<MyRangeSliderProps> = ({
   }, []);
   useEffect(() => {
     onChangeFunction(value);
+    if (onChangeOptional) onChangeOptional(value);
   }, [value]);
   return (
     <Form.Group className={className} as={Row}>

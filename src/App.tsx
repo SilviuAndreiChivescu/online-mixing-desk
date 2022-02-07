@@ -19,6 +19,7 @@ import Gain from "./components/Gain";
 import Compressor from "./components/Compressor";
 import FXUnit from "./components/FXUnit";
 import VolumeSlider from "./components/VolumeSlider";
+import MasterFilter from "./components/MasterFilter";
 
 //todo change all any types to actual types?
 
@@ -87,7 +88,12 @@ import VolumeSlider from "./components/VolumeSlider";
 // };
 
 const App: React.FC = () => {
-  const [channelOneFunctions, channelOneUI, setChannelOneUI] = useInit();
+  const [
+    channelOneFunctions,
+    channelOneUI,
+    setChannelOneUI,
+    masterFilterToExport,
+  ] = useInit();
 
   return (
     <div className="App text-center">
@@ -97,6 +103,7 @@ const App: React.FC = () => {
           channelOneUI={channelOneUI}
           setChannelOneUI={setChannelOneUI}
         />
+        <MasterFilter masterFilterToExport={masterFilterToExport} />
       </Container>
     </div>
   );
