@@ -100,6 +100,47 @@ const App: React.FC = () => {
     masterFunctions,
   ] = useInit();
 
+  // Below states are used to control all compressors
+  const [main, setMain] = useState({
+    setChannelUI: setChannelOneUI,
+    channelUI: channelOneUI,
+    compressorFunctions: channelOneFunctions.compressorFunctions,
+  });
+  const [channel1, setChannel1] = useState({
+    setChannelUI: setChannelOneUI,
+    channelUI: channelOneUI,
+    compressorFunctions: channelOneFunctions.compressorFunctions,
+  });
+  const [channel2, setChannel2] = useState({
+    setChannelUI: setChannelTwoUI,
+    channelUI: channelTwoUI,
+    compressorFunctions: channelTwoFunctions.compressorFunctions,
+  });
+
+  const [prevValue, setPrevValue] = useState(1);
+  const controlWhichChannel = (channel: string) => {
+    switch (prevValue) {
+      case 1:
+        setChannel1(main);
+        break;
+
+      case 2:
+        setChannel2(main);
+        break;
+    }
+
+    switch (parseInt(channel)) {
+      case 1:
+        setMain(channel1);
+        setPrevValue(1);
+        break;
+
+      case 2:
+        setMain(channel2);
+        setPrevValue(2);
+        break;
+    }
+  };
   return (
     <div className="App text-center">
       <Container>
@@ -119,6 +160,17 @@ const App: React.FC = () => {
             />
           </Col>
         </Row>
+        <Compressor
+          controlWhichChannel={controlWhichChannel}
+          setCompressorStates={setMain}
+          compressorStates={main}
+          compressorFunctions={main.compressorFunctions}
+        />
+        <FXUnit
+          setChannelUI={setChannelOneUI}
+          channelUI={channelOneUI}
+          FXUnitFunctions={channelOneFunctions.FXUnitFunctions}
+        />
         <MasterFilter masterFilterToExport={masterFilterToExport} />
         <Master masterFunctions={masterFunctions} />
       </Container>
@@ -164,7 +216,6 @@ const ChannelLine: React.FC<ChannelLineProps> = ({
         HPFFunctions={HPFFunctions}
       />
       <Panner channelFunctions={channelFunctions} />
-      <VolumeSlider channelFunctions={channelFunctions} />
       <Row>
         <Col>
           <Button
@@ -177,16 +228,7 @@ const ChannelLine: React.FC<ChannelLineProps> = ({
           </Button>
         </Col>
       </Row>
-      <Compressor
-        setChannelUI={setChannelUI}
-        channelUI={channelUI}
-        compressorFunctions={channelFunctions.compressorFunctions}
-      />
-      <FXUnit
-        setChannelUI={setChannelUI}
-        channelUI={channelUI}
-        FXUnitFunctions={channelFunctions.FXUnitFunctions}
-      />
+      <VolumeSlider channelFunctions={channelFunctions} />
     </>
   );
 };
