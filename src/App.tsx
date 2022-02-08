@@ -103,9 +103,6 @@ const App: React.FC = () => {
     main,
   ] = useInit();
 
-  // DECI TRE SA BAG STATE URILE ASTEA SI CE MAI E SUB IN USEINIT, SI ACOLO UNDE AM TOATE
-  // USEEFFECTS, TRE SA PUN PT FIECARE COMPRESSOR DIN STATE U ASTA
-
   return (
     <div className="App text-center">
       <Container>
