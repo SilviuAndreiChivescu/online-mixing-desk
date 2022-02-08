@@ -12,7 +12,6 @@ const useChannelLine = (
   withoutCueNode: GainNode
 ) => {
   //*** UI states
-  // AM RAMAS AICI, DEGEABA AM FACUT ATATEA USE STATES AICI DACA EU LE BAG DUPA IN OBJ, PT CA GEN DUPA OBJ ALA TRE MODIFICAT CU SETSATTE U LUI
   //   FA CE AM FKT CU EQ ON USPR PT TOATE PROB
   const [channelOn, setChannelOn] = useState(false);
 
@@ -23,7 +22,6 @@ const useChannelLine = (
     compressorOn: false,
     fxUnitOn: false,
     cueOn: false,
-    // aici am ramas, sa continui checku, prob fx unit acu si dupa master filter etc..
 
     // todo change these (and below and at gain and slider and at compressor UI and at master filter UI) to correspond to actual defaults
     channelOn: channelOn, //todo this and below needs to be rethinked when I put to live audio

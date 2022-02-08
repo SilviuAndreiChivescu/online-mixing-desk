@@ -52,6 +52,7 @@ const useInit = () => {
     channelUI: channelOneUI,
     compressorFunctions: channelOneFunctions.compressorFunctions,
   });
+
   const [channel1, setChannel1] = useState({
     setChannelUI: setChannelOneUI,
     channelUI: channelOneUI,
@@ -75,7 +76,8 @@ const useInit = () => {
         setChannel2(main);
         break;
     }
-  }, [main.channelUI.compressorOn]);
+    // probably need to change the below dependency to relate to the other values as well
+  }, [main]);
   const controlWhichChannel = (channel: string) => {
     switch (parseInt(channel)) {
       case 1:
