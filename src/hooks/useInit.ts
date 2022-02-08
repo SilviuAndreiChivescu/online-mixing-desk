@@ -64,9 +64,9 @@ const useInit = () => {
   });
 
   // The state below is used to change values of compressors in between channels
-  const [prevValueCompressor, setPrevValueCompressor] = useState(1);
+  const [whichCompressor, setWhichCompressor] = useState(1);
   useEffect(() => {
-    switch (prevValueCompressor) {
+    switch (whichCompressor) {
       case 1:
         setChannel1(main);
         break;
@@ -80,12 +80,12 @@ const useInit = () => {
     switch (parseInt(channel)) {
       case 1:
         setMain(channel1);
-        setPrevValueCompressor(1);
+        setWhichCompressor(1);
         break;
 
       case 2:
         setMain(channel2);
-        setPrevValueCompressor(2);
+        setWhichCompressor(2);
         break;
     }
   };
