@@ -11,7 +11,9 @@ interface MyCompressorSliderProps {
   max?: number;
   defaultValue?: number;
   step?: number;
-  onChangeFunction: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeFunction: any; // (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setMain: any;
+  main: any;
 }
 function MyCompressorSlider({
   id,
@@ -21,12 +23,14 @@ function MyCompressorSlider({
   max,
   defaultValue,
   step,
+  setMain,
+  main,
   onChangeFunction,
 }: MyCompressorSliderProps) {
   const [value, setValue] = useState(0);
   useEffect(() => {
     if (defaultValue) setValue(defaultValue);
-  }, []);
+  }, [defaultValue]);
   return (
     <Form.Group className={className} as={Row}>
       <Col xs="3"> {label} </Col>
@@ -39,7 +43,7 @@ function MyCompressorSlider({
           step={step}
           value={value}
           onChange={(e) => {
-            onChangeFunction(e);
+            onChangeFunction(e, setMain, main);
             setValue(parseFloat(e.target.value));
           }}
         />

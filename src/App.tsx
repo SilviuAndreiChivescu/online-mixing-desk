@@ -123,6 +123,8 @@ const App: React.FC = () => {
           </Col>
         </Row>
         <Compressor
+          setMain={setMain}
+          main={main}
           controlWhichChannel={controlWhichChannel}
           setCompressorStates={setMain}
           compressorStates={main}

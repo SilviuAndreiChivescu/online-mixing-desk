@@ -8,7 +8,11 @@ const useCompressor = (
   const [compressorOutput] = useGain(audioCtx);
   const compressor = audioCtx.createDynamicsCompressor();
   // Control Compressor's Params: Threshold, Knee, Ratio, Attack, Release
-  const compressorControl = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const compressorControl = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    setMain: any,
+    main: any
+  ) => {
     // Take the id and value
     const { id, value } = e.target;
     // Make type of proprieties to please Typescript
@@ -19,36 +23,123 @@ const useCompressor = (
       | "attack"
       | "release";
     // Change the particular property taken from id to the value taken from the slider
-
     compressor[id as compressorProperties].value = parseFloat(value);
+
+    switch (id) {
+      case "threshold":
+        setMain({
+          ...main,
+          compressorFunctions: {
+            ...main.compressorFunctions,
+            compressorUIStates: {
+              ...main.compressorFunctions.compressorUIStates,
+              threshold: parseFloat(value),
+            },
+          },
+        });
+        break;
+      case "knee":
+        setMain({
+          ...main,
+          compressorFunctions: {
+            ...main.compressorFunctions,
+            compressorUIStates: {
+              ...main.compressorFunctions.compressorUIStates,
+              knee: parseFloat(value),
+            },
+          },
+        });
+        break;
+      case "ratio":
+        setMain({
+          ...main,
+          compressorFunctions: {
+            ...main.compressorFunctions,
+            compressorUIStates: {
+              ...main.compressorFunctions.compressorUIStates,
+              ratio: parseFloat(value),
+            },
+          },
+        });
+        break;
+      case "release":
+        setMain({
+          ...main,
+          compressorFunctions: {
+            ...main.compressorFunctions,
+            compressorUIStates: {
+              ...main.compressorFunctions.compressorUIStates,
+              release: parseFloat(value),
+            },
+          },
+        });
+        break;
+      case "attack":
+        setMain({
+          ...main,
+          compressorFunctions: {
+            ...main.compressorFunctions,
+            compressorUIStates: {
+              ...main.compressorFunctions.compressorUIStates,
+              attack: parseFloat(value),
+            },
+          },
+        });
+        break;
+    }
+    setTest(parseFloat(value));
   };
+
+  const [test, setTest] = useState(0);
+
+  // States to use for changing compressor
+  const [compressorUIStates] = useState({
+    threshold: compressor.threshold.value,
+    knee: compressor.knee.value,
+    ratio: compressor.ratio.value,
+    attack: compressor.attack.value,
+    release: compressor.release.value,
+    dryWetKnob: 0.5,
+  });
 
   const [dryGainNode, dryGainControl] = useGain(audioCtx);
   const [wetGainNode, wetGainControl] = useGain(audioCtx);
 
   // Dry Wet Mix Controller Knob (1 means full wet)
-  const setDryWetKnob = (dryWetKnob: number) => {
-    if (dryWetKnob > 0.5) {
-      dryGainControl(1 - 2 * (dryWetKnob - 0.5));
+  const setDryWetKnob = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    setMain: any,
+    main: any
+  ) => {
+    const { value } = e.target;
+    setMain({
+      ...main,
+      compressorFunctions: {
+        ...main.compressorFunctions,
+        compressorUIStates: {
+          ...main.compressorFunctions.compressorUIStates,
+          dryWetKnob: parseFloat(value),
+        },
+      },
+    });
+    if (parseFloat(value) > 0.5) {
+      dryGainControl(1 - 2 * (parseFloat(value) - 0.5));
       wetGainControl(1);
     } else {
-      wetGainControl(1 - 2 * (0.5 - dryWetKnob));
+      wetGainControl(1 - 2 * (0.5 - parseFloat(value)));
       dryGainControl(1);
     }
   };
 
-  // Connect compressor to wetGainNode and to compressor output
-  //todo check later - If this doesn't work, it should not be on the same line the two connects
   useEffect(() => {
     compressor.connect(wetGainNode).connect(compressorOutput);
 
-    // Connect dryGainNode to compressor output
     dryGainNode.connect(compressorOutput);
   }, []);
 
   // Connect compressor
   const connectCompressor = () => {
-    pannerNode.disconnect(); // Disconnect from gainNode so other effects can be chained as well and work independently or with each other
+    pannerNode.disconnect();
 
     pannerNode.connect(compressor);
     pannerNode.connect(dryGainNode);
@@ -64,10 +155,12 @@ const useCompressor = (
   // Put everything to export into an object
   const [compressorFunctions] = useState({
     compressorControl: compressorControl,
+    compressorUIStates: compressorUIStates,
     connectCompressor: connectCompressor,
     disconnectCompressor: disconnectCompressor,
     setDryWetKnob: setDryWetKnob,
     compressorOutput: compressorOutput,
+    test: test,
   });
 
   return [compressorFunctions] as const;
