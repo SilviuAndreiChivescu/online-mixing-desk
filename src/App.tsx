@@ -98,49 +98,14 @@ const App: React.FC = () => {
     setChannelTwoUI,
     masterFilterToExport,
     masterFunctions,
+    controlWhichChannel,
+    setMain,
+    main,
   ] = useInit();
 
-  // Below states are used to control all compressors
-  const [main, setMain] = useState({
-    setChannelUI: setChannelOneUI,
-    channelUI: channelOneUI,
-    compressorFunctions: channelOneFunctions.compressorFunctions,
-  });
-  const [channel1, setChannel1] = useState({
-    setChannelUI: setChannelOneUI,
-    channelUI: channelOneUI,
-    compressorFunctions: channelOneFunctions.compressorFunctions,
-  });
-  const [channel2, setChannel2] = useState({
-    setChannelUI: setChannelTwoUI,
-    channelUI: channelTwoUI,
-    compressorFunctions: channelTwoFunctions.compressorFunctions,
-  });
+  // DECI TRE SA BAG STATE URILE ASTEA SI CE MAI E SUB IN USEINIT, SI ACOLO UNDE AM TOATE
+  // USEEFFECTS, TRE SA PUN PT FIECARE COMPRESSOR DIN STATE U ASTA
 
-  const [prevValue, setPrevValue] = useState(1);
-  const controlWhichChannel = (channel: string) => {
-    switch (prevValue) {
-      case 1:
-        setChannel1(main);
-        break;
-
-      case 2:
-        setChannel2(main);
-        break;
-    }
-
-    switch (parseInt(channel)) {
-      case 1:
-        setMain(channel1);
-        setPrevValue(1);
-        break;
-
-      case 2:
-        setMain(channel2);
-        setPrevValue(2);
-        break;
-    }
-  };
   return (
     <div className="App text-center">
       <Container>

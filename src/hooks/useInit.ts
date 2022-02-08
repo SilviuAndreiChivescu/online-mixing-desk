@@ -21,7 +21,7 @@ const useInit = () => {
     masterFunctions.cueNode,
     masterFunctions.withoutCueNode
   );
-  // todo I need some main states here for UI for compressor and fx unit
+
   // Combine all audio signal coming from each channel to pass to masterFilter as one
   const [sliderVolumeNodesCombined] = useGain(audioCtx);
   useEffect(() => {
@@ -45,7 +45,52 @@ const useInit = () => {
     masterFilterCueFunctions: masterFilterCueFunctions,
     setMasterFilterOn: setMasterFilterOn,
   });
-  // These connections will be made based on the value of the buttons (for now I need it to make it first on render so I can test - delete this () late)
+
+  // Below states are used to control all compressors
+  const [main, setMain] = useState({
+    setChannelUI: setChannelOneUI,
+    channelUI: channelOneUI,
+    compressorFunctions: channelOneFunctions.compressorFunctions,
+  });
+  const [channel1, setChannel1] = useState({
+    setChannelUI: setChannelOneUI,
+    channelUI: channelOneUI,
+    compressorFunctions: channelOneFunctions.compressorFunctions,
+  });
+  const [channel2, setChannel2] = useState({
+    setChannelUI: setChannelTwoUI,
+    channelUI: channelTwoUI,
+    compressorFunctions: channelTwoFunctions.compressorFunctions,
+  });
+
+  // The state below is used to change values of compressors in between channels
+  const [prevValueCompressor, setPrevValueCompressor] = useState(1);
+  useEffect(() => {
+    switch (prevValueCompressor) {
+      case 1:
+        setChannel1(main);
+        break;
+
+      case 2:
+        setChannel2(main);
+        break;
+    }
+  }, [main.channelUI.compressorOn]);
+  const controlWhichChannel = (channel: string) => {
+    switch (parseInt(channel)) {
+      case 1:
+        setMain(channel1);
+        setPrevValueCompressor(1);
+        break;
+
+      case 2:
+        setMain(channel2);
+        setPrevValueCompressor(2);
+        break;
+    }
+  };
+
+  // These connections will be made based on the value of the buttons
   // Channel 1
   useEffect(() => {
     if (channelOneUI.eqOn) channelOneFunctions.EQFunctions.connectEQ();
@@ -58,10 +103,10 @@ const useInit = () => {
   }, [channelOneUI.hpfOn]);
 
   useEffect(() => {
-    if (channelOneUI.compressorOn)
+    if (channel1.channelUI.compressorOn)
       channelOneFunctions.compressorFunctions.connectCompressor();
     else channelOneFunctions.compressorFunctions.disconnectCompressor();
-  }, [channelOneUI.compressorOn]);
+  }, [channel1.channelUI.compressorOn]);
 
   useEffect(() => {
     if (channelOneUI.fxUnitOn)
@@ -86,10 +131,10 @@ const useInit = () => {
   }, [channelTwoUI.hpfOn]);
 
   useEffect(() => {
-    if (channelTwoUI.compressorOn)
+    if (channel2.channelUI.compressorOn)
       channelTwoFunctions.compressorFunctions.connectCompressor();
     else channelTwoFunctions.compressorFunctions.disconnectCompressor();
-  }, [channelTwoUI.compressorOn]);
+  }, [channel2.channelUI.compressorOn]);
 
   useEffect(() => {
     if (channelTwoUI.fxUnitOn)
@@ -141,6 +186,9 @@ const useInit = () => {
     setChannelTwoUI,
     masterFilterToExport,
     masterFunctions,
+    controlWhichChannel,
+    setMain,
+    main,
   ] as const;
 };
 export { useInit };
