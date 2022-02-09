@@ -87,18 +87,45 @@ function Compressor({
     changeAll();
   }, [main.compressorFunctions.compressorUIStates]);
 
-  const [dropDownInfo] = useState([1, 2]);
+  const [dropDownInfo, setDropDownInfo] = useState([
+    { channel: 1, active: true },
+    { channel: 2, active: false },
+  ]);
+
+  const handleActive = (channel: number) => {
+    let items = [...dropDownInfo];
+    let missingItemIndex =
+      items.filter((item: any) => item.active === true)[0].channel - 1;
+    console.log(missingItemIndex);
+    let itemTrue = { ...items[missingItemIndex] };
+    itemTrue.active = false;
+    items[missingItemIndex] = itemTrue;
+    let item = { ...items[channel - 1] };
+    item.active = true;
+    items[channel - 1] = item;
+    setDropDownInfo(items);
+  };
+
   return (
     <section className="border align-items-center mt-2 mb-2">
-      <Dropdown onSelect={(e: any) => controlWhichChannel(e)}>
+      <Dropdown
+        onSelect={(e: any) => {
+          controlWhichChannel(e);
+          handleActive(e);
+        }}
+      >
         <Dropdown.Toggle variant="success" id="dropdown-basic2">
           Channel
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
           {dropDownInfo.map((el: any) => (
-            <Dropdown.Item key={el} eventKey={el}>
-              {el}
+            <Dropdown.Item
+              active={el.active}
+              key={el.channel}
+              eventKey={el.channel}
+            >
+              {el.channel}
             </Dropdown.Item>
           ))}
         </Dropdown.Menu>
