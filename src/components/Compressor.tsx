@@ -11,11 +11,7 @@ interface CompressorProps {
   setMain: any;
   main: any;
 }
-// I have an idea about the below, I can make an state obj above the compressor component
-// which will have all the functions to control the compressor + the values of the thingies
-// coming from their .value, and the "dropdown" to change channel will change value of the state obj default to use that one and so on
-// todo, aici cand o sa fac cu multiple compressors pe un singur ala poate o sa fie mai fucked up
-// ca ai vaz cu rerenderingu si alea, sper ca nu
+
 function Compressor({
   setCompressorStates,
   compressorStates,
@@ -24,36 +20,77 @@ function Compressor({
   setMain,
   main,
 }: CompressorProps) {
+  const { threshold, knee, ratio, attack, release } =
+    main.compressorFunctions.compressorUIStates;
   const [slidersInfo, setSlidersInfo] = useState([
     {
       id: "threshold",
       min: -100,
       max: 0,
-      defaultValue: main.compressorFunctions.compressorUIStates.threshold,
+      defaultValue: threshold,
       step: 1,
     },
-    { id: "knee", min: 0, max: 40, defaultValue: 32, step: 1 },
-    { id: "ratio", min: 1, max: 19.8, defaultValue: 10.4, step: 1 },
-    { id: "attack", min: 0, max: 1, defaultValue: 0.003, step: 0.1 },
-    { id: "release", min: 0, max: 1, defaultValue: 0.3, step: 0.1 },
+    {
+      id: "knee",
+      min: 0,
+      max: 40,
+      defaultValue: knee,
+      step: 1,
+    },
+    {
+      id: "ratio",
+      min: 1,
+      max: 19.8,
+      defaultValue: ratio,
+      step: 1,
+    },
+    {
+      id: "attack",
+      min: 0,
+      max: 1,
+      defaultValue: attack,
+      step: 0.1,
+    },
+    {
+      id: "release",
+      min: 0,
+      max: 1,
+      defaultValue: release,
+      step: 0.1,
+    },
   ]);
-  const handleChange = (index: number, newValue: number) => {
+  // AM RAMAS AICI, AM FACUT ASTA SA MEARGA ORICAND SCHIMBI, ALL GOOD i LIKE IT.
+  // ACU SA FAC PT WET DRY SLIDER CA GEN ACU NU MERGE DELOC PT CA TRE SA II FAC CEVA AICI SI PLM BFT HF U RE THE BEST
+  // This function changes all the values of a channel compressor whenever it changes
+  const changeAll = () => {
     // 1. Make a shallow copy of the items
     let items = [...slidersInfo];
     // 2. Make a shallow copy of the item you want to mutate
-    let item = { ...items[index] };
+    let thresholdItem = { ...items[0] };
+    let kneeItem = { ...items[1] };
+    let ratioItem = { ...items[2] };
+    let attackItem = { ...items[3] };
+    let releaseItem = { ...items[4] };
     // 3. Replace the property you're intested in
-    item.defaultValue = newValue;
+    thresholdItem.defaultValue = threshold;
+    kneeItem.defaultValue = knee;
+    ratioItem.defaultValue = ratio;
+    attackItem.defaultValue = attack;
+    releaseItem.defaultValue = release;
     // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-    items[index] = item;
+    items[0] = thresholdItem;
+    items[1] = kneeItem;
+    items[2] = ratioItem;
+    items[3] = attackItem;
+    items[4] = releaseItem;
     // 5. Set the state to our new copy
     setSlidersInfo(items);
   };
-  // am ramas aici, tre sa fac chestia de sub pentru fiecare knob + pt wet dry, si dupa e cam gata compressoru complet, le mai si testezi sa vezi daca se si aud lucrurile cum trebe
+  //! AM RAMAS AICI, tre sa fac chestia de sub pentru fiecare knob + pt wet dry, si dupa e cam gata compressoru complet, le mai si testezi sa vezi daca se si aud lucrurile cum trebe
   // dupa FX UNIT BROOO
   useEffect(() => {
-    handleChange(0, main.compressorFunctions.compressorUIStates.threshold);
-  }, [main.compressorFunctions.compressorUIStates.threshold]);
+    changeAll();
+  }, [main.compressorFunctions.compressorUIStates]);
 
   const [dropDownInfo] = useState([1, 2]);
   return (

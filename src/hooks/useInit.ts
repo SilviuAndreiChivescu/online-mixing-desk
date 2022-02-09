@@ -63,17 +63,40 @@ const useInit = () => {
     channelUI: channelTwoUI,
     compressorFunctions: channelTwoFunctions.compressorFunctions,
   });
+  //new idea, think if i can change values only when the channel changes
 
+  // am ramas aici, vreau sa fac sa nu mai puna tot direct, sa puna doar ce e nev, pt ca breaks my app, si gen la dependenci
+  // la fel, sa pui doar ce e nev cred? poate ast anu e neaparat, ba e?
   // The state below is used to change values of compressors in between channels
   const [whichCompressor, setWhichCompressor] = useState(1);
   useEffect(() => {
     switch (whichCompressor) {
       case 1:
-        setChannel1(main);
+        setChannel1({
+          ...channel1,
+          channelUI: {
+            ...channel1.channelUI,
+            compressorOn: main.channelUI.compressorOn,
+          },
+          compressorFunctions: {
+            ...channel1.compressorFunctions,
+            compressorUIStates: main.compressorFunctions.compressorUIStates,
+          },
+        });
         break;
 
       case 2:
-        setChannel2(main);
+        setChannel2({
+          ...channel2,
+          channelUI: {
+            ...channel2.channelUI,
+            compressorOn: main.channelUI.compressorOn,
+          },
+          compressorFunctions: {
+            ...channel2.compressorFunctions,
+            compressorUIStates: main.compressorFunctions.compressorUIStates,
+          },
+        });
         break;
     }
     // probably need to change the below dependency to relate to the other values as well
@@ -81,12 +104,34 @@ const useInit = () => {
   const controlWhichChannel = (channel: string) => {
     switch (parseInt(channel)) {
       case 1:
-        setMain(channel1);
+        setMain({
+          ...main,
+          channelUI: {
+            ...main.channelUI,
+            compressorOn: channel1.channelUI.compressorOn,
+          },
+          compressorFunctions: {
+            ...main.compressorFunctions,
+            compressorUIStates: channel1.compressorFunctions.compressorUIStates,
+          },
+        });
+        // setMain(channel1);
         setWhichCompressor(1);
         break;
 
       case 2:
-        setMain(channel2);
+        setMain({
+          ...main,
+          channelUI: {
+            ...main.channelUI,
+            compressorOn: channel2.channelUI.compressorOn,
+          },
+          compressorFunctions: {
+            ...main.compressorFunctions,
+            compressorUIStates: channel2.compressorFunctions.compressorUIStates,
+          },
+        });
+        // setMain(channel2);
         setWhichCompressor(2);
         break;
     }

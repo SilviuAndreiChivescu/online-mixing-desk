@@ -87,10 +87,7 @@ const useCompressor = (
         });
         break;
     }
-    setTest(parseFloat(value));
   };
-
-  const [test, setTest] = useState(0);
 
   // States to use for changing compressor
   const [compressorUIStates] = useState({
@@ -160,7 +157,6 @@ const useCompressor = (
     disconnectCompressor: disconnectCompressor,
     setDryWetKnob: setDryWetKnob,
     compressorOutput: compressorOutput,
-    test: test,
   });
 
   return [compressorFunctions] as const;
