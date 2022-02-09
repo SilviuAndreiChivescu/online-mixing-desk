@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useBiquadFilterNonResonant } from "./useBiquadFilter";
 import { useGain } from "./useGain";
 
@@ -21,8 +21,10 @@ const useEQ = (audioCtx: AudioContext, analyserNode: any) => {
     "lowshelf"
   );
 
-  // Connections
-  high.connect(mid).connect(low).connect(EQOutput);
+  useEffect(() => {
+    // Connections
+    high.connect(mid).connect(low).connect(EQOutput);
+  }, []);
 
   // Connect EQ
   const connectEQ = () => {

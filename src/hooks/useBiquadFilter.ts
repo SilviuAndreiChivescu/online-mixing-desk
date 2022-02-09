@@ -1,9 +1,11 @@
+import { useState } from "react";
+
 // highpass, lowpass
 const useBiquadFilterResonant = (
   audioCtx: AudioContext,
   typeValue: BiquadFilterType
 ) => {
-  const biquadFilter = audioCtx.createBiquadFilter();
+  const [biquadFilter] = useState(() => audioCtx.createBiquadFilter());
   biquadFilter.type = typeValue;
 
   const biquadFilterCutOffFreqControl = (cutOffValue: number) => {
@@ -19,7 +21,7 @@ const useBiquadFilterNonResonant = (
   frequencyValue: number,
   typeValue: BiquadFilterType
 ) => {
-  const biquadFilter = audioCtx.createBiquadFilter();
+  const [biquadFilter] = useState(() => audioCtx.createBiquadFilter());
   biquadFilter.type = typeValue;
   biquadFilter["frequency"].value = frequencyValue;
 

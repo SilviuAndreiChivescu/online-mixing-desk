@@ -30,7 +30,7 @@ const useChannelLine = (
   //*** END UI states
 
   // todo change this to live audio after testing
-  const audioElement = new Audio("/assets/outfoxing.mp3");
+  const [audioElement] = useState(() => new Audio("/assets/outfoxing.mp3"));
 
   const play = () => {
     if (audioCtx.state === "running") return;
@@ -44,7 +44,9 @@ const useChannelLine = (
     audioElement.pause();
   };
 
-  const audioSourceNode = audioCtx.createMediaElementSource(audioElement);
+  const [audioSourceNode] = useState(() =>
+    audioCtx.createMediaElementSource(audioElement)
+  );
   const [channelGainNode, controlChannelGainNode] = useGain(audioCtx);
   const [sliderVolumeNode, controlSliderVolumeNode] = useGain(audioCtx);
   // todo, this needs to be changed to actual analyser node after testing, also in useEQ file change the type

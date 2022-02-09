@@ -1,6 +1,8 @@
+import { useState } from "react";
+
 const useGain = (audioCtx: AudioContext) => {
   // Create Gain Node
-  const gainNode = audioCtx.createGain();
+  const [gainNode] = useState(() => audioCtx.createGain());
   const gainControl = (gainValue: number) => {
     gainNode.gain.value = gainValue;
   };

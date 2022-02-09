@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 //TODO delete below where cmomented
 const useReverb = (audioCtx: AudioContext) => {
@@ -8,7 +8,7 @@ const useReverb = (audioCtx: AudioContext) => {
       .then((arrayBuffer) => audioCtx.decodeAudioData(arrayBuffer));
   };
 
-  const convolver = audioCtx.createConvolver();
+  const [convolver] = useState(() => audioCtx.createConvolver());
 
   const chooseImpulse = async (impulseUrl: string) => {
     try {

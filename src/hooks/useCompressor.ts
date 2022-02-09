@@ -6,7 +6,7 @@ const useCompressor = (
   pannerNode: StereoPannerNode
 ) => {
   const [compressorOutput] = useGain(audioCtx);
-  const compressor = audioCtx.createDynamicsCompressor();
+  const [compressor] = useState(() => audioCtx.createDynamicsCompressor());
   // Control Compressor's Params: Threshold, Knee, Ratio, Attack, Release
   const compressorControl = (
     e: React.ChangeEvent<HTMLInputElement>,
