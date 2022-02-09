@@ -94,11 +94,14 @@ function Compressor({
 
   const handleActive = (channel: number) => {
     let items = [...dropDownInfo];
+    // Make current true active, to false
     let missingItemIndex =
       items.filter((item: any) => item.active === true)[0].channel - 1;
     let itemTrue = { ...items[missingItemIndex] };
     itemTrue.active = false;
     items[missingItemIndex] = itemTrue;
+
+    // Make selected one to true
     let item = { ...items[channel - 1] };
     item.active = true;
     items[channel - 1] = item;
