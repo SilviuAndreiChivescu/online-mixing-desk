@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-//TODO delete below where cmomented
 const useReverb = (audioCtx: AudioContext) => {
   const getImpulseBuffer = (audioCtx: AudioContext, impulseUrl: string) => {
     return fetch(impulseUrl)
@@ -16,14 +15,13 @@ const useReverb = (audioCtx: AudioContext) => {
         audioCtx,
         `/assets/impulses/${impulseUrl}`
       );
-      console.log(`using ${impulseUrl}`); // this probably needs deleted
     } catch (err) {
       console.log(err);
     }
   };
 
   useEffect(() => {
-    chooseImpulse("LargeHall.wav"); // this probably needs deleted or changed (needs to be the value from the checkbox on UI)
+    chooseImpulse("LargeHall.wav");
   }, []);
 
   return [convolver, chooseImpulse] as const;
