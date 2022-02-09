@@ -96,7 +96,6 @@ function Compressor({
     let items = [...dropDownInfo];
     let missingItemIndex =
       items.filter((item: any) => item.active === true)[0].channel - 1;
-    console.log(missingItemIndex);
     let itemTrue = { ...items[missingItemIndex] };
     itemTrue.active = false;
     items[missingItemIndex] = itemTrue;
