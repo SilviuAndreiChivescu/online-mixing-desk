@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Dropdown, Row } from "react-bootstrap";
 import MyCompressorSlider from "./MyCompressorSlider";
-import { MyRangeSlider } from "./MyRangeSlider";
 
 interface CompressorProps {
   setCompressorStates: any;
@@ -20,7 +19,7 @@ function Compressor({
   setMain,
   main,
 }: CompressorProps) {
-  const { threshold, knee, ratio, attack, release } =
+  const { threshold, knee, ratio, attack, release, dryWetKnob } =
     main.compressorFunctions.compressorUIStates;
   const [slidersInfo, setSlidersInfo] = useState([
     {
@@ -28,7 +27,7 @@ function Compressor({
       min: -100,
       max: 0,
       defaultValue: threshold,
-      step: 1,
+      step: 10,
     },
     {
       id: "knee",
@@ -59,8 +58,6 @@ function Compressor({
       step: 0.1,
     },
   ]);
-  // AM RAMAS AICI, AM FACUT ASTA SA MEARGA ORICAND SCHIMBI, ALL GOOD i LIKE IT.
-  // ACU SA FAC PT WET DRY SLIDER CA GEN ACU NU MERGE DELOC PT CA TRE SA II FAC CEVA AICI SI PLM BFT HF U RE THE BEST
   // This function changes all the values of a channel compressor whenever it changes
   const changeAll = () => {
     // 1. Make a shallow copy of the items
@@ -86,8 +83,6 @@ function Compressor({
     // 5. Set the state to our new copy
     setSlidersInfo(items);
   };
-  //! AM RAMAS AICI, tre sa fac chestia de sub pentru fiecare knob + pt wet dry, si dupa e cam gata compressoru complet, le mai si testezi sa vezi daca se si aud lucrurile cum trebe
-  // dupa FX UNIT BROOO
   useEffect(() => {
     changeAll();
   }, [main.compressorFunctions.compressorUIStates]);
@@ -153,7 +148,7 @@ function Compressor({
             onChangeFunction={compressorFunctions.setDryWetKnob}
             min={0}
             max={1}
-            defaultValue={0.5}
+            defaultValue={dryWetKnob}
             step={0.1}
             className="mt-4 mb-4"
             id="wetDryCompressor"
