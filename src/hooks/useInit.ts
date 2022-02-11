@@ -48,8 +48,6 @@ const useInit = () => {
     setMasterFilterOn: setMasterFilterOn,
   });
 
-  // aici am ramas, am realizat ca tre sa fac chestiile astea specific pt fx unit, nu le pot folosi tot pe astea
-  // deoarece atunci cand ar fi un useEffect s-ar pune una peste alta, ucm se inmpla de fapt
   // Below states are used to control all compressors
   const [main, setMain] = useState({
     setChannelUI: setChannelOneUI,
