@@ -3,7 +3,7 @@ import { useChannelLine } from "./useChannelLine";
 import { useGain } from "./useGain";
 import { useMaster } from "./useMaster";
 import { useMasterFilter } from "./useMasterFilter";
-// am ramas aici sa rez cu meteru si live audio, si dupa prob testing la scl despre cue and booth singal and stuff? (test first on my pc to get my audio etc)
+// am ramas aici sa rez cu live audio, si dupa prob testing la scl despre cue and booth singal and stuff? (test first on my pc to get my audio etc)
 const useInit = () => {
   const [AudioContext] = useState(
     () => window.AudioContext || window.webkitAudioContext
@@ -146,6 +146,10 @@ const useInit = () => {
   // These connections will be made based on the value of the buttons
   // Channel 1
   useEffect(() => {
+    if (channelOneUI.channelOn) channelOneFunctions.connectChannel();
+    else channelOneFunctions.disconnectChannel();
+  }, [channelOneUI.channelOn]);
+  useEffect(() => {
     if (channelOneUI.eqOn) channelOneFunctions.EQFunctions.connectEQ();
     else channelOneFunctions.EQFunctions.disconnectEQ();
   }, [channelOneUI.eqOn]);
@@ -173,6 +177,10 @@ const useInit = () => {
   }, [channelOneUI.cueOn]);
 
   // Channel 2
+  useEffect(() => {
+    if (channelTwoUI.channelOn) channelTwoFunctions.connectChannel();
+    else channelTwoFunctions.disconnectChannel();
+  }, [channelTwoUI.channelOn]);
   useEffect(() => {
     if (channelTwoUI.eqOn) channelTwoFunctions.EQFunctions.connectEQ();
     else channelTwoFunctions.EQFunctions.disconnectEQ();
