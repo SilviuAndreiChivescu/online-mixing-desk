@@ -12,26 +12,20 @@ const useChannelLine = (
   cueNode: GainNode,
   withoutCueNode: GainNode
 ) => {
-  //*** UI states
-  //   FA CE AM FKT CU EQ ON USPR PT TOATE PROB
-  const [channelOn, setChannelOn] = useState(false);
-
-  // UI STATES
   const [UI, setUI] = useState({
     eqOn: false,
     hpfOn: false,
     compressorOn: false,
     fxUnitOn: false,
     cueOn: false,
-
-    // todo change these (and below and at gain and slider and at compressor UI and at master filter UI) to correspond to actual defaults
-    channelOn: channelOn, //todo this and below needs to be rethinked when I put to live audio
-    setChannelOn: setChannelOn,
+    channelOn: false,
   });
-  //*** END UI states
 
   // todo change this to live audio after testing
   const [audioElement] = useState(() => new Audio("/assets/outfoxing.mp3"));
+  const [audioSourceNode] = useState(() =>
+    audioCtx.createMediaElementSource(audioElement)
+  );
 
   const play = () => {
     if (audioCtx.state === "running") return;
@@ -44,10 +38,6 @@ const useChannelLine = (
 
     audioElement.pause();
   };
-
-  const [audioSourceNode] = useState(() =>
-    audioCtx.createMediaElementSource(audioElement)
-  );
 
   const [analyserNode] = useState(() => audioCtx.createAnalyser());
   const { drawSoundLevel } = useSoundMeter(audioCtx, analyserNode);
@@ -71,6 +61,7 @@ const useChannelLine = (
   const [connectionNode] = useGain(audioCtx);
   useEffect(() => {
     audioSourceNode.connect(channelGainNode).connect(analyserNode);
+    channelGainNode.connect(analyserNode);
     HPFFunctions.HPFOutput.connect(pannerNode);
     FXUnitFunctions.FXUnitOutput.connect(sliderVolumeNode);
     sliderVolumeNode.connect(connectionNode);
@@ -88,18 +79,32 @@ const useChannelLine = (
     connectionNode.disconnect();
     FXUnitFunctions.FXUnitOutput.connect(sliderVolumeNode);
   };
-  // todo I don't know if I really need these or I can just connect it as I have it
-  // and only pause and play? or even better, see how it is for live audio
-  // because before I had in the first useEffect I did not have as connected the audioSourceNode, so I
-  // could use the below
+
   // Channel ON
   const connectChannel = () => {
-    audioSourceNode.connect(channelGainNode);
+    if (navigator.mediaDevices) {
+      navigator.mediaDevices
+        .getUserMedia({ audio: true })
+        .then((stream) => {
+          const microphone = audioCtx.createMediaStreamSource(stream);
+          audioCtx.resume();
+          microphone.connect(channelGainNode);
+        })
+        .catch((err) => {
+          // browser unable to access microphone
+          // (check to see if microphone is attached)
+          console.log(err);
+        });
+    } else {
+      // browser unable to access media devices
+      // (update your browser)
+      console.log("browser unable to access media devices");
+    }
   };
 
   // Channel OFF
   const disconnectChannel = () => {
-    audioSourceNode.disconnect();
+    audioCtx.suspend();
   };
 
   // Put everything to export into an object
