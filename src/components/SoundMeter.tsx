@@ -30,6 +30,6 @@ function SoundMeter({ draw }: SoundMeterProps) {
     };
   }, []);
 
-  return <canvas ref={canvasRef} />;
+  return <canvas height="300" width="10" ref={canvasRef} />;
 }
 export default SoundMeter;
