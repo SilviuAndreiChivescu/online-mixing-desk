@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Dropdown, Row } from "react-bootstrap";
+import CustomDropdown from "./CustomDropdown";
 import MyCompressorSlider from "./MyCompressorSlider";
 
 interface CompressorProps {
@@ -87,51 +88,9 @@ function Compressor({
     changeAll();
   }, [main.compressorFunctions.compressorUIStates]);
 
-  const [dropDownInfo, setDropDownInfo] = useState([
-    { channel: 1, active: true },
-    { channel: 2, active: false },
-  ]);
-
-  const handleActive = (channel: number) => {
-    let items = [...dropDownInfo];
-    // Make current true active, to false
-    let missingItemIndex =
-      items.filter((item: any) => item.active === true)[0].channel - 1;
-    let itemTrue = { ...items[missingItemIndex] };
-    itemTrue.active = false;
-    items[missingItemIndex] = itemTrue;
-
-    // Make selected one to true
-    let item = { ...items[channel - 1] };
-    item.active = true;
-    items[channel - 1] = item;
-    setDropDownInfo(items);
-  };
-
   return (
     <section className="border align-items-center mt-2 mb-2">
-      <Dropdown
-        onSelect={(e: any) => {
-          controlWhichChannel(e);
-          handleActive(e);
-        }}
-      >
-        <Dropdown.Toggle variant="success" id="dropdown-basic2">
-          Channel
-        </Dropdown.Toggle>
-
-        <Dropdown.Menu>
-          {dropDownInfo.map((el: any) => (
-            <Dropdown.Item
-              active={el.active}
-              key={el.channel}
-              eventKey={el.channel}
-            >
-              {el.channel}
-            </Dropdown.Item>
-          ))}
-        </Dropdown.Menu>
-      </Dropdown>
+      <CustomDropdown controlWhichChannel={controlWhichChannel} />
       <Row>
         <Col>
           <Button
