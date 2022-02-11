@@ -162,8 +162,18 @@ const ChannelLine: React.FC<ChannelLineProps> = ({
     <>
       <Row>
         <Col>
+          <Button
+            className="mt-5"
+            onClick={() =>
+              setChannelUI({ ...channelUI, channelOn: !channelUI.channelOn })
+            }
+          >
+            Mic Input
+          </Button>
+        </Col>
+        <Col>
           <Button className="mt-5" onClick={play}>
-            Plays
+            Play
           </Button>
         </Col>
         <Col>
