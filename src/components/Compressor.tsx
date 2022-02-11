@@ -4,8 +4,6 @@ import CustomDropdown from "./CustomDropdown";
 import MyCompressorSlider from "./MyCompressorSlider";
 
 interface CompressorProps {
-  setCompressorStates: any;
-  compressorStates: any;
   compressorFunctions: any;
   controlWhichChannel: any;
   setMain: any;
@@ -13,8 +11,6 @@ interface CompressorProps {
 }
 
 function Compressor({
-  setCompressorStates,
-  compressorStates,
   compressorFunctions,
   controlWhichChannel,
   setMain,
@@ -96,11 +92,11 @@ function Compressor({
           <Button
             className="mt-2 mb-2"
             onClick={() =>
-              setCompressorStates({
-                ...compressorStates,
+              setMain({
+                ...main,
                 channelUI: {
-                  ...compressorStates.channelUI,
-                  compressorOn: !compressorStates.channelUI.compressorOn,
+                  ...main.channelUI,
+                  compressorOn: !main.channelUI.compressorOn,
                 },
               })
             }
