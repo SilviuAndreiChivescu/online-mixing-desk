@@ -1,24 +1,36 @@
 import React, { useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
+import CustomDropdown from "./CustomDropdown";
+import MyCompressorSlider from "./MyCompressorSlider";
 import MyDropdown from "./MyDropdown";
 import { MyRangeSlider } from "./MyRangeSlider";
 interface FXUnitProps {
-  setChannelUI: any;
-  channelUI: any;
   FXUnitFunctions: any;
+  controlWhichChannel: any;
+  setMain: any;
+  main: any;
 }
 
-function FXUnit({ setChannelUI, channelUI, FXUnitFunctions }: FXUnitProps) {
+function FXUnit({
+  FXUnitFunctions,
+  controlWhichChannel,
+  setMain,
+  main,
+}: FXUnitProps) {
   return (
     <section className="border align-items-center mt-2 mb-2">
+      <CustomDropdown controlWhichChannel={controlWhichChannel} />
       <Row>
         <Col>
           <Button
             className="mt-2 mb-2"
             onClick={() =>
-              setChannelUI({
-                ...channelUI,
-                fxUnitOn: !channelUI.fxUnitOn,
+              setMain({
+                ...main,
+                channelUI: {
+                  ...main.channelUI,
+                  fxUnitOn: !main.channelUI.fxUnitOn,
+                },
               })
             }
           >
@@ -29,13 +41,17 @@ function FXUnit({ setChannelUI, channelUI, FXUnitFunctions }: FXUnitProps) {
       <MyDropdown chooseImpulse={FXUnitFunctions.chooseImpulse} />
       <Row>
         <Col>
-          <MyRangeSlider
+          <MyCompressorSlider
             label="Wet Dry"
+            setMain={setMain}
+            main={main}
             onChangeFunction={FXUnitFunctions.setDryWetKnob}
             min={0}
             max={1}
-            defaultValue={0.5}
+            defaultValue={FXUnitFunctions.FXUnitUIStates.dryWetKnob}
             step={0.1}
+            className="mt-4 mb-4"
+            id="wetDryFXUnit"
           />
         </Col>
       </Row>

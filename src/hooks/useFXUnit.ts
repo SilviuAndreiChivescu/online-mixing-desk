@@ -7,16 +7,39 @@ const useFXUnit = (audioCtx: AudioContext, compressorOutput: GainNode) => {
 
   const [convolver, chooseImpulse] = useReverb(audioCtx);
 
+  // States to use for changing between channels
+  const [FXUnitUIStates] = useState({
+    reverb: "LargeHall", // this will only help if I want to show as active the reverb used
+    dryWetKnob: 0.5,
+  });
+
   const [dryGainNode, dryGainControl] = useGain(audioCtx);
   const [wetGainNode, wetGainControl] = useGain(audioCtx);
 
   // Dry Wet Mix Controller Knob (1 means full wet)
-  const setDryWetKnob = (dryWetKnob: number) => {
-    if (dryWetKnob > 0.5) {
-      dryGainControl(1 - 2 * (dryWetKnob - 0.5));
+  const setDryWetKnob = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    setMain: any,
+    main: any
+  ) => {
+    const { value } = e.target;
+
+    setMain({
+      ...main,
+      FXUnitFunctions: {
+        ...main.FXUnitFunctions,
+        FXUnitUIStates: {
+          ...main.FXUnitFunctions.FXUnitUIStates,
+          dryWetKnob: parseFloat(value),
+        },
+      },
+    });
+
+    if (parseFloat(value) > 0.5) {
+      dryGainControl(1 - 2 * (parseFloat(value) - 0.5));
       wetGainControl(1);
     } else {
-      wetGainControl(1 - 2 * (0.5 - dryWetKnob));
+      wetGainControl(1 - 2 * (0.5 - parseFloat(value)));
       dryGainControl(1);
     }
   };
@@ -51,6 +74,7 @@ const useFXUnit = (audioCtx: AudioContext, compressorOutput: GainNode) => {
     disconnectFXUnit: disconnectFXUnit,
     FXUnitOutput: FXUnitOutput,
     setDryWetKnob: setDryWetKnob,
+    FXUnitUIStates: FXUnitUIStates,
   });
 
   return [FXUnitFunctions] as const;

@@ -99,8 +99,11 @@ const App: React.FC = () => {
     masterFilterToExport,
     masterFunctions,
     controlWhichChannel,
+    controlWhichFXUnit,
     setMain,
     main,
+    setMainFXUnit,
+    mainFXUnit,
   ] = useInit();
 
   return (
@@ -126,14 +129,13 @@ const App: React.FC = () => {
           setMain={setMain}
           main={main}
           controlWhichChannel={controlWhichChannel}
-          setCompressorStates={setMain}
-          compressorStates={main}
           compressorFunctions={main.compressorFunctions}
         />
         <FXUnit
-          setChannelUI={setChannelOneUI}
-          channelUI={channelOneUI}
-          FXUnitFunctions={channelOneFunctions.FXUnitFunctions}
+          setMain={setMainFXUnit}
+          main={mainFXUnit}
+          controlWhichChannel={controlWhichFXUnit}
+          FXUnitFunctions={mainFXUnit.FXUnitFunctions}
         />
         <MasterFilter masterFilterToExport={masterFilterToExport} />
         <Master masterFunctions={masterFunctions} />

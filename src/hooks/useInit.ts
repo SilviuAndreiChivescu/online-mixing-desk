@@ -3,7 +3,7 @@ import { useChannelLine } from "./useChannelLine";
 import { useGain } from "./useGain";
 import { useMaster } from "./useMaster";
 import { useMasterFilter } from "./useMasterFilter";
-
+// am ramas aici sa rez cu meteru si live audio, si dupa prob testing la scl despre cue and booth singal and stuff? (test first on my pc to get my audio etc)
 const useInit = () => {
   const [AudioContext] = useState(
     () => window.AudioContext || window.webkitAudioContext
@@ -48,6 +48,8 @@ const useInit = () => {
     setMasterFilterOn: setMasterFilterOn,
   });
 
+  // aici am ramas, am realizat ca tre sa fac chestiile astea specific pt fx unit, nu le pot folosi tot pe astea
+  // deoarece atunci cand ar fi un useEffect s-ar pune una peste alta, ucm se inmpla de fapt
   // Below states are used to control all compressors
   const [main, setMain] = useState({
     setChannelUI: setChannelOneUI,
@@ -96,6 +98,53 @@ const useInit = () => {
     }
   };
 
+  // The state below is used to change values of FXUnits in between channels
+  const [mainFXUnit, setMainFXUnit] = useState({
+    setChannelUI: setChannelOneUI,
+    channelUI: channelOneUI,
+    FXUnitFunctions: channelOneFunctions.FXUnitFunctions,
+  });
+
+  const [channel1FX, setChannel1FX] = useState({
+    setChannelUI: setChannelOneUI,
+    channelUI: channelOneUI,
+    FXUnitFunctions: channelOneFunctions.FXUnitFunctions,
+  });
+  const [channel2FX, setChannel2FX] = useState({
+    setChannelUI: setChannelTwoUI,
+    channelUI: channelTwoUI,
+    FXUnitFunctions: channelTwoFunctions.FXUnitFunctions,
+  });
+  const [whichFXUnit, setWhichFXUnit] = useState(1);
+  useEffect(() => {
+    switch (whichFXUnit) {
+      case 1:
+        setChannel1FX(mainFXUnit);
+        break;
+
+      case 2:
+        setChannel2FX(mainFXUnit);
+        break;
+    }
+  }, [
+    mainFXUnit.channelUI.fxUnitOn,
+    mainFXUnit.FXUnitFunctions.FXUnitUIStates,
+  ]);
+
+  const controlWhichFXUnit = (channel: string) => {
+    switch (parseInt(channel)) {
+      case 1:
+        setMainFXUnit(channel1FX);
+        setWhichFXUnit(1);
+        break;
+
+      case 2:
+        setMainFXUnit(channel2FX);
+        setWhichFXUnit(2);
+        break;
+    }
+  };
+
   // These connections will be made based on the value of the buttons
   // Channel 1
   useEffect(() => {
@@ -115,10 +164,10 @@ const useInit = () => {
   }, [channel1.channelUI.compressorOn]);
 
   useEffect(() => {
-    if (channelOneUI.fxUnitOn)
+    if (channel1FX.channelUI.fxUnitOn)
       channelOneFunctions.FXUnitFunctions.connectFXUnit();
     else channelOneFunctions.FXUnitFunctions.disconnectFXUnit();
-  }, [channelOneUI.fxUnitOn]);
+  }, [channel1FX.channelUI.fxUnitOn]);
 
   useEffect(() => {
     if (channelOneUI.cueOn) channelOneFunctions.connectCue();
@@ -143,10 +192,10 @@ const useInit = () => {
   }, [channel2.channelUI.compressorOn]);
 
   useEffect(() => {
-    if (channelTwoUI.fxUnitOn)
+    if (channel2FX.channelUI.fxUnitOn)
       channelTwoFunctions.FXUnitFunctions.connectFXUnit();
     else channelTwoFunctions.FXUnitFunctions.disconnectFXUnit();
-  }, [channelTwoUI.fxUnitOn]);
+  }, [channel2FX.channelUI.fxUnitOn]);
 
   useEffect(() => {
     if (channelTwoUI.cueOn) channelTwoFunctions.connectCue();
@@ -193,8 +242,11 @@ const useInit = () => {
     masterFilterToExport,
     masterFunctions,
     controlWhichChannel,
+    controlWhichFXUnit,
     setMain,
     main,
+    setMainFXUnit,
+    mainFXUnit,
   ] as const;
 };
 export { useInit };
