@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Col, Container, Dropdown, Form, Row } from "react-bootstrap";
 import "./App.css";
-import { useAudio } from "./AppLogic";
-import { Oscilloscope } from "./components/Oscilloscope";
+import SoundMeter from "./components/SoundMeter";
 
 import { MyRangeSlider } from "./components/MyRangeSlider";
 // import { Compressor } from "./components/Compressor";
@@ -21,6 +20,7 @@ import FXUnit from "./components/FXUnit";
 import VolumeSlider from "./components/VolumeSlider";
 import MasterFilter from "./components/MasterFilter";
 import Master from "./components/Master";
+import { useSoundMeter } from "./hooks/useSoundMeter";
 
 //todo change all any types to actual types?
 
@@ -155,13 +155,15 @@ const ChannelLine: React.FC<ChannelLineProps> = ({
   channelUI,
   setChannelUI,
 }) => {
-  const { play, pause, EQFunctions, HPFFunctions } = channelFunctions;
+  const { play, pause, EQFunctions, HPFFunctions, drawSoundLevel } =
+    channelFunctions;
+
   return (
     <>
       <Row>
         <Col>
           <Button className="mt-5" onClick={play}>
-            Play
+            Plays
           </Button>
         </Col>
         <Col>
@@ -171,6 +173,9 @@ const ChannelLine: React.FC<ChannelLineProps> = ({
         </Col>
       </Row>
       <Gain channelFunctions={channelFunctions} />
+
+      <SoundMeter draw={drawSoundLevel} />
+
       <EQ
         setChannelUI={setChannelUI}
         channelUI={channelUI}

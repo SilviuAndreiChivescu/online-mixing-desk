@@ -5,6 +5,7 @@ import { useFXUnit } from "./useFXUnit";
 import { useGain } from "./useGain";
 import { useHPF } from "./useHPF";
 import { usePanner } from "./usePanner";
+import { useSoundMeter } from "./useSoundMeter";
 
 const useChannelLine = (
   audioCtx: AudioContext,
@@ -47,10 +48,12 @@ const useChannelLine = (
   const [audioSourceNode] = useState(() =>
     audioCtx.createMediaElementSource(audioElement)
   );
+
+  const [analyserNode] = useState(() => audioCtx.createAnalyser());
+  const { drawSoundLevel } = useSoundMeter(audioCtx, analyserNode);
+
   const [channelGainNode, controlChannelGainNode] = useGain(audioCtx);
   const [sliderVolumeNode, controlSliderVolumeNode] = useGain(audioCtx);
-  // todo, this needs to be changed to actual analyser node after testing, also in useEQ file change the type
-  const [analyserNode] = useGain(audioCtx);
   const [pannerNode, controlPannerNode] = usePanner(audioCtx);
 
   // rest of the nodes are already connected inside the custom hooks that have them (by passing the node in the args)
@@ -115,6 +118,7 @@ const useChannelLine = (
     HPFFunctions: HPFFunctions,
     compressorFunctions: compressorFunctions,
     FXUnitFunctions: FXUnitFunctions,
+    drawSoundLevel: drawSoundLevel,
   });
   return [channelLineFunctions, UI, setUI] as const;
 };

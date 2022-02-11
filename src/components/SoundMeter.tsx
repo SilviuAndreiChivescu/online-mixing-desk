@@ -1,15 +1,13 @@
 import React, { useRef, useEffect } from "react";
 
-interface OscilloscopeProps {
+interface SoundMeterProps {
   draw: (
     canvas: HTMLCanvasElement,
     canvasCtx: CanvasRenderingContext2D
   ) => void;
 }
 
-export const Oscilloscope: React.FC<OscilloscopeProps> = (props) => {
-  const { draw } = props;
-
+function SoundMeter({ draw }: SoundMeterProps) {
   // Get canvas Ref
   const canvasRef = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
@@ -33,4 +31,5 @@ export const Oscilloscope: React.FC<OscilloscopeProps> = (props) => {
   }, []);
 
   return <canvas ref={canvasRef} />;
-};
+}
+export default SoundMeter;
