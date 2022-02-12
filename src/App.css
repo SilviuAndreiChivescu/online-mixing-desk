@@ -1,2 +1,6 @@
 .App {
 }
+[type="checkbox"]{
+    width: 0;
+    height: 0;
+  }
