@@ -5,6 +5,7 @@ import { useMaster } from "./useMaster";
 import { useMasterFilter } from "./useMasterFilter";
 // prob acu tre sa fac design -ul si sa le connectez gen 6 chanale, momentan am doar 2 dar o sa le conectez dupa ce gasesc / fac un ui frumos
 // dupa prob testing la scl despre cue and booth singal and stuff? (test first on my pc to get my audio etc)
+//todo test compressor and others, sometimes they produce a weird sound when turned on and stuff, see if I can prevent that
 const useInit = () => {
   const [AudioContext] = useState(
     () => window.AudioContext || window.webkitAudioContext

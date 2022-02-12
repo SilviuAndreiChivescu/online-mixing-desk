@@ -3,9 +3,30 @@ import { Button, Col, Row } from "react-bootstrap";
 import { MyRangeSlider } from "./MyRangeSlider";
 
 interface HPFProps {
-  HPFFunctions: any;
-  setChannelUI: any;
-  channelUI: any;
+  HPFFunctions: {
+    controlHighPassCutOff: (cutOffValue: number) => void;
+    connectHPF: () => void;
+    disconnectHPF: () => void;
+    HPFOutput: GainNode;
+  };
+  setChannelUI: React.Dispatch<
+    React.SetStateAction<{
+      eqOn: boolean;
+      hpfOn: boolean;
+      compressorOn: boolean;
+      fxUnitOn: boolean;
+      cueOn: boolean;
+      channelOn: boolean;
+    }>
+  >;
+  channelUI: {
+    eqOn: boolean;
+    hpfOn: boolean;
+    compressorOn: boolean;
+    fxUnitOn: boolean;
+    cueOn: boolean;
+    channelOn: boolean;
+  };
 }
 
 function HPF({ HPFFunctions, setChannelUI, channelUI }: HPFProps) {

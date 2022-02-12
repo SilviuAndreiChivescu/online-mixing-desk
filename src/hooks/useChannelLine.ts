@@ -40,7 +40,7 @@ const useChannelLine = (
   };
 
   const [analyserNode] = useState(() => audioCtx.createAnalyser());
-  const { drawSoundLevel } = useSoundMeter(audioCtx, analyserNode);
+  const { drawSoundLevel } = useSoundMeter(analyserNode);
 
   const [channelGainNode, controlChannelGainNode] = useGain(audioCtx);
   const [sliderVolumeNode, controlSliderVolumeNode] = useGain(audioCtx);
@@ -80,6 +80,7 @@ const useChannelLine = (
     FXUnitFunctions.FXUnitOutput.connect(sliderVolumeNode);
   };
 
+  const [inputConnectionNode] = useGain(audioCtx);
   // Channel ON
   const connectChannel = () => {
     if (navigator.mediaDevices) {
@@ -88,7 +89,7 @@ const useChannelLine = (
         .then((stream) => {
           const microphone = audioCtx.createMediaStreamSource(stream);
           audioCtx.resume();
-          microphone.connect(channelGainNode);
+          microphone.connect(inputConnectionNode).connect(channelGainNode);
         })
         .catch((err) => {
           // browser unable to access microphone
@@ -104,7 +105,7 @@ const useChannelLine = (
 
   // Channel OFF
   const disconnectChannel = () => {
-    audioCtx.suspend();
+    inputConnectionNode.disconnect();
   };
 
   // Put everything to export into an object

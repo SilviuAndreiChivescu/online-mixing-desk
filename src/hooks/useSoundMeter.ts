@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const useSoundMeter = (audioCtx: AudioContext, analyserNode: AnalyserNode) => {
+const useSoundMeter = (analyserNode: AnalyserNode) => {
   const [bufferLength] = useState(() => analyserNode.frequencyBinCount);
   const [dataArray] = useState(() => new Uint8Array(bufferLength));
   useEffect(() => {

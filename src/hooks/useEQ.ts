@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { useBiquadFilterNonResonant } from "./useBiquadFilter";
 import { useGain } from "./useGain";
 
-// todo AnalyserNode as type for below where any after testing
-const useEQ = (audioCtx: AudioContext, analyserNode: any) => {
+const useEQ = (audioCtx: AudioContext, analyserNode: AnalyserNode) => {
   const [EQOutput] = useGain(audioCtx);
   const [high, controlHigh] = useBiquadFilterNonResonant(
     audioCtx,

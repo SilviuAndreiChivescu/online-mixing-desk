@@ -3,9 +3,34 @@ import { Button, Col, Row } from "react-bootstrap";
 import { MyRangeSlider } from "./MyRangeSlider";
 
 interface EQProps {
-  EQFunctions: any;
-  setChannelUI: any;
-  channelUI: any;
+  EQFunctions: {
+    EQControl: {
+      controlHigh: (gainValue: number) => void;
+      controlMid: (gainValue: number) => void;
+      controlLow: (gainValue: number) => void;
+    };
+    connectEQ: () => void;
+    disconnectEQ: () => void;
+    EQOutput: GainNode;
+  };
+  setChannelUI: React.Dispatch<
+    React.SetStateAction<{
+      eqOn: boolean;
+      hpfOn: boolean;
+      compressorOn: boolean;
+      fxUnitOn: boolean;
+      cueOn: boolean;
+      channelOn: boolean;
+    }>
+  >;
+  channelUI: {
+    eqOn: boolean;
+    hpfOn: boolean;
+    compressorOn: boolean;
+    fxUnitOn: boolean;
+    cueOn: boolean;
+    channelOn: boolean;
+  };
 }
 
 function EQ({ EQFunctions, setChannelUI, channelUI }: EQProps) {

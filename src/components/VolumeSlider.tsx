@@ -2,16 +2,16 @@ import React from "react";
 import { Col, Row } from "react-bootstrap";
 import { MyRangeSlider } from "./MyRangeSlider";
 interface VolumeSliderProps {
-  channelFunctions: any;
+  controlSliderVolumeNode: (gainValue: number) => void;
 }
 
-function VolumeSlider({ channelFunctions }: VolumeSliderProps) {
+function VolumeSlider({ controlSliderVolumeNode }: VolumeSliderProps) {
   return (
     <section className="border align-items-center mt-2 mb-2">
       <Row>
         <Col>
           <MyRangeSlider
-            onChangeFunction={channelFunctions.controlSliderVolumeNode}
+            onChangeFunction={controlSliderVolumeNode}
             label="Volume"
             min={0}
             max={2}
