@@ -3,7 +3,8 @@ import { useChannelLine } from "./useChannelLine";
 import { useGain } from "./useGain";
 import { useMaster } from "./useMaster";
 import { useMasterFilter } from "./useMasterFilter";
-// am ramas aici sa rez cu live audio, si dupa prob testing la scl despre cue and booth singal and stuff? (test first on my pc to get my audio etc)
+// prob acu tre sa fac design -ul si sa le connectez gen 6 chanale, momentan am doar 2 dar o sa le conectez dupa ce gasesc / fac un ui frumos
+// dupa prob testing la scl despre cue and booth singal and stuff? (test first on my pc to get my audio etc)
 const useInit = () => {
   const [AudioContext] = useState(
     () => window.AudioContext || window.webkitAudioContext
