@@ -33,7 +33,7 @@ function SoundMeter({ draw }: SoundMeterProps) {
 
   return (
     <Col>
-      <canvas height="305" width="5" ref={canvasRef} />
+      <canvas height="205" width="5" ref={canvasRef} />
     </Col>
   );
 }

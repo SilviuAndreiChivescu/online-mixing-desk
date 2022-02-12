@@ -58,7 +58,7 @@ function VolumeSlider({ controlSliderVolumeNode }: VolumeSliderProps) {
 
   return (
     <Col>
-      <Stack sx={{ height: 300 }} spacing={1} direction="row">
+      <Stack sx={{ height: 200 }} spacing={1} direction="row">
         <Slider
           // @ts-ignore
           onChange={(e) => controlSliderVolumeNode(e.target.value)}
