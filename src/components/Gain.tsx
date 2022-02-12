@@ -1,22 +1,26 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-import { MyRangeSlider } from "./MyRangeSlider";
+import Knob from "./Knob";
+
 interface GainProps {
   controlChannelGainNode: (gainValue: number) => void;
 }
 
 function Gain({ controlChannelGainNode }: GainProps) {
   return (
-    <section className="border align-items-center mt-2 mb-2">
+    <section className="border mt-2 pt-3 mb-0">
       <Row>
-        <Col>
-          <MyRangeSlider
-            onChangeFunction={controlChannelGainNode}
-            label="Gain"
+        <Col className="d-flex justify-content-center align-items-center">
+          <Knob
+            formatFunction={(label: string) => {
+              if (label === "0") return `-10`;
+              if (label === "2") return "+40";
+            }}
             min={0}
             max={2}
-            defaultValue={1}
             step={0.1}
+            defaultValue={1}
+            onChangeFunction={controlChannelGainNode}
           />
         </Col>
       </Row>

@@ -1,8 +1,24 @@
-import JqxKnob from "jqwidgets-scripts/jqwidgets-react-tsx/jqxknob";
+import JqxKnob, {
+  IKnobLabels,
+} from "jqwidgets-scripts/jqwidgets-react-tsx/jqxknob";
 import { useState } from "react";
-interface KnobProps {}
+interface KnobProps {
+  min: number;
+  max: number;
+  defaultValue: number;
+  onChangeFunction: any;
+  formatFunction?: any;
+  step?: number;
+}
 
-function Knob({}: KnobProps) {
+function Knob({
+  min,
+  max,
+  defaultValue,
+  onChangeFunction,
+  formatFunction,
+  step,
+}: KnobProps) {
   const [styles] = useState({
     fill: {
       color: "#fefefe",
@@ -30,6 +46,7 @@ function Knob({}: KnobProps) {
     offset: "100%",
     step: 100,
     visible: true,
+    formatFunction: formatFunction,
   });
   const [pointer] = useState({
     offset: "0%",
@@ -47,16 +64,20 @@ function Knob({}: KnobProps) {
 
   return (
     <JqxKnob
+      onChange={(e: any) => onChangeFunction(e.args.value)}
       width="70"
-      value={60}
-      min={0}
-      max={100}
+      height="100"
+      value={defaultValue}
+      min={min}
+      max={max}
+      step={step}
       startAngle={120}
       endAngle={420}
       snapToStep={true}
       rotation={"clockwise"}
       styles={styles}
       marks={marks}
+      // @ts-ignore
       labels={labels}
       pointer={pointer}
       progressBar={progressBar}

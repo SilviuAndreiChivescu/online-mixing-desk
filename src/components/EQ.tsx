@@ -6,6 +6,7 @@ import {
   ToggleButton,
   ToggleButtonGroup,
 } from "react-bootstrap";
+import Knob from "./Knob";
 import { MyRangeSlider } from "./MyRangeSlider";
 import OnOffButton from "./OnOffButton";
 
@@ -59,20 +60,29 @@ function EQ({ EQFunctions, setChannelUI, channelUI }: EQProps) {
         id="eqOn"
         onChange={() => setChannelUI({ ...channelUI, eqOn: !channelUI.eqOn })}
       />
-      <Row>
-        {slidersInfo.map((e: any) => (
-          <Col key={e.label}>
-            <MyRangeSlider
-              onChangeFunction={e.onChangeFunction}
-              label={e.label}
-              min={-40}
-              max={40}
-              defaultValue={0}
-              step={1}
-            />
-          </Col>
-        ))}
-      </Row>
+      {slidersInfo.map((e: any) => (
+        <main key={e.label}>
+          <Row>
+            <Col>
+              <h5>{e.label}</h5>
+            </Col>
+          </Row>
+          <Row>
+            <Col className="d-flex justify-content-center">
+              <Knob
+                formatFunction={(label: string) => {
+                  if (label === "-40") return `-\u221e`;
+                  if (label === "40") return "+6";
+                }}
+                min={-40}
+                max={40}
+                defaultValue={0}
+                onChangeFunction={e.onChangeFunction}
+              />
+            </Col>
+          </Row>
+        </main>
+      ))}
     </section>
   );
 }
