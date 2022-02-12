@@ -1,6 +1,13 @@
 import React, { useState } from "react";
-import { Button, Col, Row } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  Row,
+  ToggleButton,
+  ToggleButtonGroup,
+} from "react-bootstrap";
 import { MyRangeSlider } from "./MyRangeSlider";
+import OnOffButton from "./OnOffButton";
 
 interface EQProps {
   EQFunctions: {
@@ -45,16 +52,13 @@ function EQ({ EQFunctions, setChannelUI, channelUI }: EQProps) {
     <section className="border align-items-center mt-2 mb-2">
       <Row>
         <Col>
-          <Button
-            className="mt-2 mb-2"
-            onClick={() =>
-              setChannelUI({ ...channelUI, eqOn: !channelUI.eqOn })
-            }
-          >
-            EQ On / Off
-          </Button>
+          <h3>EQ</h3>
         </Col>
       </Row>
+      <OnOffButton
+        id="eqOn"
+        onChange={() => setChannelUI({ ...channelUI, eqOn: !channelUI.eqOn })}
+      />
       <Row>
         {slidersInfo.map((e: any) => (
           <Col key={e.label}>

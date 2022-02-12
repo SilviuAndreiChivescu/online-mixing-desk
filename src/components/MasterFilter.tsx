@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import { MyRangeSlider } from "./MyRangeSlider";
+import OnOffButton from "./OnOffButton";
 
 interface MasterFilterProps {
   masterFilterToExport: any;
@@ -11,18 +12,17 @@ function MasterFilter({ masterFilterToExport }: MasterFilterProps) {
     <section className="border align-items-center mt-2 mb-2">
       <Row>
         <Col>
-          <Button
-            className="mt-2 mb-2"
-            onClick={() =>
-              masterFilterToExport.setMasterFilterOn(
-                (currValue: boolean) => !currValue
-              )
-            }
-          >
-            Master Filter On / Off
-          </Button>
+          <h3>MASTER FILTER</h3>
         </Col>
       </Row>
+      <OnOffButton
+        id="masterFilterOn"
+        onChange={() =>
+          masterFilterToExport.setMasterFilterOn(
+            (currValue: boolean) => !currValue
+          )
+        }
+      />
       <Row>
         <Col>
           <MyRangeSlider

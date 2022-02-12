@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import { MyRangeSlider } from "./MyRangeSlider";
+import OnOffButton from "./OnOffButton";
 
 interface HPFProps {
   HPFFunctions: {
@@ -35,15 +36,14 @@ function HPF({ HPFFunctions, setChannelUI, channelUI }: HPFProps) {
     <section className="border align-items-center mt-2 mb-2">
       <Row>
         <Col>
-          <Button
-            className=""
-            onClick={() =>
-              setChannelUI({ ...channelUI, hpfOn: !channelUI.hpfOn })
-            }
-          >
-            HPF On / Off
-          </Button>
+          <h3>HPF</h3>
         </Col>
+      </Row>
+      <OnOffButton
+        id="hpfOn"
+        onChange={() => setChannelUI({ ...channelUI, hpfOn: !channelUI.hpfOn })}
+      />
+      <Row>
         <Col>
           <MyRangeSlider
             onChangeFunction={controlHighPassCutOff}

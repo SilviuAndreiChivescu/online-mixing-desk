@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, Dropdown, Row } from "react-bootstrap";
 import CustomDropdown from "./CustomDropdown";
 import MyCompressorSlider from "./MyCompressorSlider";
+import OnOffButton from "./OnOffButton";
 
+// todo change these from any to its own
 interface CompressorProps {
   compressorFunctions: any;
   controlWhichChannel: any;
@@ -85,26 +87,21 @@ function Compressor({
   }, [main.compressorFunctions.compressorUIStates]);
 
   return (
-    <section className="border align-items-center mt-2 mb-2">
+    <section className="border align-items-center mt-2">
       <CustomDropdown controlWhichChannel={controlWhichChannel} />
-      <Row>
-        <Col>
-          <Button
-            className="mt-2 mb-2"
-            onClick={() =>
-              setMain({
-                ...main,
-                channelUI: {
-                  ...main.channelUI,
-                  compressorOn: !main.channelUI.compressorOn,
-                },
-              })
-            }
-          >
-            Compressor On / Off
-          </Button>
-        </Col>
-      </Row>
+      <OnOffButton
+        checkedArray={main.channelUI.compressorOn ? [1] : []}
+        id="compressorOn"
+        onChange={() =>
+          setMain({
+            ...main,
+            channelUI: {
+              ...main.channelUI,
+              compressorOn: !main.channelUI.compressorOn,
+            },
+          })
+        }
+      />
       <Row>
         {slidersInfo.map((elem: any) => (
           <Col key={elem.id}>

@@ -2,9 +2,17 @@ import HPF from "./HPF";
 import EQ from "./EQ";
 import Panner from "./Panner";
 import Gain from "./Gain";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  Container,
+  Row,
+  ToggleButton,
+  ToggleButtonGroup,
+} from "react-bootstrap";
 import VolumeSlider from "./VolumeSlider";
 import SoundMeter from "./SoundMeter";
+import OnOffButton from "./OnOffButton";
 
 interface ChannelLineProps {
   channelFunctions: {
@@ -115,26 +123,18 @@ const ChannelLine: React.FC<ChannelLineProps> = ({
 
   return (
     <>
+      <OnOffButton
+        id="eqOn"
+        onChange={() =>
+          setChannelUI({ ...channelUI, channelOn: !channelUI.channelOn })
+        }
+      />
       <Row>
         <Col>
-          <Button
-            className="mt-5"
-            onClick={() =>
-              setChannelUI({ ...channelUI, channelOn: !channelUI.channelOn })
-            }
-          >
-            Mic Input
-          </Button>
+          <Button onClick={play}>Play</Button>
         </Col>
         <Col>
-          <Button className="mt-5" onClick={play}>
-            Play
-          </Button>
-        </Col>
-        <Col>
-          <Button className=" mt-5" onClick={pause}>
-            Pause
-          </Button>
+          <Button onClick={pause}>Pause</Button>
         </Col>
       </Row>
       <Gain controlChannelGainNode={controlChannelGainNode} />
@@ -153,15 +153,23 @@ const ChannelLine: React.FC<ChannelLineProps> = ({
       />
       <Panner controlPannerNode={controlPannerNode} />
       <Row>
-        <Col>
-          <Button
-            className="mt-2 mb-2"
-            onClick={() =>
+        <Col className="mb-2">
+          <ToggleButtonGroup
+            type="checkbox"
+            onChange={() =>
               setChannelUI({ ...channelUI, cueOn: !channelUI.cueOn })
             }
           >
-            Cue On / Off
-          </Button>
+            <ToggleButton
+              style={{ borderRadius: "25px" }}
+              variant="outline-dark"
+              size="sm"
+              id="cueOn"
+              value="1"
+            >
+              In
+            </ToggleButton>
+          </ToggleButtonGroup>
         </Col>
       </Row>
       <VolumeSlider controlSliderVolumeNode={controlSliderVolumeNode} />

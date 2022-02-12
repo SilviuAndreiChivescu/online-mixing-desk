@@ -4,6 +4,9 @@ import CustomDropdown from "./CustomDropdown";
 import MyCompressorSlider from "./MyCompressorSlider";
 import MyDropdown from "./MyDropdown";
 import { MyRangeSlider } from "./MyRangeSlider";
+import OnOffButton from "./OnOffButton";
+// todo change these from any to its own
+
 interface FXUnitProps {
   FXUnitFunctions: any;
   controlWhichChannel: any;
@@ -20,24 +23,19 @@ function FXUnit({
   return (
     <section className="border align-items-center mt-2 mb-2">
       <CustomDropdown controlWhichChannel={controlWhichChannel} />
-      <Row>
-        <Col>
-          <Button
-            className="mt-2 mb-2"
-            onClick={() =>
-              setMain({
-                ...main,
-                channelUI: {
-                  ...main.channelUI,
-                  fxUnitOn: !main.channelUI.fxUnitOn,
-                },
-              })
-            }
-          >
-            FXUnit On / Off
-          </Button>
-        </Col>
-      </Row>
+      <OnOffButton
+        checkedArray={main.channelUI.fxUnitOn ? [1] : []}
+        id="fxUnitOn"
+        onChange={() =>
+          setMain({
+            ...main,
+            channelUI: {
+              ...main.channelUI,
+              fxUnitOn: !main.channelUI.fxUnitOn,
+            },
+          })
+        }
+      />
       <MyDropdown chooseImpulse={FXUnitFunctions.chooseImpulse} />
       <Row>
         <Col>
