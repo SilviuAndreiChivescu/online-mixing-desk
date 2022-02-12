@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from "react";
+import { Col } from "react-bootstrap";
 
 interface SoundMeterProps {
   draw: (
@@ -30,6 +31,10 @@ function SoundMeter({ draw }: SoundMeterProps) {
     };
   }, []);
 
-  return <canvas height="300" width="10" ref={canvasRef} />;
+  return (
+    <Col>
+      <canvas height="305" width="5" ref={canvasRef} />
+    </Col>
+  );
 }
 export default SoundMeter;

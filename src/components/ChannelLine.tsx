@@ -139,8 +139,6 @@ const ChannelLine: React.FC<ChannelLineProps> = ({
       </Row>
       <Gain controlChannelGainNode={controlChannelGainNode} />
 
-      <SoundMeter draw={drawSoundLevel} />
-
       <EQ
         setChannelUI={setChannelUI}
         channelUI={channelUI}
@@ -172,7 +170,12 @@ const ChannelLine: React.FC<ChannelLineProps> = ({
           </ToggleButtonGroup>
         </Col>
       </Row>
-      <VolumeSlider controlSliderVolumeNode={controlSliderVolumeNode} />
+      <section className="border d-flex justify-content-center align-items-center mt-2 mb-2">
+        <Row>
+          <VolumeSlider controlSliderVolumeNode={controlSliderVolumeNode} />
+          <SoundMeter draw={drawSoundLevel} />
+        </Row>
+      </section>
     </>
   );
 };
