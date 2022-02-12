@@ -28,13 +28,14 @@ function CustomDropdown({ controlWhichChannel }: CustomDropdownProps) {
   };
   return (
     <Dropdown
+      className="mb-2 mt-2"
       onSelect={(e: any) => {
         controlWhichChannel(e);
         handleActive(e);
       }}
     >
       <Dropdown.Toggle variant="success" id="dropdown-basic2">
-        Channel
+        Ch
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
