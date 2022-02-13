@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Col, Row } from "react-bootstrap";
+import Knob from "./Knob";
 import { MyRangeSlider } from "./MyRangeSlider";
 
 interface MasterProps {
@@ -15,6 +16,10 @@ function Master({ masterFunctions }: MasterProps) {
       max: 2,
       defaultValue: 1,
       step: 0.1,
+      formatFunction: (label: string) => {
+        if (label === "0") return `-\u221e`;
+        if (label === "2") return `0`;
+      },
     },
     {
       label: "Master",
@@ -23,6 +28,10 @@ function Master({ masterFunctions }: MasterProps) {
       max: 2,
       defaultValue: 1,
       step: 0.1,
+      formatFunction: (label: string) => {
+        if (label === "0") return `-\u221e`;
+        if (label === "2") return `0`;
+      },
     },
     {
       label: "Headphones",
@@ -31,6 +40,10 @@ function Master({ masterFunctions }: MasterProps) {
       max: 2,
       defaultValue: 1,
       step: 0.1,
+      formatFunction: (label: string) => {
+        if (label === "0") return `-\u221e`;
+        if (label === "2") return `0`;
+      },
     },
     {
       label: "Cue Mix",
@@ -39,20 +52,35 @@ function Master({ masterFunctions }: MasterProps) {
       max: 1,
       defaultValue: 0.5,
       step: 0.1,
+      formatFunction: (label: string) => {
+        if (label === "1") return `M`;
+        if (label === "0") return `C`;
+      },
     },
   ]);
   return (
     <Row>
       {slidersInfo.map((el: any) => (
-        <Col key={el.label}>
-          <MyRangeSlider
-            label={el.label}
-            onChangeFunction={el.onChangeFunction}
-            min={el.min}
-            max={el.max}
-            defaultValue={el.defaultValue}
-            step={el.step}
-          />
+        <Col>
+          <main key={el.label}>
+            <Row>
+              <Col>
+                <h5>{el.label}</h5>
+              </Col>
+            </Row>
+            <Row>
+              <Col key={el.label} className="d-flex justify-content-center">
+                <Knob
+                  formatFunction={el.formatFunction}
+                  min={el.min}
+                  max={el.max}
+                  defaultValue={el.defaultValue}
+                  step={el.step}
+                  onChangeFunction={el.onChangeFunction}
+                />
+              </Col>
+            </Row>
+          </main>
         </Col>
       ))}
     </Row>
