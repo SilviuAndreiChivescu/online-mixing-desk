@@ -9,19 +9,11 @@ interface OnOffButtonProps {
 
 function OnOffButton({ id, onChange, checkedArray }: OnOffButtonProps) {
   return (
-    <Row>
-      <Col className="mb-2">
-        <ToggleButtonGroup
-          type="checkbox"
-          value={checkedArray}
-          onChange={onChange}
-        >
-          <ToggleButton variant="outline-dark" size="sm" id={id} value={1}>
-            In
-          </ToggleButton>
-        </ToggleButtonGroup>
-      </Col>
-    </Row>
+    <ToggleButtonGroup type="checkbox" value={checkedArray} onChange={onChange}>
+      <ToggleButton variant="outline-dark" size="sm" id={id} value={1}>
+        In
+      </ToggleButton>
+    </ToggleButtonGroup>
   );
 }
 export default OnOffButton;

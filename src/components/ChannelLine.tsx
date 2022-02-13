@@ -15,6 +15,7 @@ import SoundMeter from "./SoundMeter";
 import OnOffButton from "./OnOffButton";
 
 interface ChannelLineProps {
+  channelNo: number;
   channelFunctions: {
     play: () => void;
     pause: () => Promise<void>;
@@ -109,6 +110,7 @@ const ChannelLine: React.FC<ChannelLineProps> = ({
   channelFunctions,
   channelUI,
   setChannelUI,
+  channelNo,
 }) => {
   const {
     play,
@@ -123,6 +125,7 @@ const ChannelLine: React.FC<ChannelLineProps> = ({
 
   return (
     <>
+      <h3>{channelNo}</h3>
       <OnOffButton
         id="eqOn"
         onChange={() =>
@@ -170,7 +173,7 @@ const ChannelLine: React.FC<ChannelLineProps> = ({
           </ToggleButtonGroup>
         </Col>
       </Row>
-      <section className="border d-flex justify-content-center align-items-center mt-2 mb-2">
+      <section className="border p-3 d-flex justify-content-center align-items-center mt-2 mb-2">
         <Row>
           <VolumeSlider controlSliderVolumeNode={controlSliderVolumeNode} />
           <SoundMeter draw={drawSoundLevel} />

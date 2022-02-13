@@ -97,22 +97,28 @@ function Compressor({
   }, [main.compressorFunctions.compressorUIStates]);
 
   return (
-    <section className="border align-items-center mt-2">
+    <section className="border p-2 mt-2">
       <h3>Compressor</h3>
-      <CustomDropdown controlWhichChannel={controlWhichChannel} />
-      <OnOffButton
-        checkedArray={main.channelUI.compressorOn ? [1] : []}
-        id="compressorOn"
-        onChange={() =>
-          setMain({
-            ...main,
-            channelUI: {
-              ...main.channelUI,
-              compressorOn: !main.channelUI.compressorOn,
-            },
-          })
-        }
-      />
+      <Row className="justify-content-center align-items-center">
+        <Col lg={1}>
+          <CustomDropdown controlWhichChannel={controlWhichChannel} />
+        </Col>
+        <Col lg={1}>
+          <OnOffButton
+            checkedArray={main.channelUI.compressorOn ? [1] : []}
+            id="compressorOn"
+            onChange={() =>
+              setMain({
+                ...main,
+                channelUI: {
+                  ...main.channelUI,
+                  compressorOn: !main.channelUI.compressorOn,
+                },
+              })
+            }
+          />
+        </Col>
+      </Row>
       <Row>
         {slidersInfo.map((elem: any, index: number) => (
           <Col key={elem.id}>

@@ -50,16 +50,22 @@ function EQ({ EQFunctions, setChannelUI, channelUI }: EQProps) {
     { label: "Low", onChangeFunction: controlLow },
   ]);
   return (
-    <section className="border align-items-center mt-2 mb-2">
+    <section className="border pt-3 mt-2 mb-2">
       <Row>
         <Col>
           <h3>EQ</h3>
         </Col>
       </Row>
-      <OnOffButton
-        id="eqOn"
-        onChange={() => setChannelUI({ ...channelUI, eqOn: !channelUI.eqOn })}
-      />
+      <Row className="mt-1 mb-2">
+        <Col>
+          <OnOffButton
+            id="eqOn"
+            onChange={() =>
+              setChannelUI({ ...channelUI, eqOn: !channelUI.eqOn })
+            }
+          />
+        </Col>
+      </Row>
       {slidersInfo.map((e: any) => (
         <main key={e.label}>
           <Row>

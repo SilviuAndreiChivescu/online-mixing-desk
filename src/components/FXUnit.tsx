@@ -21,24 +21,31 @@ function FXUnit({
   main,
 }: FXUnitProps) {
   return (
-    <section className="border align-items-center mt-2 mb-2">
-      <CustomDropdown controlWhichChannel={controlWhichChannel} />
-      <OnOffButton
-        checkedArray={main.channelUI.fxUnitOn ? [1] : []}
-        id="fxUnitOn"
-        onChange={() =>
-          setMain({
-            ...main,
-            channelUI: {
-              ...main.channelUI,
-              fxUnitOn: !main.channelUI.fxUnitOn,
-            },
-          })
-        }
-      />
+    <section className="border align-items-center mt-2 mb-2 pt-3 pb-2">
+      <h3>FX Unit</h3>
+      <Row className="justify-content-center align-items-center mb-2">
+        <Col lg={2}>
+          <CustomDropdown controlWhichChannel={controlWhichChannel} />
+        </Col>
+        <Col lg={2}>
+          <OnOffButton
+            checkedArray={main.channelUI.fxUnitOn ? [1] : []}
+            id="fxUnitOn"
+            onChange={() =>
+              setMain({
+                ...main,
+                channelUI: {
+                  ...main.channelUI,
+                  fxUnitOn: !main.channelUI.fxUnitOn,
+                },
+              })
+            }
+          />
+        </Col>{" "}
+      </Row>
       <MyDropdown chooseImpulse={FXUnitFunctions.chooseImpulse} />
       <Row className="justify-content-center">
-        <Col lg={5}>
+        <Col lg={10}>
           <MyCompressorSlider
             label="Wet Dry"
             setMain={setMain}

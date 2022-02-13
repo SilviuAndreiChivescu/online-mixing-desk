@@ -9,8 +9,8 @@ interface MasterFilterProps {
 
 function MasterFilter({ masterFilterToExport }: MasterFilterProps) {
   return (
-    <section className="border align-items-center mt-2 mb-2">
-      <Row>
+    <section className="border align-items-center mt-2 mb-2 pt-3 pb-2">
+      <Row className="mb-2">
         <Col>
           <h3>MASTER FILTER</h3>
         </Col>
@@ -23,8 +23,8 @@ function MasterFilter({ masterFilterToExport }: MasterFilterProps) {
           )
         }
       />
-      <Row className="justify-content-center">
-        <Col lg={5}>
+      <Row className="justify-content-center mt-2">
+        <Col lg={10}>
           <MyRangeSlider
             leftLabel="20"
             rightLabel="1k"
@@ -43,8 +43,8 @@ function MasterFilter({ masterFilterToExport }: MasterFilterProps) {
           />
         </Col>
       </Row>
-      <Row className="justify-content-center">
-        <Col lg={5}>
+      <Row className="justify-content-center mb-1">
+        <Col lg={10}>
           <MyRangeSlider
             leftLabel="500"
             rightLabel="20k"

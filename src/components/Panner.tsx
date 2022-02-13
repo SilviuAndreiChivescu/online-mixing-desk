@@ -8,7 +8,7 @@ interface PannerProps {
 
 function Panner({ controlPannerNode }: PannerProps) {
   return (
-    <section className="border align-items-center mt-2 mb-2">
+    <section className="border mt-2 mb-2 pt-2">
       <Row>
         <Col className="d-flex justify-content-center">
           <Knob

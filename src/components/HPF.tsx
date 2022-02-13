@@ -33,21 +33,28 @@ interface HPFProps {
 function HPF({ HPFFunctions, setChannelUI, channelUI }: HPFProps) {
   const { controlHighPassCutOff } = HPFFunctions;
   return (
-    <section className="border align-items-center mt-2 mb-2">
+    <section className="border pt-3 mt-2 mb-2">
       <Row>
         <Col>
           <h3>HPF</h3>
         </Col>
       </Row>
-      <OnOffButton
-        id="hpfOn"
-        onChange={() => setChannelUI({ ...channelUI, hpfOn: !channelUI.hpfOn })}
-      />
+      <Row className="mt-1 mb-2">
+        <Col>
+          <OnOffButton
+            id="hpfOn"
+            onChange={() =>
+              setChannelUI({ ...channelUI, hpfOn: !channelUI.hpfOn })
+            }
+          />
+        </Col>
+      </Row>
       <Row>
         <Col className="d-flex justify-content-center">
           <Knob
             formatFunction={(label: string) => {
-              if (label === "20" || label === "1000") return label;
+              if (label === "20") return label;
+              if (label === "1000") return "1k";
             }}
             min={20}
             max={1000}
