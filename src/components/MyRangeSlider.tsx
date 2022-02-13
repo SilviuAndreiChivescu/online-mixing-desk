@@ -13,6 +13,8 @@ interface MyRangeSliderProps {
   step?: number;
   onChangeFunction: (e: number) => void;
   onChangeOptional?: (e: number) => void;
+  leftLabel?: string;
+  rightLabel?: string;
 }
 
 export const MyRangeSlider: React.FC<MyRangeSliderProps> = ({
@@ -25,6 +27,8 @@ export const MyRangeSlider: React.FC<MyRangeSliderProps> = ({
   step,
   onChangeFunction,
   onChangeOptional,
+  leftLabel,
+  rightLabel,
 }) => {
   const [value, setValue] = useState(0);
   useEffect(() => {
@@ -35,25 +39,31 @@ export const MyRangeSlider: React.FC<MyRangeSliderProps> = ({
     if (onChangeOptional) onChangeOptional(value);
   }, [value]);
   return (
-    <Form.Group className={className} as={Row}>
-      <Col xs="3"> {label} </Col>
-      <Col xs="7">
-        <RangeSlider
-          id={id}
-          tooltip="off"
-          min={min}
-          max={max}
-          step={step}
-          value={value}
-          onChange={(e) => setValue(parseFloat(e.target.value))}
-        />
-      </Col>
-      <Col
-        className="border d-flex justify-content-center align-items-center"
-        xs="2"
-      >
-        {value}
-      </Col>
-    </Form.Group>
+    <>
+      <Row className="mt-2">
+        <Col> {label} </Col>
+      </Row>
+      <Form.Group className={className} as={Row}>
+        <Col className="d-flex align-items-end justify-content-center" lg={3}>
+          <p>{leftLabel}</p>
+        </Col>
+        <Col>
+          <RangeSlider
+            variant="secondary"
+            size="lg"
+            id={id}
+            tooltip="off"
+            min={min}
+            max={max}
+            step={step}
+            value={value}
+            onChange={(e) => setValue(parseFloat(e.target.value))}
+          />
+        </Col>
+        <Col className="d-flex align-items-end justify-content-center" lg={3}>
+          <p>{rightLabel}</p>
+        </Col>
+      </Form.Group>
+    </>
   );
 };
