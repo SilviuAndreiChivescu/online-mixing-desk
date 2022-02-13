@@ -94,7 +94,7 @@ const useCompressor = (
     threshold: compressor.threshold.value,
     knee: compressor.knee.value,
     ratio: compressor.ratio.value,
-    attack: compressor.attack.value,
+    attack: 0.1,
     release: compressor.release.value,
     dryWetKnob: 0.5,
   });

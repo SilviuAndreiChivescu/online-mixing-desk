@@ -11,9 +11,11 @@ interface MyCompressorSliderProps {
   max?: number;
   defaultValue: number;
   step?: number;
-  onChangeFunction: any; // (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeFunction: any;
   setMain: any;
   main: any;
+  leftLabel?: string;
+  rightLabel?: string;
 }
 function MyCompressorSlider({
   id,
@@ -26,31 +28,38 @@ function MyCompressorSlider({
   setMain,
   main,
   onChangeFunction,
+  leftLabel,
+  rightLabel,
 }: MyCompressorSliderProps) {
   return (
-    <Form.Group className={className} as={Row}>
-      <Col xs="3"> {label} </Col>
-      <Col xs="7">
-        <RangeSlider
-          id={id}
-          tooltip="off"
-          min={min}
-          max={max}
-          step={step}
-          value={defaultValue}
-          onChange={(e) => {
-            onChangeFunction(e, setMain, main);
-            // setValue(parseFloat(e.target.value));
-          }}
-        />
-      </Col>
-      <Col
-        className="border d-flex justify-content-center align-items-center"
-        xs="2"
-      >
-        {defaultValue}
-      </Col>
-    </Form.Group>
+    <>
+      <Row className="mt-2">
+        <Col> {label} </Col>
+      </Row>
+      <Form.Group className={className} as={Row}>
+        <Col className="d-flex align-items-end justify-content-center" lg={3}>
+          <p>{leftLabel}</p>
+        </Col>
+        <Col>
+          <RangeSlider
+            variant="secondary"
+            size="lg"
+            id={id}
+            tooltip="off"
+            min={min}
+            max={max}
+            step={step}
+            value={defaultValue}
+            onChange={(e) => {
+              onChangeFunction(e, setMain, main);
+            }}
+          />
+        </Col>
+        <Col className="d-flex align-items-end justify-content-center" lg={3}>
+          <p>{rightLabel}</p>
+        </Col>
+      </Form.Group>
+    </>
   );
 }
 export default MyCompressorSlider;

@@ -27,6 +27,8 @@ function Compressor({
       max: 0,
       defaultValue: threshold,
       step: 10,
+      leftLabel: "\u221e : 1",
+      rightLabel: "1 : 1",
     },
     {
       id: "knee",
@@ -34,6 +36,8 @@ function Compressor({
       max: 40,
       defaultValue: knee,
       step: 1,
+      leftLabel: "0",
+      rightLabel: "1",
     },
     {
       id: "ratio",
@@ -41,20 +45,26 @@ function Compressor({
       max: 19.8,
       defaultValue: ratio,
       step: 1,
+      leftLabel: "2",
+      rightLabel: "10",
     },
     {
       id: "attack",
-      min: 0,
+      min: 0.1,
       max: 1,
       defaultValue: attack,
       step: 0.1,
+      leftLabel: "0.1",
+      rightLabel: "30",
     },
     {
       id: "release",
-      min: 0,
+      min: 0.1,
       max: 1,
       defaultValue: release,
       step: 0.1,
+      leftLabel: "0.1",
+      rightLabel: "1",
     },
   ]);
   // This function changes all the values of a channel compressor whenever it changes
@@ -88,6 +98,7 @@ function Compressor({
 
   return (
     <section className="border align-items-center mt-2">
+      <h3>Compressor</h3>
       <CustomDropdown controlWhichChannel={controlWhichChannel} />
       <OnOffButton
         checkedArray={main.channelUI.compressorOn ? [1] : []}
@@ -103,7 +114,7 @@ function Compressor({
         }
       />
       <Row>
-        {slidersInfo.map((elem: any) => (
+        {slidersInfo.map((elem: any, index: number) => (
           <Col key={elem.id}>
             <MyCompressorSlider
               setMain={setMain}
@@ -115,13 +126,15 @@ function Compressor({
               max={elem.max}
               defaultValue={elem.defaultValue}
               step={elem.step}
-              className="mt-4 mb-4"
+              leftLabel={elem.leftLabel}
+              rightLabel={elem.rightLabel}
+              className="mt-2 mb-4"
             />
           </Col>
         ))}
       </Row>
-      <Row>
-        <Col>
+      <Row className="justify-content-center">
+        <Col lg={6}>
           <MyCompressorSlider
             label="Wet Dry"
             setMain={setMain}
@@ -131,7 +144,9 @@ function Compressor({
             max={1}
             defaultValue={dryWetKnob}
             step={0.1}
-            className="mt-4 mb-4"
+            className="mt-2 mb-4"
+            leftLabel={"Dry"}
+            rightLabel={"Wet"}
             id="wetDryCompressor"
           />
         </Col>
