@@ -134,7 +134,7 @@ function Compressor({
         ))}
       </Row>
       <Row className="justify-content-center">
-        <Col lg={6}>
+        <Col lg={5}>
           <MyCompressorSlider
             label="Wet Dry"
             setMain={setMain}
