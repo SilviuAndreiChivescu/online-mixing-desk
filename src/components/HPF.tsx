@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Col, Row } from "react-bootstrap";
-import { MyRangeSlider } from "./MyRangeSlider";
+import Knob from "./Knob";
 import OnOffButton from "./OnOffButton";
 
 interface HPFProps {
@@ -44,14 +44,16 @@ function HPF({ HPFFunctions, setChannelUI, channelUI }: HPFProps) {
         onChange={() => setChannelUI({ ...channelUI, hpfOn: !channelUI.hpfOn })}
       />
       <Row>
-        <Col>
-          <MyRangeSlider
-            onChangeFunction={controlHighPassCutOff}
-            label="Cut Off"
+        <Col className="d-flex justify-content-center">
+          <Knob
+            formatFunction={(label: string) => {
+              if (label === "20" || label === "1000") return label;
+            }}
             min={20}
             max={1000}
             defaultValue={(1000 - 20) / 2}
             step={1}
+            onChangeFunction={controlHighPassCutOff}
           />
         </Col>
       </Row>
