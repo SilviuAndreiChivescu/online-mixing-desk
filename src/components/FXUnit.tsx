@@ -37,8 +37,8 @@ function FXUnit({
         }
       />
       <MyDropdown chooseImpulse={FXUnitFunctions.chooseImpulse} />
-      <Row>
-        <Col>
+      <Row className="justify-content-center">
+        <Col lg={5}>
           <MyCompressorSlider
             label="Wet Dry"
             setMain={setMain}
@@ -48,7 +48,9 @@ function FXUnit({
             max={1}
             defaultValue={FXUnitFunctions.FXUnitUIStates.dryWetKnob}
             step={0.1}
-            className="mt-4 mb-4"
+            className="mt-2 mb-4"
+            leftLabel={"Dry"}
+            rightLabel={"Wet"}
             id="wetDryFXUnit"
           />
         </Col>
