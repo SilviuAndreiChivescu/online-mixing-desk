@@ -23,9 +23,11 @@ function MasterFilter({ masterFilterToExport }: MasterFilterProps) {
           )
         }
       />
-      <Row>
-        <Col>
+      <Row className="justify-content-center">
+        <Col lg={5}>
           <MyRangeSlider
+            leftLabel="20"
+            rightLabel="1k"
             label="HPF"
             onChangeFunction={
               masterFilterToExport.masterFilterFunctions.controlHighPassCutOff
@@ -40,8 +42,12 @@ function MasterFilter({ masterFilterToExport }: MasterFilterProps) {
             step={10}
           />
         </Col>
-        <Col>
+      </Row>
+      <Row className="justify-content-center">
+        <Col lg={5}>
           <MyRangeSlider
+            leftLabel="500"
+            rightLabel="20k"
             label="LPF"
             onChangeFunction={
               masterFilterToExport.masterFilterFunctions.controlLowPassCutOff
