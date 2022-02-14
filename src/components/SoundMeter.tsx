@@ -32,8 +32,8 @@ function SoundMeter({ draw }: SoundMeterProps) {
   }, []);
 
   return (
-    <Col>
-      <canvas height="205" width="5" ref={canvasRef} />
+    <Col className="mt-2">
+      <canvas height="228" width="5" ref={canvasRef} />
     </Col>
   );
 }
