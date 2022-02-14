@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import CustomDropdown from "./CustomDropdown";
-import MyCompressorSlider from "./MyCompressorSlider";
 import MyDropdown from "./MyDropdown";
-import { MyRangeSlider } from "./MyRangeSlider";
 import OnOffButton from "./OnOffButton";
+import WetDryKnob from "./WetDryKnob";
 // todo change these from any to its own
 
 interface FXUnitProps {
@@ -46,7 +45,7 @@ function FXUnit({
       <MyDropdown chooseImpulse={FXUnitFunctions.chooseImpulse} />
       <Row className="justify-content-center">
         <Col lg={10}>
-          <MyCompressorSlider
+          <WetDryKnob
             label="Wet Dry"
             setMain={setMain}
             main={main}
@@ -55,10 +54,8 @@ function FXUnit({
             max={1}
             defaultValue={FXUnitFunctions.FXUnitUIStates.dryWetKnob}
             step={0.1}
-            className="mt-2 mb-4"
             leftLabel={"Dry"}
             rightLabel={"Wet"}
-            id="wetDryFXUnit"
           />
         </Col>
       </Row>

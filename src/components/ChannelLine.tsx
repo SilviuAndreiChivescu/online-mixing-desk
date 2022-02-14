@@ -71,11 +71,7 @@ interface ChannelLineProps {
       connectFXUnit: () => void;
       disconnectFXUnit: () => void;
       FXUnitOutput: GainNode;
-      setDryWetKnob: (
-        e: React.ChangeEvent<HTMLInputElement>,
-        setMain: any,
-        main: any
-      ) => void;
+      setDryWetKnob: (value: number, setMain: any, main: any) => void;
       FXUnitUIStates: {
         reverb: string;
         dryWetKnob: number;
