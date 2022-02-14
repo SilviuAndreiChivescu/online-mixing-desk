@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Col, Row } from "react-bootstrap";
+import Knob from "./Knob";
 import { MyRangeSlider } from "./MyRangeSlider";
 import OnOffButton from "./OnOffButton";
 
@@ -24,11 +25,15 @@ function MasterFilter({ masterFilterToExport }: MasterFilterProps) {
         }
       />
       <Row className="justify-content-center mt-2">
-        <Col lg={10}>
-          <MyRangeSlider
-            leftLabel="20"
-            rightLabel="1k"
+        <Col>
+          <Knob
             label="HPF"
+            leftLabel={"20"}
+            rightLabel={"1k"}
+            min={20}
+            max={1000}
+            step={1}
+            defaultValue={500}
             onChangeFunction={
               masterFilterToExport.masterFilterFunctions.controlHighPassCutOff
             }
@@ -36,16 +41,10 @@ function MasterFilter({ masterFilterToExport }: MasterFilterProps) {
               masterFilterToExport.masterFilterCueFunctions
                 .controlHighPassCutOff
             }
-            min={20}
-            max={1000}
-            defaultValue={500}
-            step={10}
           />
         </Col>
-      </Row>
-      <Row className="justify-content-center mb-1">
-        <Col lg={10}>
-          <MyRangeSlider
+        <Col>
+          <Knob
             leftLabel="500"
             rightLabel="20k"
             label="LPF"
