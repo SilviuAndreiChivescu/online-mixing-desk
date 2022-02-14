@@ -92,6 +92,8 @@ function Compressor({
     // 5. Set the state to our new copy
     setSlidersInfo(items);
   };
+  // mai am o idee gen sa schimb valoriile cand schimb canalu, nu de fiecare data, gen doar on off are nev sa se schimbe o data cu el
+  // crek stiu care e prob, deci asta aici listening to compressorUIStates, dar alea sunt exact ce eu schimb ca sa fac... crek asta e
   useEffect(() => {
     changeAll();
   }, [main.compressorFunctions.compressorUIStates]);
