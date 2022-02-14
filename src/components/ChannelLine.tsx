@@ -17,8 +17,6 @@ import OnOffButton from "./OnOffButton";
 interface ChannelLineProps {
   channelNo: number;
   channelFunctions: {
-    play: () => void;
-    pause: () => Promise<void>;
     connectCue: () => void;
     disconnectCue: () => void;
     connectChannel: () => void;
@@ -105,8 +103,6 @@ const ChannelLine: React.FC<ChannelLineProps> = ({
   channelNo,
 }) => {
   const {
-    play,
-    pause,
     EQFunctions,
     HPFFunctions,
     drawSoundLevel,
@@ -124,14 +120,7 @@ const ChannelLine: React.FC<ChannelLineProps> = ({
           setChannelUI({ ...channelUI, channelOn: !channelUI.channelOn })
         }
       />
-      <Row>
-        <Col>
-          <Button onClick={play}>Play</Button>
-        </Col>
-        <Col>
-          <Button onClick={pause}>Pause</Button>
-        </Col>
-      </Row>
+
       <Gain controlChannelGainNode={controlChannelGainNode} />
 
       <EQ

@@ -50,6 +50,23 @@ const useInit = () => {
     setMasterFilterOn: setMasterFilterOn,
   });
 
+  // Control "Play / Pause / Stop"
+  const play = () => {
+    audioCtx.resume();
+    channelOneFunctions.audioElement.play();
+    channelTwoFunctions.audioElement.play();
+  };
+
+  const pause = () => {
+    channelOneFunctions.audioElement.pause();
+    channelTwoFunctions.audioElement.pause();
+  };
+
+  const replay = () => {
+    channelOneFunctions.audioElement.load();
+    channelTwoFunctions.audioElement.load();
+  };
+
   // Below states are used to control all compressors
   const [main, setMain] = useState({
     setChannelUI: setChannelOneUI,
@@ -255,6 +272,9 @@ const useInit = () => {
     main,
     setMainFXUnit,
     mainFXUnit,
+    play,
+    pause,
+    replay,
   ] as const;
 };
 export { useInit };

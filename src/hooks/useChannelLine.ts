@@ -21,23 +21,10 @@ const useChannelLine = (
     channelOn: false,
   });
 
-  // todo change this to live audio after testing
   const [audioElement] = useState(() => new Audio("/assets/outfoxing.mp3"));
   const [audioSourceNode] = useState(() =>
     audioCtx.createMediaElementSource(audioElement)
   );
-
-  const play = () => {
-    if (audioCtx.state === "running") return;
-    audioCtx.resume();
-    audioElement.play();
-  };
-
-  const pause = async () => {
-    await audioCtx.suspend();
-
-    audioElement.pause();
-  };
 
   const [analyserNode] = useState(() => audioCtx.createAnalyser());
   const { drawSoundLevel } = useSoundMeter(analyserNode);
@@ -110,8 +97,6 @@ const useChannelLine = (
 
   // Put everything to export into an object
   const [channelLineFunctions] = useState({
-    play: play,
-    pause: pause,
     connectCue: connectCue,
     disconnectCue: disconnectCue,
     connectChannel: connectChannel,
@@ -125,6 +110,7 @@ const useChannelLine = (
     compressorFunctions: compressorFunctions,
     FXUnitFunctions: FXUnitFunctions,
     drawSoundLevel: drawSoundLevel,
+    audioElement: audioElement,
   });
   return [channelLineFunctions, UI, setUI] as const;
 };
