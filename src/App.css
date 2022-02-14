@@ -21,7 +21,23 @@
 
   /* Make volume slider look more like a volume slider */
   .css-y35fuw-MuiSlider-thumb {
-width: 60px !important;
-height: 10px !important;
-border-radius: 15px !important;
+  width: 60px !important;
+  height: 10px !important;
+  border-radius: 15px !important;
+  }
+
+
+  /* Customize the dropdown menu */
+  .dropdown-menu {
+  min-width: 3rem;
+  padding: 0;
+  }
+
+  .dropdown-item.active {
+    background-color: #ffc107 !important;
+    color: black !important;
+  }
+  .dropdown-item:active {
+    background-color: #ffc107 !important;
+    color: black !important;
   }
