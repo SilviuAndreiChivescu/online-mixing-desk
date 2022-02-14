@@ -154,7 +154,7 @@ const ChannelLine: React.FC<ChannelLineProps> = ({
       />
       <Panner controlPannerNode={controlPannerNode} />
       <Row>
-        <Col className="mb-2">
+        <Col className="mb-2 mt-2">
           <ToggleButtonGroup
             type="checkbox"
             onChange={() =>
@@ -162,13 +162,16 @@ const ChannelLine: React.FC<ChannelLineProps> = ({
             }
           >
             <ToggleButton
-              style={{ borderRadius: "25px" }}
-              variant="outline-dark"
+              style={{
+                width: "70px",
+                borderRadius: "15px",
+              }}
+              variant="outline-warning"
               size="sm"
               id="cueOn"
               value="1"
             >
-              In
+              Cue
             </ToggleButton>
           </ToggleButtonGroup>
         </Col>

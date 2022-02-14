@@ -10,7 +10,7 @@ interface OnOffButtonProps {
 function OnOffButton({ id, onChange, checkedArray }: OnOffButtonProps) {
   return (
     <ToggleButtonGroup type="checkbox" value={checkedArray} onChange={onChange}>
-      <ToggleButton variant="outline-dark" size="sm" id={id} value={1}>
+      <ToggleButton variant="outline-light" size="sm" id={id} value={1}>
         In
       </ToggleButton>
     </ToggleButtonGroup>

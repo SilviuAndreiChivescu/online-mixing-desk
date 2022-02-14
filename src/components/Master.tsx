@@ -16,10 +16,8 @@ function Master({ masterFunctions }: MasterProps) {
       max: 2,
       defaultValue: 1,
       step: 0.1,
-      formatFunction: (label: string) => {
-        if (label === "0") return `-\u221e`;
-        if (label === "2") return `0`;
-      },
+      leftLabel: `-\u221e`,
+      rightLabel: "0",
     },
     {
       label: "Booth",
@@ -28,10 +26,8 @@ function Master({ masterFunctions }: MasterProps) {
       max: 2,
       defaultValue: 1,
       step: 0.1,
-      formatFunction: (label: string) => {
-        if (label === "0") return `-\u221e`;
-        if (label === "2") return `0`;
-      },
+      leftLabel: `-\u221e`,
+      rightLabel: "0",
     },
 
     {
@@ -41,10 +37,8 @@ function Master({ masterFunctions }: MasterProps) {
       max: 2,
       defaultValue: 1,
       step: 0.1,
-      formatFunction: (label: string) => {
-        if (label === "0") return `-\u221e`;
-        if (label === "2") return `0`;
-      },
+      leftLabel: `-\u221e`,
+      rightLabel: "0",
     },
     {
       label: "Cue Mix",
@@ -53,10 +47,8 @@ function Master({ masterFunctions }: MasterProps) {
       max: 1,
       defaultValue: 0.5,
       step: 0.1,
-      formatFunction: (label: string) => {
-        if (label === "1") return `M`;
-        if (label === "0") return `C`;
-      },
+      leftLabel: `Cue`,
+      rightLabel: "Master",
     },
   ]);
   return (
@@ -73,7 +65,8 @@ function Master({ masterFunctions }: MasterProps) {
               <Row>
                 <Col key={el.label} className="d-flex justify-content-center">
                   <Knob
-                    formatFunction={el.formatFunction}
+                    leftLabel={el.leftLabel}
+                    rightLabel={el.rightLabel}
                     min={el.min}
                     max={el.max}
                     defaultValue={el.defaultValue}

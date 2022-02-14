@@ -12,10 +12,8 @@ function Gain({ controlChannelGainNode }: GainProps) {
       <Row>
         <Col className="d-flex justify-content-center align-items-center">
           <Knob
-            formatFunction={(label: string) => {
-              if (label === "0") return `-10`;
-              if (label === "2") return "+40";
-            }}
+            leftLabel={"-10"}
+            rightLabel={"+40"}
             min={0}
             max={2}
             step={0.1}

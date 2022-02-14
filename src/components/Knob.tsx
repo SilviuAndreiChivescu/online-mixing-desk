@@ -1,14 +1,18 @@
-import JqxKnob, {
-  IKnobLabels,
-} from "jqwidgets-scripts/jqwidgets-react-tsx/jqxknob";
 import { useEffect, useRef, useState } from "react";
+import { Col, Form, Row } from "react-bootstrap";
+import RangeSlider from "react-bootstrap-range-slider";
+//@ts-ignore
+import CircularSlider from "@fseehawer/react-circular-slider";
+
 interface KnobProps {
   min: number;
   max: number;
   defaultValue: number;
   onChangeFunction: any;
-  formatFunction?: any;
   step?: number;
+  leftLabel?: string;
+  rightLabel?: string;
+  label?: string;
 }
 
 function Knob({
@@ -16,79 +20,82 @@ function Knob({
   max,
   defaultValue,
   onChangeFunction,
-  formatFunction,
-  step,
+  step = 1,
+  leftLabel,
+  rightLabel,
+  label,
 }: KnobProps) {
-  const [styles] = useState({
-    fill: {
-      color: "#fefefe",
-      gradientStops: [
-        [0, 1],
-        [50, 0.9],
-        [100, 1],
-      ],
-      gradientType: "linear",
-    },
-    stroke: "#dfe3e9",
-    strokeWidth: 3,
-  });
-  const [marks] = useState({
-    colorProgress: { border: "#00a4e1", color: "#00a4e1" },
-    colorRemaining: { border: "grey", color: "grey" },
-    majorInterval: 10,
-    majorSize: "9%",
-    minorInterval: 2,
-    offset: "71%",
-    size: "8%",
-    thickness: 3,
-  });
-  const [labels] = useState({
-    offset: "100%",
-    step: 100,
-    visible: true,
-    formatFunction: formatFunction,
-  });
-  const [pointer] = useState({
-    offset: "0%",
-    size: "0%",
-    style: { fill: "#00a4e1", stroke: "grey" },
-    thickness: 0,
-    type: "arrow",
-  });
-  const [progressBar] = useState({
-    background: { fill: "grey", stroke: "grey" },
-    offset: "70%",
-    size: "15%",
-    style: { fill: "#00a4e1", stroke: "grey" },
-  });
-  const valueRef = useRef(0);
-  // const [value, setValue] = useState(0);
+  const [value, setValue] = useState(0);
   useEffect(() => {
-    valueRef.current = defaultValue;
+    setValue(defaultValue);
   }, []);
-  // useEffect(() => {
-  //   onChangeFunction(valueRef.current);
-  // }, [valueRef.current]);
+  useEffect(() => {
+    onChangeFunction(value);
+  }, [value]);
+
+  const getDataForKnob = () => {
+    let data = [];
+    for (let i = min; i <= max; i = i + step) {
+      data.push(i);
+    }
+    console.log(data);
+    return data;
+  };
+
+  const [dataForKnob] = useState<number[]>(() => getDataForKnob());
   return (
-    <JqxKnob // setValue(e.args.value)
-      onChange={(e: any) => onChangeFunction(e.args.value)}
-      width="70"
-      height="100"
-      value={valueRef.current}
-      min={min}
-      max={max}
-      step={step}
-      startAngle={120}
-      endAngle={420}
-      snapToStep={true}
-      rotation={"clockwise"}
-      styles={styles}
-      marks={marks}
-      // @ts-ignore
-      labels={labels}
-      pointer={pointer}
-      progressBar={progressBar}
-    />
+    <Row className="align-items-end mb-2">
+      <Col>{leftLabel}</Col>
+      <Col>
+        <CircularSlider
+          hideLabelValue={true}
+          width={80}
+          knobSize={22}
+          progressSize={10}
+          // verticalOffset="50rem"
+          // renderLabelValue={null}
+          knobPosition="bottom"
+          knobColor="#FFFAF0"
+          progressColorFrom="#808080"
+          progressColorTo="#696969"
+          trackColor="#eeeeee"
+          trackSize={10}
+          data={dataForKnob}
+          dataIndex={dataForKnob.length / 2}
+          onChange={(value: number) => setValue(value)}
+        />
+      </Col>
+      <Col>{rightLabel}</Col>
+    </Row>
   );
 }
 export default Knob;
+
+// below was from when the first knob was breaking the app, the below is the original rangeSlider which works
+// <>
+//   {label ? (
+//     <Row className="mt-2">
+//       <Col> {label} </Col>
+//     </Row>
+//   ) : null}
+//   <Form.Group as={Row}>
+//     <Col className="d-flex align-items-end justify-content-center" lg={3}>
+//       <p>{leftLabel}</p>
+//     </Col>
+//     <Col>
+//       <RangeSlider
+//         variant="secondary"
+//         size="lg"
+//         tooltip="off"
+//         min={min}
+//         max={max}
+//         step={step}
+//         value={value}
+//         onChange={(e: any) => setValue(e.target.value)}
+//       />
+//     </Col>
+//     <Col className="d-flex align-items-end justify-content-center" lg={3}>
+//       <p>{rightLabel}</p>
+//     </Col>
+//   </Form.Group>
+// </>

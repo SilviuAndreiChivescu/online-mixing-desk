@@ -52,10 +52,8 @@ function HPF({ HPFFunctions, setChannelUI, channelUI }: HPFProps) {
       <Row>
         <Col className="d-flex justify-content-center">
           <Knob
-            formatFunction={(label: string) => {
-              if (label === "20") return label;
-              if (label === "1000") return "1k";
-            }}
+            leftLabel="20"
+            rightLabel="1k"
             min={20}
             max={1000}
             defaultValue={(1000 - 20) / 2}

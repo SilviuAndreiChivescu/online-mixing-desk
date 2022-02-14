@@ -76,10 +76,8 @@ function EQ({ EQFunctions, setChannelUI, channelUI }: EQProps) {
           <Row>
             <Col className="d-flex justify-content-center">
               <Knob
-                formatFunction={(label: string) => {
-                  if (label === "-40") return `-\u221e`;
-                  if (label === "40") return "+6";
-                }}
+                leftLabel={`-\u221e`}
+                rightLabel="+6"
                 min={-40}
                 max={40}
                 defaultValue={0}

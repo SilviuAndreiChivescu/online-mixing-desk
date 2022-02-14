@@ -62,7 +62,7 @@ function VolumeSlider({ controlSliderVolumeNode }: VolumeSliderProps) {
         <Slider
           // @ts-ignore
           onChange={(e) => controlSliderVolumeNode(e.target.value)}
-          style={{ color: "gray" }}
+          style={{ color: "white" }}
           min={0}
           max={2}
           step={0.2}
