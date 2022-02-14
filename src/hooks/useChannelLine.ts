@@ -35,6 +35,7 @@ const useChannelLine = (
 
   // rest of the nodes are already connected inside the custom hooks that have them (by passing the node in the args)
   const [EQFunctions] = useEQ(audioCtx, analyserNode);
+
   const [HPFFunctions] = useHPF(audioCtx, EQFunctions.EQOutput);
 
   const [compressorFunctions] = useCompressor(audioCtx, pannerNode);

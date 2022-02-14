@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
-import RangeSlider from "react-bootstrap-range-slider";
 //@ts-ignore
 import CircularSlider from "@fseehawer/react-circular-slider";
 
@@ -41,7 +40,6 @@ function Knob({
     for (let i = min; i <= max; i = i + step) {
       data.push(i);
     }
-    console.log(data);
     return data;
   };
 

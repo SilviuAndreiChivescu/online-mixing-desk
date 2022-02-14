@@ -13,10 +13,8 @@ import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { faPause } from "@fortawesome/free-solid-svg-icons";
 import { faStop } from "@fortawesome/free-solid-svg-icons";
 
-//todo maybe change the reverb dropdown to radio inputs? Also the ch dropdown?
 // change the channels from channel 2 to what it should be
-// do something with the play and pause, first with the UI, find some icons nice to play and pause and find them a good spot
-// then do something with the back end of it, i know it pauses all when pause one etc.., also find samples and stuff
+
 const App: React.FC = () => {
   const [
     channelOneFunctions,
@@ -120,7 +118,6 @@ const App: React.FC = () => {
                   setMain={setMainFXUnit}
                   main={mainFXUnit}
                   controlWhichChannel={controlWhichFXUnit}
-                  FXUnitFunctions={mainFXUnit.FXUnitFunctions}
                 />
               </Col>
               <Col>
