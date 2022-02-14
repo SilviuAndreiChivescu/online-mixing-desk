@@ -1,26 +1,13 @@
 import React, { useState } from "react";
 import { ButtonGroup, Dropdown } from "react-bootstrap";
-
+// todo change the name of this
 interface MyDropdownProps {
   chooseImpulse: any;
+  setMain: any;
+  main: any;
 }
-function MyDropdown({ chooseImpulse }: MyDropdownProps) {
-  const [dropDownInfo, setDropDownInfo] = useState([
-    { impulse: "Large Hall", active: true, index: 1 },
-    { impulse: "Medium Hall", active: false, index: 2 },
-    { impulse: "Small Hall", active: false, index: 3 },
-    { impulse: "Plate 1", active: false, index: 4 },
-    { impulse: "Plate 2", active: false, index: 5 },
-    { impulse: "Plate 3", active: false, index: 6 },
-    { impulse: "Large Room", active: false, index: 7 },
-    { impulse: "Medium Room", active: false, index: 8 },
-    { impulse: "Small Room", active: false, index: 9 },
-    { impulse: "Large Chamber", active: false, index: 10 },
-    { impulse: "Medium Chamber", active: false, index: 11 },
-    { impulse: "Small Chamber", active: false, index: 12 },
-    { impulse: "Stage 1", active: false, index: 13 },
-    { impulse: "Stage 2", active: false, index: 14 },
-  ]);
+function MyDropdown({ chooseImpulse, setMain, main }: MyDropdownProps) {
+  const { dropDownInfo } = main.FXUnitFunctions;
   const handleActive = (impulseWav: string) => {
     let items = [...dropDownInfo];
     // Make current true active, to false
@@ -46,7 +33,10 @@ function MyDropdown({ chooseImpulse }: MyDropdownProps) {
     let item = { ...items[indexItemToChange - 1] };
     item.active = true;
     items[indexItemToChange - 1] = item;
-    setDropDownInfo(items);
+    setMain({
+      ...main,
+      FXUnitFunctions: { ...main.FXUnitFunctions, dropDownInfo: items },
+    });
   };
 
   return (

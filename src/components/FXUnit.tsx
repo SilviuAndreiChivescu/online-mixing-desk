@@ -7,18 +7,13 @@ import WetDryKnob from "./WetDryKnob";
 // todo change these from any to its own
 
 interface FXUnitProps {
-  FXUnitFunctions: any;
   controlWhichChannel: any;
   setMain: any;
   main: any;
 }
 
-function FXUnit({
-  FXUnitFunctions,
-  controlWhichChannel,
-  setMain,
-  main,
-}: FXUnitProps) {
+function FXUnit({ controlWhichChannel, setMain, main }: FXUnitProps) {
+  const { FXUnitFunctions } = main;
   return (
     <section className="border align-items-center mt-2 mb-2 pt-3 pb-2">
       <h3>FX Unit</h3>
@@ -42,7 +37,11 @@ function FXUnit({
           />
         </Col>{" "}
         <Col lg={2}>
-          <MyDropdown chooseImpulse={FXUnitFunctions.chooseImpulse} />
+          <MyDropdown
+            setMain={setMain}
+            main={main}
+            chooseImpulse={FXUnitFunctions.chooseImpulse}
+          />
         </Col>
       </Row>
       <Row className="justify-content-center">

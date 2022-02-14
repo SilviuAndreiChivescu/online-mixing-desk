@@ -42,7 +42,6 @@ function WetDryKnob({
     for (let i = min; i <= max; i = i + step) {
       data.push(i);
     }
-    console.log(data);
     return data;
   };
 
