@@ -59,11 +59,7 @@ interface ChannelLineProps {
       };
       connectCompressor: () => void;
       disconnectCompressor: () => void;
-      setDryWetKnob: (
-        e: React.ChangeEvent<HTMLInputElement>,
-        setMain: any,
-        main: any
-      ) => void;
+      setDryWetKnob: (value: number, setMain: any, main: any) => void;
       compressorOutput: GainNode;
     };
     FXUnitFunctions: {

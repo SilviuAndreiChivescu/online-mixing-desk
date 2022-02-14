@@ -103,27 +103,22 @@ const useCompressor = (
   const [wetGainNode, wetGainControl] = useGain(audioCtx);
 
   // Dry Wet Mix Controller Knob (1 means full wet)
-  const setDryWetKnob = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    setMain: any,
-    main: any
-  ) => {
-    const { value } = e.target;
+  const setDryWetKnob = (value: number, setMain: any, main: any) => {
     setMain({
       ...main,
       compressorFunctions: {
         ...main.compressorFunctions,
         compressorUIStates: {
           ...main.compressorFunctions.compressorUIStates,
-          dryWetKnob: parseFloat(value),
+          dryWetKnob: value,
         },
       },
     });
-    if (parseFloat(value) > 0.5) {
-      dryGainControl(1 - 2 * (parseFloat(value) - 0.5));
+    if (value > 0.5) {
+      dryGainControl(1 - 2 * (value - 0.5));
       wetGainControl(1);
     } else {
-      wetGainControl(1 - 2 * (0.5 - parseFloat(value)));
+      wetGainControl(1 - 2 * (0.5 - value));
       dryGainControl(1);
     }
   };

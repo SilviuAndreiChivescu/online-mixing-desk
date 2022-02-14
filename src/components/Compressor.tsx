@@ -3,6 +3,7 @@ import { Button, Col, Dropdown, Row } from "react-bootstrap";
 import CustomDropdown from "./CustomDropdown";
 import MyCompressorSlider from "./MyCompressorSlider";
 import OnOffButton from "./OnOffButton";
+import WetDryKnob from "./WetDryKnob";
 
 // todo change these from any to its own
 interface CompressorProps {
@@ -92,8 +93,7 @@ function Compressor({
     // 5. Set the state to our new copy
     setSlidersInfo(items);
   };
-  // mai am o idee gen sa schimb valoriile cand schimb canalu, nu de fiecare data, gen doar on off are nev sa se schimbe o data cu el
-  // crek stiu care e prob, deci asta aici listening to compressorUIStates, dar alea sunt exact ce eu schimb ca sa fac... crek asta e
+
   useEffect(() => {
     changeAll();
   }, [main.compressorFunctions.compressorUIStates]);
@@ -143,7 +143,7 @@ function Compressor({
       </Row>
       <Row className="justify-content-center">
         <Col lg={5}>
-          <MyCompressorSlider
+          <WetDryKnob
             label="Wet Dry"
             setMain={setMain}
             main={main}
@@ -152,10 +152,8 @@ function Compressor({
             max={1}
             defaultValue={dryWetKnob}
             step={0.1}
-            className="mt-2 mb-4"
             leftLabel={"Dry"}
             rightLabel={"Wet"}
-            id="wetDryCompressor"
           />
         </Col>
       </Row>
