@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
-import RangeSlider from "react-bootstrap-range-slider";
 //@ts-ignore
 import CircularSlider from "@fseehawer/react-circular-slider";
 
-interface WetDryKnobProps {
+interface CompressorKnobProps {
   min: number;
   max: number;
   defaultValue: number;
   onChangeFunction: any;
+  onChangeOptional?: any;
   step?: number;
   leftLabel?: string;
   rightLabel?: string;
@@ -17,7 +17,7 @@ interface WetDryKnobProps {
   main: any;
 }
 
-function WetDryKnob({
+function CompressorKnob({
   min,
   max,
   defaultValue,
@@ -26,9 +26,18 @@ function WetDryKnob({
   leftLabel,
   rightLabel,
   label,
+  onChangeOptional,
   setMain,
   main,
-}: WetDryKnobProps) {
+}: CompressorKnobProps) {
+  //   const [value, setValue] = useState(0);
+  //   useEffect(() => {
+  //     setValue(defaultValue);
+  //   }, [defaultValue]);
+  //   useEffect(() => {
+  //     onChangeFunction(value, setMain, main);
+  //   }, [value]);
+
   const getDataForKnob = () => {
     let data = [];
     for (let i = min; i <= max; i = i + step) {
@@ -39,13 +48,13 @@ function WetDryKnob({
 
   const [dataForKnob] = useState<number[]>(() => getDataForKnob());
   return (
-    <section className="mt-2 mb-2">
+    <>
       <Row className="mb-3">
         <Col>{label}</Col>
       </Row>
       <Row className="align-items-end justify-content-center mb-2">
-        <Col lg={1}>{leftLabel}</Col>
-        <Col lg={3}>
+        <Col>{leftLabel}</Col>
+        <Col>
           <CircularSlider
             hideLabelValue={true}
             width={80}
@@ -64,9 +73,9 @@ function WetDryKnob({
             onChange={(value: number) => onChangeFunction(value, setMain, main)}
           />
         </Col>
-        <Col lg={1}>{rightLabel}</Col>
+        <Col>{rightLabel}</Col>
       </Row>
-    </section>
+    </>
   );
 }
-export default WetDryKnob;
+export default CompressorKnob;

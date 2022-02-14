@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Dropdown, Row } from "react-bootstrap";
+import CompressorKnob from "./CompressorKnob";
 import CustomDropdown from "./CustomDropdown";
 import MyCompressorSlider from "./MyCompressorSlider";
 import OnOffButton from "./OnOffButton";
@@ -21,6 +22,8 @@ function Compressor({
 }: CompressorProps) {
   const { threshold, knee, ratio, attack, release, dryWetKnob } =
     main.compressorFunctions.compressorUIStates;
+  // am ramas aici, e o problema cu knobs urile astea de la compressor, gen ele schimba valoarea la ch 1 chiar daca nu e pe ch 1
+  // crek tre sa le dau dau update la state la onChange astea din obj state below si all good
   const [slidersInfo, setSlidersInfo] = useState([
     {
       id: "threshold",
@@ -30,6 +33,7 @@ function Compressor({
       step: 10,
       leftLabel: "\u221e : 1",
       rightLabel: "1 : 1",
+      onChangeFunction: main.compressorFunctions.compressorControlThreshold,
     },
     {
       id: "knee",
@@ -39,6 +43,7 @@ function Compressor({
       step: 1,
       leftLabel: "0",
       rightLabel: "1",
+      onChangeFunction: main.compressorFunctions.compressorControlKnee,
     },
     {
       id: "ratio",
@@ -48,6 +53,7 @@ function Compressor({
       step: 1,
       leftLabel: "2",
       rightLabel: "10",
+      onChangeFunction: main.compressorFunctions.compressorControlRatio,
     },
     {
       id: "attack",
@@ -57,6 +63,7 @@ function Compressor({
       step: 0.1,
       leftLabel: "0.1",
       rightLabel: "30",
+      onChangeFunction: main.compressorFunctions.compressorControlAttack,
     },
     {
       id: "release",
@@ -66,6 +73,7 @@ function Compressor({
       step: 0.1,
       leftLabel: "0.1",
       rightLabel: "1",
+      onChangeFunction: main.compressorFunctions.compressorControlRelease,
     },
   ]);
   // This function changes all the values of a channel compressor whenever it changes
@@ -124,10 +132,10 @@ function Compressor({
       <Row>
         {slidersInfo.map((elem: any, index: number) => (
           <Col key={elem.id}>
-            <MyCompressorSlider
+            {/* <MyCompressorSlider
               setMain={setMain}
               main={main}
-              onChangeFunction={compressorFunctions.compressorControl}
+              onChangeFunction={elem.onChangeFunction}
               id={elem.id}
               label={elem.id.toUpperCase()}
               min={elem.min}
@@ -137,6 +145,18 @@ function Compressor({
               leftLabel={elem.leftLabel}
               rightLabel={elem.rightLabel}
               className="mt-2 mb-4"
+            /> */}
+            <CompressorKnob
+              setMain={setMain}
+              main={main}
+              onChangeFunction={elem.onChangeFunction}
+              label={elem.id.toUpperCase()}
+              min={elem.min}
+              max={elem.max}
+              defaultValue={elem.defaultValue}
+              step={elem.step}
+              leftLabel={elem.leftLabel}
+              rightLabel={elem.rightLabel}
             />
           </Col>
         ))}

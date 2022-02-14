@@ -42,11 +42,19 @@ interface ChannelLineProps {
       HPFOutput: GainNode;
     };
     compressorFunctions: {
-      compressorControl: (
-        e: React.ChangeEvent<HTMLInputElement>,
+      compressorControlThreshold: (
+        value: number,
         setMain: any,
         main: any
       ) => void;
+      compressorControlRatio: (value: number, setMain: any, main: any) => void;
+      compressorControlRelease: (
+        value: number,
+        setMain: any,
+        main: any
+      ) => void;
+      compressorControlAttack: (value: number, setMain: any, main: any) => void;
+      compressorControlKnee: (value: number, setMain: any, main: any) => void;
       compressorUIStates: {
         threshold: number;
         knee: number;

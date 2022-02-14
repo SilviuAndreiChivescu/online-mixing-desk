@@ -134,7 +134,6 @@ const useInit = () => {
   });
   const [whichFXUnit, setWhichFXUnit] = useState(1);
   useEffect(() => {
-    console.log(mainFXUnit.FXUnitFunctions.dropDownInfo);
     switch (whichFXUnit) {
       case 1:
         setChannel1FX(mainFXUnit);

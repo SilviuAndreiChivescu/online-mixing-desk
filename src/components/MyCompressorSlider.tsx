@@ -31,10 +31,6 @@ function MyCompressorSlider({
   leftLabel,
   rightLabel,
 }: MyCompressorSliderProps) {
-  // const [value, setValue] = useState(0);
-  // useEffect(() => {
-  //   setValue(defaultValue);
-  // }, [defaultValue]);
   return (
     <>
       <Row className="mt-2">

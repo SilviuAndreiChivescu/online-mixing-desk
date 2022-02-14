@@ -7,86 +7,76 @@ const useCompressor = (
 ) => {
   const [compressorOutput] = useGain(audioCtx);
   const [compressor] = useState(() => audioCtx.createDynamicsCompressor());
-  // Control Compressor's Params: Threshold, Knee, Ratio, Attack, Release
-  const compressorControl = (
-    e: React.ChangeEvent<HTMLInputElement>,
+  const compressorControlThreshold = (
+    value: number,
     setMain: any,
     main: any
   ) => {
-    // Take the id and value
-    const { id, value } = e.target;
-    // Make type of proprieties to please Typescript
-    type compressorProperties =
-      | "threshold"
-      | "knee"
-      | "ratio"
-      | "attack"
-      | "release";
-    // Change the particular property taken from id to the value taken from the slider
-    compressor[id as compressorProperties].value = parseFloat(value);
+    compressor["threshold"].value = value;
+    setMain({
+      ...main,
+      compressorFunctions: {
+        ...main.compressorFunctions,
+        compressorUIStates: {
+          ...main.compressorFunctions.compressorUIStates,
+          threshold: value,
+        },
+      },
+    });
+  };
 
-    switch (id) {
-      case "threshold":
-        setMain({
-          ...main,
-          compressorFunctions: {
-            ...main.compressorFunctions,
-            compressorUIStates: {
-              ...main.compressorFunctions.compressorUIStates,
-              threshold: parseFloat(value),
-            },
-          },
-        });
-        break;
-      case "knee":
-        setMain({
-          ...main,
-          compressorFunctions: {
-            ...main.compressorFunctions,
-            compressorUIStates: {
-              ...main.compressorFunctions.compressorUIStates,
-              knee: parseFloat(value),
-            },
-          },
-        });
-        break;
-      case "ratio":
-        setMain({
-          ...main,
-          compressorFunctions: {
-            ...main.compressorFunctions,
-            compressorUIStates: {
-              ...main.compressorFunctions.compressorUIStates,
-              ratio: parseFloat(value),
-            },
-          },
-        });
-        break;
-      case "release":
-        setMain({
-          ...main,
-          compressorFunctions: {
-            ...main.compressorFunctions,
-            compressorUIStates: {
-              ...main.compressorFunctions.compressorUIStates,
-              release: parseFloat(value),
-            },
-          },
-        });
-        break;
-      case "attack":
-        setMain({
-          ...main,
-          compressorFunctions: {
-            ...main.compressorFunctions,
-            compressorUIStates: {
-              ...main.compressorFunctions.compressorUIStates,
-              attack: parseFloat(value),
-            },
-          },
-        });
-        break;
-    }
+  const compressorControlKnee = (value: number, setMain: any, main: any) => {
+    compressor["knee"].value = value;
+    setMain({
+      ...main,
+      compressorFunctions: {
+        ...main.compressorFunctions,
+        compressorUIStates: {
+          ...main.compressorFunctions.compressorUIStates,
+          knee: value,
+        },
+      },
+    });
+  };
+
+  const compressorControlRatio = (value: number, setMain: any, main: any) => {
+    compressor["ratio"].value = value;
+    setMain({
+      ...main,
+      compressorFunctions: {
+        ...main.compressorFunctions,
+        compressorUIStates: {
+          ...main.compressorFunctions.compressorUIStates,
+          ratio: value,
+        },
+      },
+    });
+  };
+  const compressorControlAttack = (value: number, setMain: any, main: any) => {
+    compressor["attack"].value = value;
+    setMain({
+      ...main,
+      compressorFunctions: {
+        ...main.compressorFunctions,
+        compressorUIStates: {
+          ...main.compressorFunctions.compressorUIStates,
+          attack: value,
+        },
+      },
+    });
+  };
+  const compressorControlRelease = (value: number, setMain: any, main: any) => {
+    compressor["release"].value = value;
+    setMain({
+      ...main,
+      compressorFunctions: {
+        ...main.compressorFunctions,
+        compressorUIStates: {
+          ...main.compressorFunctions.compressorUIStates,
+          release: value,
+        },
+      },
+    });
   };
 
   // States to use for changing compressor
@@ -146,7 +136,11 @@ const useCompressor = (
 
   // Put everything to export into an object
   const [compressorFunctions] = useState({
-    compressorControl: compressorControl,
+    compressorControlThreshold: compressorControlThreshold,
+    compressorControlKnee: compressorControlKnee,
+    compressorControlRatio: compressorControlRatio,
+    compressorControlAttack: compressorControlAttack,
+    compressorControlRelease: compressorControlRelease,
     compressorUIStates: compressorUIStates,
     connectCompressor: connectCompressor,
     disconnectCompressor: disconnectCompressor,
