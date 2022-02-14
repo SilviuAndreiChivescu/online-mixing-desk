@@ -34,7 +34,7 @@ function CustomDropdown({ controlWhichChannel }: CustomDropdownProps) {
         handleActive(e);
       }}
     >
-      <Dropdown.Toggle variant="success" id="dropdown-basic2">
+      <Dropdown.Toggle variant="outline-warning" id="dropdown-basic2">
         Ch
       </Dropdown.Toggle>
 

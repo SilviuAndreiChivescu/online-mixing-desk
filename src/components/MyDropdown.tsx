@@ -23,7 +23,7 @@ function MyDropdown({ chooseImpulse }: MyDropdownProps) {
   ]);
   return (
     <Dropdown onSelect={(e: any) => chooseImpulse(e)}>
-      <Dropdown.Toggle variant="success" id="dropdown-basic">
+      <Dropdown.Toggle variant="outline-warning" id="dropdown-basic">
         Reberb
       </Dropdown.Toggle>
 
