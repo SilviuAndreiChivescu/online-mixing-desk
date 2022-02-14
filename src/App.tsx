@@ -8,6 +8,9 @@ import MasterFilter from "./components/MasterFilter";
 import Master from "./components/Master";
 import ChannelLine from "./components/ChannelLine";
 
+// also try to modify the volume slider, make that circular thingy flat if you can in the dev tools
+// also make the knobs for master section bigger, make another component
+
 //todo maybe change the reverb dropdown to radio inputs? Also the ch dropdown?
 // change the channels from channel 2 to what it should be
 // do something with the play and pause, first with the UI, find some icons nice to play and pause and find them a good spot

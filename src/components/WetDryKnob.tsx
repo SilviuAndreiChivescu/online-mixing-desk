@@ -49,10 +49,10 @@ function WetDryKnob({
   const [dataForKnob] = useState<number[]>(() => getDataForKnob());
   return (
     <section className="mt-2 mb-2">
-      <Row>
+      <Row className="mb-3">
         <Col>{label}</Col>
       </Row>
-      <Row className="align-items-end justify-content-center mb-2 mt-2">
+      <Row className="align-items-end justify-content-center mb-2">
         <Col lg={1}>{leftLabel}</Col>
         <Col lg={3}>
           <CircularSlider

@@ -7,10 +7,21 @@
     height: 0;
   }
 
+  /* Customize the marks */
   .css-19l5h75-MuiSlider-markLabel {
     color: white !important;
   }
 
   .css-xxsb21-MuiSlider-markLabel {
     color: white !important;
+  }
+  .css-xxsb21-MuiSlider-markLabel, .css-19l5h75-MuiSlider-markLabel  {
+    left: -45px !important;
+  }
+
+  /* Make volume slider look more like a volume slider */
+  .css-y35fuw-MuiSlider-thumb {
+width: 60px !important;
+height: 10px !important;
+border-radius: 15px !important;
   }

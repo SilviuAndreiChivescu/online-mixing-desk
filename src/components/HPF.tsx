@@ -39,7 +39,7 @@ function HPF({ HPFFunctions, setChannelUI, channelUI }: HPFProps) {
           <h3>HPF</h3>
         </Col>
       </Row>
-      <Row className="mt-1 mb-2">
+      <Row className="mt-1 mb-3">
         <Col>
           <OnOffButton
             id="hpfOn"

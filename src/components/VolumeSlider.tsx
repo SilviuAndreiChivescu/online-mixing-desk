@@ -57,7 +57,7 @@ function VolumeSlider({ controlSliderVolumeNode }: VolumeSliderProps) {
   ];
 
   return (
-    <Col>
+    <Col className="mt-2">
       <Stack sx={{ height: 200 }} spacing={1} direction="row">
         <Slider
           // @ts-ignore

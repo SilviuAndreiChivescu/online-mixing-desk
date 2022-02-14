@@ -41,8 +41,10 @@ function FXUnit({
             }
           />
         </Col>{" "}
+        <Col lg={2}>
+          <MyDropdown chooseImpulse={FXUnitFunctions.chooseImpulse} />
+        </Col>
       </Row>
-      <MyDropdown chooseImpulse={FXUnitFunctions.chooseImpulse} />
       <Row className="justify-content-center">
         <Col lg={10}>
           <WetDryKnob

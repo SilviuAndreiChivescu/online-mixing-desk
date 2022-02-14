@@ -24,7 +24,7 @@ function MasterFilter({ masterFilterToExport }: MasterFilterProps) {
           )
         }
       />
-      <Row className="justify-content-center mt-2">
+      <Row className="justify-content-center mt-4">
         <Col>
           <Knob
             label="HPF"
