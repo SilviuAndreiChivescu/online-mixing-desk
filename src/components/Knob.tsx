@@ -1,7 +1,7 @@
 import JqxKnob, {
   IKnobLabels,
 } from "jqwidgets-scripts/jqwidgets-react-tsx/jqxknob";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 interface KnobProps {
   min: number;
   max: number;
@@ -61,13 +61,20 @@ function Knob({
     size: "15%",
     style: { fill: "#00a4e1", stroke: "grey" },
   });
-
+  const valueRef = useRef(0);
+  // const [value, setValue] = useState(0);
+  useEffect(() => {
+    valueRef.current = defaultValue;
+  }, []);
+  // useEffect(() => {
+  //   onChangeFunction(valueRef.current);
+  // }, [valueRef.current]);
   return (
-    <JqxKnob
+    <JqxKnob // setValue(e.args.value)
       onChange={(e: any) => onChangeFunction(e.args.value)}
       width="70"
       height="100"
-      value={defaultValue}
+      value={valueRef.current}
       min={min}
       max={max}
       step={step}

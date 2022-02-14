@@ -8,8 +8,13 @@ import MasterFilter from "./components/MasterFilter";
 import Master from "./components/Master";
 import ChannelLine from "./components/ChannelLine";
 
+// found a bug, when I change something at compressor, it resets to defaults to ALL! knobs stuff :|
+// try with some state from the knob and useEffect to put default value as state etc. Also try with useRef
+
 //todo maybe change the reverb dropdown to radio inputs? Also the ch dropdown?
 // change the channels from channel 2 to what it should be
+// do something with the play and pause, first with the UI, find some icons nice to play and pause and find them a good spot
+// then do something with the back end of it, i know it pauses all when pause one etc.., also find samples and stuff
 const App: React.FC = () => {
   const [
     channelOneFunctions,
