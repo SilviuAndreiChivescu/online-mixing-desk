@@ -7,6 +7,11 @@ import FXUnit from "./components/FXUnit";
 import MasterFilter from "./components/MasterFilter";
 import Master from "./components/Master";
 import ChannelLine from "./components/ChannelLine";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// @ts-ignore
+import { faPlay } from "@fortawesome/free-solid-svg-icons";
+import { faPause } from "@fortawesome/free-solid-svg-icons";
+import { faStop } from "@fortawesome/free-solid-svg-icons";
 
 //todo maybe change the reverb dropdown to radio inputs? Also the ch dropdown?
 // change the channels from channel 2 to what it should be
@@ -86,15 +91,21 @@ const App: React.FC = () => {
             />
           </Col>
           <Col lg={5}>
-            <Row>
-              <Col>
-                <Button onClick={play}>Play</Button>
+            <Row className="justify-content-center">
+              <Col lg={1}>
+                <Button variant="outline-warning" onClick={play}>
+                  <FontAwesomeIcon icon={faPlay} />
+                </Button>
               </Col>
-              <Col>
-                <Button onClick={pause}>Pause</Button>
+              <Col lg={1}>
+                <Button variant="outline-warning" onClick={pause}>
+                  <FontAwesomeIcon icon={faPause} />
+                </Button>
               </Col>
-              <Col>
-                <Button onClick={replay}>Replay</Button>
+              <Col lg={1}>
+                <Button variant="outline-warning" onClick={replay}>
+                  <FontAwesomeIcon icon={faStop} />
+                </Button>
               </Col>
             </Row>
             <Compressor
