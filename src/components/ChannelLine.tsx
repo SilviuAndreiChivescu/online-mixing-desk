@@ -124,7 +124,7 @@ const ChannelLine: React.FC<ChannelLineProps> = ({
   } = channelFunctions;
 
   return (
-    <>
+    <section className="border">
       <h3>{channelNo}</h3>
       <OnOffButton
         id="eqOn"
@@ -179,7 +179,7 @@ const ChannelLine: React.FC<ChannelLineProps> = ({
           <SoundMeter draw={drawSoundLevel} />
         </Row>
       </section>
-    </>
+    </section>
   );
 };
 
