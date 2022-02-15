@@ -121,7 +121,7 @@ const ChannelLine: React.FC<ChannelLineProps> = ({
   } = channelFunctions;
 
   return (
-    <section className="border">
+    <section className="bg-black">
       <h3>{channelNo}</h3>
       <OnOffButton
         id="eqOn"

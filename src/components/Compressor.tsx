@@ -127,7 +127,7 @@ function Compressor({ controlWhichChannel, setMain, main }: CompressorProps) {
   );
 
   return (
-    <section className="border p-2 mt-2">
+    <section className="p-2 mt-2 bg-black">
       <h3>Compressor</h3>
       <Row className="justify-content-center align-items-center">
         <Col lg={2}>

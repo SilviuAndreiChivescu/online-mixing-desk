@@ -15,7 +15,7 @@ interface FXUnitProps {
 function FXUnit({ controlWhichChannel, setMain, main }: FXUnitProps) {
   const { FXUnitFunctions } = main;
   return (
-    <section className="border align-items-center mt-2 mb-2 pt-3 pb-2">
+    <section className="bg-black align-items-center mt-2 mb-2 pt-3 pb-2">
       <h3>FX Unit</h3>
       <Row className="justify-content-center align-items-center mb-2">
         <Col lg={2}>

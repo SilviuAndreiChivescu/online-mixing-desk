@@ -10,7 +10,7 @@ interface MasterFilterProps {
 
 function MasterFilter({ masterFilterToExport }: MasterFilterProps) {
   return (
-    <section className="border align-items-center mt-2 mb-2 pt-3 pb-2">
+    <section className="bg-black align-items-center mt-2 mb-2 pt-3 pb-2">
       <Row className="mb-2">
         <Col>
           <h3>MASTER FILTER</h3>

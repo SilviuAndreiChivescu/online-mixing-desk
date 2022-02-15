@@ -33,7 +33,7 @@ interface HPFProps {
 function HPF({ HPFFunctions, setChannelUI, channelUI }: HPFProps) {
   const { controlHighPassCutOff } = HPFFunctions;
   return (
-    <section className="border pt-3 mt-2 mb-2">
+    <section className="border-top pt-3 mt-2 mb-2">
       <Row>
         <Col>
           <h3>HPF</h3>

@@ -50,7 +50,7 @@ function EQ({ EQFunctions, setChannelUI, channelUI }: EQProps) {
     { label: "Low", onChangeFunction: controlLow },
   ]);
   return (
-    <section className="border pt-3 mt-2 mb-2">
+    <section className="pt-3 mt-2 mb-2">
       <Row>
         <Col>
           <h3>EQ</h3>
