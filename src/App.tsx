@@ -13,12 +13,13 @@ import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { faPause } from "@fortawesome/free-solid-svg-icons";
 import { faStop } from "@fortawesome/free-solid-svg-icons";
 
+// gain reduction? make another branch
+
 // change the channels from channel 2 to what it should be (make new branch for this haha)
 
 // background color to white or smthing, and to black only the "hardware"
 // do the select input / output stuff (try with multiple bluetooth connections)
 // create help modal?
-
 const App: React.FC = () => {
   const [
     channelOneFunctions,

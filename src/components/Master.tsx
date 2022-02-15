@@ -47,8 +47,8 @@ function Master({ masterFunctions }: MasterProps) {
       max: 1,
       defaultValue: 0.5,
       step: 0.1,
-      leftLabel: `Cue`,
-      rightLabel: "Master",
+      leftLabel: `C`,
+      rightLabel: "M",
     },
   ]);
   return (
