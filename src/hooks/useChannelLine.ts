@@ -22,6 +22,27 @@ const useChannelLine = (
     channelOn: false,
   });
 
+  // These connections will be made based on the value of the buttons
+  useEffect(() => {
+    if (UI.eqOn) EQFunctions.connectEQ();
+    else EQFunctions.disconnectEQ();
+  }, [UI.eqOn]);
+
+  useEffect(() => {
+    if (UI.channelOn) connectChannel();
+    else disconnectChannel();
+  }, [UI.channelOn]);
+
+  useEffect(() => {
+    if (UI.hpfOn) HPFFunctions.connectHPF();
+    else HPFFunctions.disconnectHPF();
+  }, [UI.hpfOn]);
+
+  useEffect(() => {
+    if (UI.cueOn) connectCue();
+    else disconnectCue();
+  }, [UI.cueOn]);
+
   const [audioElement] = useState(
     () => new Audio(`/assets/samples/${sampleName}`)
   );

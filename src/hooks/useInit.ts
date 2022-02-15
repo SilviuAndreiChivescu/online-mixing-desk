@@ -333,24 +333,9 @@ const useInit = () => {
     }
   };
 
-  // todo, maybe put some of this in the channels? I had a thought and I think I can have the eq etc in the useChannelLine
   // These connections will be made based on the value of the buttons
+  // It only needs to change the FXUnit and Compressor here in the useInit because these have the same interface for multiple chs
   // Channel 1
-  useEffect(() => {
-    if (channelOneUI.channelOn) channelOneFunctions.connectChannel();
-    else channelOneFunctions.disconnectChannel();
-  }, [channelOneUI.channelOn]);
-
-  useEffect(() => {
-    if (channelOneUI.eqOn) channelOneFunctions.EQFunctions.connectEQ();
-    else channelOneFunctions.EQFunctions.disconnectEQ();
-  }, [channelOneUI.eqOn]);
-
-  useEffect(() => {
-    if (channelOneUI.hpfOn) channelOneFunctions.HPFFunctions.connectHPF();
-    else channelOneFunctions.HPFFunctions.disconnectHPF();
-  }, [channelOneUI.hpfOn]);
-
   useEffect(() => {
     if (channel1.channelUI.compressorOn)
       channelOneFunctions.compressorFunctions.connectCompressor();
@@ -363,27 +348,7 @@ const useInit = () => {
     else channelOneFunctions.FXUnitFunctions.disconnectFXUnit();
   }, [channel1FX.channelUI.fxUnitOn]);
 
-  useEffect(() => {
-    if (channelOneUI.cueOn) channelOneFunctions.connectCue();
-    else channelOneFunctions.disconnectCue();
-  }, [channelOneUI.cueOn]);
-
   // Channel 2
-  useEffect(() => {
-    if (channelTwoUI.channelOn) channelTwoFunctions.connectChannel();
-    else channelTwoFunctions.disconnectChannel();
-  }, [channelTwoUI.channelOn]);
-
-  useEffect(() => {
-    if (channelTwoUI.eqOn) channelTwoFunctions.EQFunctions.connectEQ();
-    else channelTwoFunctions.EQFunctions.disconnectEQ();
-  }, [channelTwoUI.eqOn]);
-
-  useEffect(() => {
-    if (channelTwoUI.hpfOn) channelTwoFunctions.HPFFunctions.connectHPF();
-    else channelTwoFunctions.HPFFunctions.disconnectHPF();
-  }, [channelTwoUI.hpfOn]);
-
   useEffect(() => {
     if (channel2.channelUI.compressorOn)
       channelTwoFunctions.compressorFunctions.connectCompressor();
@@ -396,27 +361,7 @@ const useInit = () => {
     else channelTwoFunctions.FXUnitFunctions.disconnectFXUnit();
   }, [channel2FX.channelUI.fxUnitOn]);
 
-  useEffect(() => {
-    if (channelTwoUI.cueOn) channelTwoFunctions.connectCue();
-    else channelTwoFunctions.disconnectCue();
-  }, [channelTwoUI.cueOn]);
-
   // Channel 3
-  useEffect(() => {
-    if (channelThreeUI.channelOn) channelThreeFunctions.connectChannel();
-    else channelThreeFunctions.disconnectChannel();
-  }, [channelThreeUI.channelOn]);
-
-  useEffect(() => {
-    if (channelThreeUI.eqOn) channelThreeFunctions.EQFunctions.connectEQ();
-    else channelThreeFunctions.EQFunctions.disconnectEQ();
-  }, [channelThreeUI.eqOn]);
-
-  useEffect(() => {
-    if (channelThreeUI.hpfOn) channelThreeFunctions.HPFFunctions.connectHPF();
-    else channelThreeFunctions.HPFFunctions.disconnectHPF();
-  }, [channelThreeUI.hpfOn]);
-
   useEffect(() => {
     if (channel3.channelUI.compressorOn)
       channelThreeFunctions.compressorFunctions.connectCompressor();
@@ -429,27 +374,7 @@ const useInit = () => {
     else channelThreeFunctions.FXUnitFunctions.disconnectFXUnit();
   }, [channel3FX.channelUI.fxUnitOn]);
 
-  useEffect(() => {
-    if (channelThreeUI.cueOn) channelThreeFunctions.connectCue();
-    else channelThreeFunctions.disconnectCue();
-  }, [channelThreeUI.cueOn]);
-
   // Channel 4
-  useEffect(() => {
-    if (channelFourUI.channelOn) channelFourFunctions.connectChannel();
-    else channelFourFunctions.disconnectChannel();
-  }, [channelFourUI.channelOn]);
-
-  useEffect(() => {
-    if (channelFourUI.eqOn) channelFourFunctions.EQFunctions.connectEQ();
-    else channelFourFunctions.EQFunctions.disconnectEQ();
-  }, [channelFourUI.eqOn]);
-
-  useEffect(() => {
-    if (channelFourUI.hpfOn) channelFourFunctions.HPFFunctions.connectHPF();
-    else channelFourFunctions.HPFFunctions.disconnectHPF();
-  }, [channelFourUI.hpfOn]);
-
   useEffect(() => {
     if (channel4.channelUI.compressorOn)
       channelFourFunctions.compressorFunctions.connectCompressor();
@@ -462,27 +387,7 @@ const useInit = () => {
     else channelFourFunctions.FXUnitFunctions.disconnectFXUnit();
   }, [channel4FX.channelUI.fxUnitOn]);
 
-  useEffect(() => {
-    if (channelFourUI.cueOn) channelFourFunctions.connectCue();
-    else channelFourFunctions.disconnectCue();
-  }, [channelFourUI.cueOn]);
-
   // Channel 5
-  useEffect(() => {
-    if (channelFiveUI.channelOn) channelFiveFunctions.connectChannel();
-    else channelFiveFunctions.disconnectChannel();
-  }, [channelFiveUI.channelOn]);
-
-  useEffect(() => {
-    if (channelFiveUI.eqOn) channelFiveFunctions.EQFunctions.connectEQ();
-    else channelFiveFunctions.EQFunctions.disconnectEQ();
-  }, [channelFiveUI.eqOn]);
-
-  useEffect(() => {
-    if (channelFiveUI.hpfOn) channelFiveFunctions.HPFFunctions.connectHPF();
-    else channelFiveFunctions.HPFFunctions.disconnectHPF();
-  }, [channelFiveUI.hpfOn]);
-
   useEffect(() => {
     if (channel5.channelUI.compressorOn)
       channelFiveFunctions.compressorFunctions.connectCompressor();
@@ -495,27 +400,7 @@ const useInit = () => {
     else channelFiveFunctions.FXUnitFunctions.disconnectFXUnit();
   }, [channel5FX.channelUI.fxUnitOn]);
 
-  useEffect(() => {
-    if (channelFiveUI.cueOn) channelFiveFunctions.connectCue();
-    else channelFiveFunctions.disconnectCue();
-  }, [channelFiveUI.cueOn]);
-
   // Channel 6
-  useEffect(() => {
-    if (channelSixUI.channelOn) channelSixFunctions.connectChannel();
-    else channelSixFunctions.disconnectChannel();
-  }, [channelSixUI.channelOn]);
-
-  useEffect(() => {
-    if (channelSixUI.eqOn) channelSixFunctions.EQFunctions.connectEQ();
-    else channelSixFunctions.EQFunctions.disconnectEQ();
-  }, [channelSixUI.eqOn]);
-
-  useEffect(() => {
-    if (channelSixUI.hpfOn) channelSixFunctions.HPFFunctions.connectHPF();
-    else channelSixFunctions.HPFFunctions.disconnectHPF();
-  }, [channelSixUI.hpfOn]);
-
   useEffect(() => {
     if (channel6.channelUI.compressorOn)
       channelSixFunctions.compressorFunctions.connectCompressor();
@@ -527,11 +412,6 @@ const useInit = () => {
       channelSixFunctions.FXUnitFunctions.connectFXUnit();
     else channelSixFunctions.FXUnitFunctions.disconnectFXUnit();
   }, [channel6FX.channelUI.fxUnitOn]);
-
-  useEffect(() => {
-    if (channelSixUI.cueOn) channelSixFunctions.connectCue();
-    else channelSixFunctions.disconnectCue();
-  }, [channelSixUI.cueOn]);
 
   // Master Filter
   useEffect(() => {
@@ -561,6 +441,11 @@ const useInit = () => {
     masterFilterCueFunctions.masterFilterOutput
       .connect(masterFunctions.headphones.node)
       .connect(audioCtx.destination); // destination headhpones L and R
+
+    // Kill the audioCtx so it won't take much time to close the browser tab
+    return () => {
+      audioCtx.suspend();
+    };
   }, []);
 
   return [
