@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Dropdown, Row } from "react-bootstrap";
 import CompressorKnob from "./CompressorKnob";
-import CustomDropdown from "./CustomDropdown";
-import MyCompressorSlider from "./MyCompressorSlider";
+import ChannelDropdown from "./ChannelDropdown";
 import OnOffButton from "./OnOffButton";
 import WetDryKnob from "./WetDryKnob";
 
@@ -131,7 +130,7 @@ function Compressor({ controlWhichChannel, setMain, main }: CompressorProps) {
       <h3>Compressor</h3>
       <Row className="justify-content-center align-items-center">
         <Col lg={2}>
-          <CustomDropdown controlWhichChannel={controlWhichChannel} />
+          <ChannelDropdown controlWhichChannel={controlWhichChannel} />
         </Col>
         <Col lg={2}>
           <OnOffButton

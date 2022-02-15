@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import { Dropdown } from "react-bootstrap";
 
-interface CustomDropdownProps {
+interface ChannelDropdownProps {
   controlWhichChannel: any;
 }
 
-function CustomDropdown({ controlWhichChannel }: CustomDropdownProps) {
+function ChannelDropdown({ controlWhichChannel }: ChannelDropdownProps) {
   const [dropDownInfo, setDropDownInfo] = useState([
     { channel: 1, active: true },
     { channel: 2, active: false },
+    { channel: 3, active: false },
+    { channel: 4, active: false },
+    { channel: 5, active: false },
+    { channel: 6, active: false },
   ]);
 
   const handleActive = (channel: number) => {
@@ -52,4 +56,4 @@ function CustomDropdown({ controlWhichChannel }: CustomDropdownProps) {
     </Dropdown>
   );
 }
-export default CustomDropdown;
+export default ChannelDropdown;

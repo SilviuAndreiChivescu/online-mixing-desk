@@ -23,6 +23,18 @@ const App: React.FC = () => {
     channelTwoFunctions,
     channelTwoUI,
     setChannelTwoUI,
+    channelThreeFunctions,
+    channelThreeUI,
+    setChannelThreeUI,
+    channelFourFunctions,
+    channelFourUI,
+    setChannelFourUI,
+    channelFiveFunctions,
+    channelFiveUI,
+    setChannelFiveUI,
+    channelSixFunctions,
+    channelSixUI,
+    setChannelSixUI,
     masterFilterToExport,
     masterFunctions,
     controlWhichChannel,
@@ -57,36 +69,37 @@ const App: React.FC = () => {
               setChannelUI={setChannelTwoUI}
             />
           </Col>
+
           <Col>
             <ChannelLine
               channelNo={3}
-              channelFunctions={channelTwoFunctions}
-              channelUI={channelTwoUI}
-              setChannelUI={setChannelTwoUI}
+              channelFunctions={channelThreeFunctions}
+              channelUI={channelThreeUI}
+              setChannelUI={setChannelThreeUI}
             />
           </Col>
           <Col>
             <ChannelLine
               channelNo={4}
-              channelFunctions={channelTwoFunctions}
-              channelUI={channelTwoUI}
-              setChannelUI={setChannelTwoUI}
+              channelFunctions={channelFourFunctions}
+              channelUI={channelFourUI}
+              setChannelUI={setChannelFourUI}
             />
           </Col>
           <Col>
             <ChannelLine
               channelNo={5}
-              channelFunctions={channelTwoFunctions}
-              channelUI={channelTwoUI}
-              setChannelUI={setChannelTwoUI}
+              channelFunctions={channelFiveFunctions}
+              channelUI={channelFiveUI}
+              setChannelUI={setChannelFiveUI}
             />
           </Col>
           <Col>
             <ChannelLine
               channelNo={6}
-              channelFunctions={channelTwoFunctions}
-              channelUI={channelTwoUI}
-              setChannelUI={setChannelTwoUI}
+              channelFunctions={channelSixFunctions}
+              channelUI={channelSixUI}
+              setChannelUI={setChannelSixUI}
             />
           </Col>
           <Col lg={5}>

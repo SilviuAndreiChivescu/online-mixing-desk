@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
-import CustomDropdown from "./CustomDropdown";
-import MyDropdown from "./MyDropdown";
+import ChannelDropdown from "./ChannelDropdown";
+import ReverbDropdown from "./ReverbDropdown";
 import OnOffButton from "./OnOffButton";
 import WetDryKnob from "./WetDryKnob";
 // todo change these from any to its own
@@ -19,7 +19,7 @@ function FXUnit({ controlWhichChannel, setMain, main }: FXUnitProps) {
       <h3>FX Unit</h3>
       <Row className="justify-content-center align-items-center mb-2">
         <Col lg={2}>
-          <CustomDropdown controlWhichChannel={controlWhichChannel} />
+          <ChannelDropdown controlWhichChannel={controlWhichChannel} />
         </Col>
         <Col lg={2}>
           <OnOffButton
@@ -37,7 +37,7 @@ function FXUnit({ controlWhichChannel, setMain, main }: FXUnitProps) {
           />
         </Col>{" "}
         <Col lg={2}>
-          <MyDropdown
+          <ReverbDropdown
             setMain={setMain}
             main={main}
             chooseImpulse={FXUnitFunctions.chooseImpulse}

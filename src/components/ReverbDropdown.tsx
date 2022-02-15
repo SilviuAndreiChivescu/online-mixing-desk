@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { ButtonGroup, Dropdown } from "react-bootstrap";
-// todo change the name of this
-interface MyDropdownProps {
+
+interface ReverbDropdownProps {
   chooseImpulse: any;
   setMain: any;
   main: any;
 }
-function MyDropdown({ chooseImpulse, setMain, main }: MyDropdownProps) {
+function ReverbDropdown({ chooseImpulse, setMain, main }: ReverbDropdownProps) {
   const { dropDownInfo } = main.FXUnitFunctions;
   const handleActive = (impulseWav: string) => {
     let items = [...dropDownInfo];
@@ -64,4 +64,4 @@ function MyDropdown({ chooseImpulse, setMain, main }: MyDropdownProps) {
     </Dropdown>
   );
 }
-export default MyDropdown;
+export default ReverbDropdown;
