@@ -148,7 +148,9 @@ function Compressor({ controlWhichChannel, setMain, main }: CompressorProps) {
             }
           />
         </Col>
-        <Col lg={2}>Reduction: {gainReduction} dB</Col>
+        <Col lg={2}>
+          Reduction: {Math.abs(gainReduction) > 0.11 ? gainReduction : 0} dB
+        </Col>
       </Row>
       <Row>
         {slidersInfo.map((elem: any, index: number) => (
