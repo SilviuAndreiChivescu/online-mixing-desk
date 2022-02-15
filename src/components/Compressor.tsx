@@ -22,8 +22,15 @@ function Compressor({
 }: CompressorProps) {
   const { threshold, knee, ratio, attack, release, dryWetKnob } =
     main.compressorFunctions.compressorUIStates;
-  // am ramas aici, e o problema cu knobs urile astea de la compressor, gen ele schimba valoarea la ch 1 chiar daca nu e pe ch 1
-  // crek tre sa le dau dau update la state la onChange astea din obj state below si all good
+
+  const {
+    compressorControlThreshold,
+    compressorControlKnee,
+    compressorControlRatio,
+    compressorControlAttack,
+    compressorControlRelease,
+  } = main.compressorFunctions;
+
   const [slidersInfo, setSlidersInfo] = useState([
     {
       id: "threshold",
@@ -33,7 +40,7 @@ function Compressor({
       step: 10,
       leftLabel: "\u221e : 1",
       rightLabel: "1 : 1",
-      onChangeFunction: main.compressorFunctions.compressorControlThreshold,
+      onChangeFunction: compressorControlThreshold,
     },
     {
       id: "knee",
@@ -43,7 +50,7 @@ function Compressor({
       step: 1,
       leftLabel: "0",
       rightLabel: "1",
-      onChangeFunction: main.compressorFunctions.compressorControlKnee,
+      onChangeFunction: compressorControlKnee,
     },
     {
       id: "ratio",
@@ -53,7 +60,7 @@ function Compressor({
       step: 1,
       leftLabel: "2",
       rightLabel: "10",
-      onChangeFunction: main.compressorFunctions.compressorControlRatio,
+      onChangeFunction: compressorControlRatio,
     },
     {
       id: "attack",
@@ -63,7 +70,7 @@ function Compressor({
       step: 0.1,
       leftLabel: "0.1",
       rightLabel: "30",
-      onChangeFunction: main.compressorFunctions.compressorControlAttack,
+      onChangeFunction: compressorControlAttack,
     },
     {
       id: "release",
@@ -73,7 +80,7 @@ function Compressor({
       step: 0.1,
       leftLabel: "0.1",
       rightLabel: "1",
-      onChangeFunction: main.compressorFunctions.compressorControlRelease,
+      onChangeFunction: compressorControlRelease,
     },
   ]);
   // This function changes all the values of a channel compressor whenever it changes
@@ -92,6 +99,12 @@ function Compressor({
     ratioItem.defaultValue = ratio;
     attackItem.defaultValue = attack;
     releaseItem.defaultValue = release;
+
+    thresholdItem.onChangeFunction = compressorControlThreshold;
+    kneeItem.onChangeFunction = compressorControlKnee;
+    ratioItem.onChangeFunction = compressorControlRatio;
+    attackItem.onChangeFunction = compressorControlAttack;
+    releaseItem.onChangeFunction = compressorControlRelease;
     // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
     items[0] = thresholdItem;
     items[1] = kneeItem;
@@ -132,20 +145,6 @@ function Compressor({
       <Row>
         {slidersInfo.map((elem: any, index: number) => (
           <Col key={elem.id}>
-            {/* <MyCompressorSlider
-              setMain={setMain}
-              main={main}
-              onChangeFunction={elem.onChangeFunction}
-              id={elem.id}
-              label={elem.id.toUpperCase()}
-              min={elem.min}
-              max={elem.max}
-              defaultValue={elem.defaultValue}
-              step={elem.step}
-              leftLabel={elem.leftLabel}
-              rightLabel={elem.rightLabel}
-              className="mt-2 mb-4"
-            /> */}
             <CompressorKnob
               setMain={setMain}
               main={main}
