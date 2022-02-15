@@ -37,9 +37,7 @@ function Knob({
 
   const getDataForKnob = () => {
     let data = [];
-    for (let i = min; i <= max; i = i + step) {
-      data.push(i);
-    }
+    for (let i = min; i <= max; i = i + step) data.push(i);
     return data;
   };
 
