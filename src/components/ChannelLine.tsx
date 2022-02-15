@@ -67,7 +67,7 @@ interface ChannelLineProps {
       disconnectCompressor: () => void;
       setDryWetKnob: (value: number, setMain: any, main: any) => void;
       compressorOutput: GainNode;
-      gainReductionRef: React.MutableRefObject<number | undefined>;
+      compressor: DynamicsCompressorNode;
     };
     FXUnitFunctions: {
       chooseImpulse: (impulseUrl: string) => Promise<void>;

@@ -111,7 +111,20 @@ function Compressor({ controlWhichChannel, setMain, main }: CompressorProps) {
 
   useEffect(() => {
     changeAll();
+    setGainReduction(
+      parseFloat(main.compressorFunctions.compressor.reduction.toFixed(2))
+    );
+    const interval = setInterval(() => {
+      setGainReduction(
+        parseFloat(main.compressorFunctions.compressor.reduction.toFixed(2))
+      );
+    }, 1000);
+    return () => clearInterval(interval);
   }, [main.compressorFunctions.compressorUIStates]);
+
+  const [gainReduction, setGainReduction] = useState(
+    main.compressorFunctions.compressor.reduction
+  );
 
   return (
     <section className="border p-2 mt-2">
@@ -135,9 +148,7 @@ function Compressor({ controlWhichChannel, setMain, main }: CompressorProps) {
             }
           />
         </Col>
-        <Col lg={2}>
-          Gain reduction: {main.compressorFunctions.gainReductionRef.current} dB
-        </Col>
+        <Col lg={2}>Reduction: {gainReduction} dB</Col>
       </Row>
       <Row>
         {slidersInfo.map((elem: any, index: number) => (

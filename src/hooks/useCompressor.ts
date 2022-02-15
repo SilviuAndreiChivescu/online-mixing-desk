@@ -91,14 +91,6 @@ const useCompressor = (
     dryWetKnob: 0.5,
   });
 
-  const gainReductionRef = useRef<number>();
-  useEffect(() => {
-    gainReductionRef.current = parseFloat(compressor.reduction.toFixed(2));
-    setInterval(() => {
-      gainReductionRef.current = parseFloat(compressor.reduction.toFixed(2));
-    }, 1000);
-  }, []);
-
   const [dryGainNode, dryGainControl] = useGain(audioCtx);
   const [wetGainNode, wetGainControl] = useGain(audioCtx);
 
@@ -156,7 +148,7 @@ const useCompressor = (
     disconnectCompressor: disconnectCompressor,
     setDryWetKnob: setDryWetKnob,
     compressorOutput: compressorOutput,
-    gainReductionRef: gainReductionRef,
+    compressor: compressor,
   });
 
   return [compressorFunctions] as const;
