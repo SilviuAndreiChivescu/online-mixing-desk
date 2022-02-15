@@ -10,7 +10,8 @@ import { useSoundMeter } from "./useSoundMeter";
 const useChannelLine = (
   audioCtx: AudioContext,
   cueNode: GainNode,
-  withoutCueNode: GainNode
+  withoutCueNode: GainNode,
+  sampleName: string
 ) => {
   const [UI, setUI] = useState({
     eqOn: false,
@@ -21,7 +22,9 @@ const useChannelLine = (
     channelOn: false,
   });
 
-  const [audioElement] = useState(() => new Audio("/assets/outfoxing.mp3"));
+  const [audioElement] = useState(
+    () => new Audio(`/assets/samples/${sampleName}`)
+  );
   const [audioSourceNode] = useState(() =>
     audioCtx.createMediaElementSource(audioElement)
   );

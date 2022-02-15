@@ -18,12 +18,14 @@ const useInit = () => {
   const [channelOneFunctions, channelOneUI, setChannelOneUI] = useChannelLine(
     audioCtx,
     masterFunctions.cueNode,
-    masterFunctions.withoutCueNode
+    masterFunctions.withoutCueNode,
+    "outfoxing.mp3"
   );
   const [channelTwoFunctions, channelTwoUI, setChannelTwoUI] = useChannelLine(
     audioCtx,
     masterFunctions.cueNode,
-    masterFunctions.withoutCueNode
+    masterFunctions.withoutCueNode,
+    "outfoxing.mp3"
   );
 
   // Combine all audio signal coming from each channel to pass to masterFilter as one
