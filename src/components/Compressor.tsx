@@ -37,9 +37,9 @@ function Compressor({
       min: -100,
       max: 0,
       defaultValue: threshold,
-      step: 10,
-      leftLabel: "\u221e : 1",
-      rightLabel: "1 : 1",
+      step: 20,
+      leftLabel: "-40",
+      rightLabel: "20",
       onChangeFunction: compressorControlThreshold,
     },
     {
@@ -58,8 +58,8 @@ function Compressor({
       max: 19.8,
       defaultValue: ratio,
       step: 1,
-      leftLabel: "2",
-      rightLabel: "10",
+      leftLabel: "1 : 1",
+      rightLabel: "\u221e : 1",
       onChangeFunction: compressorControlRatio,
     },
     {
