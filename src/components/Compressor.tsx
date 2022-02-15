@@ -8,18 +8,12 @@ import WetDryKnob from "./WetDryKnob";
 
 // todo change these from any to its own
 interface CompressorProps {
-  compressorFunctions: any;
   controlWhichChannel: any;
   setMain: any;
   main: any;
 }
 
-function Compressor({
-  compressorFunctions,
-  controlWhichChannel,
-  setMain,
-  main,
-}: CompressorProps) {
+function Compressor({ controlWhichChannel, setMain, main }: CompressorProps) {
   const { threshold, knee, ratio, attack, release, dryWetKnob } =
     main.compressorFunctions.compressorUIStates;
 
@@ -123,10 +117,10 @@ function Compressor({
     <section className="border p-2 mt-2">
       <h3>Compressor</h3>
       <Row className="justify-content-center align-items-center">
-        <Col lg={1}>
+        <Col lg={2}>
           <CustomDropdown controlWhichChannel={controlWhichChannel} />
         </Col>
-        <Col lg={1}>
+        <Col lg={2}>
           <OnOffButton
             checkedArray={main.channelUI.compressorOn ? [1] : []}
             id="compressorOn"
@@ -140,6 +134,9 @@ function Compressor({
               })
             }
           />
+        </Col>
+        <Col lg={2}>
+          Gain reduction: {main.compressorFunctions.gainReductionRef.current} dB
         </Col>
       </Row>
       <Row>
@@ -166,7 +163,7 @@ function Compressor({
             label="Wet Dry"
             setMain={setMain}
             main={main}
-            onChangeFunction={compressorFunctions.setDryWetKnob}
+            onChangeFunction={main.compressorFunctions.setDryWetKnob}
             min={0}
             max={1}
             defaultValue={dryWetKnob}

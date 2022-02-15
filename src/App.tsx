@@ -115,7 +115,6 @@ const App: React.FC = () => {
               setMain={setMain}
               main={main}
               controlWhichChannel={controlWhichChannel}
-              compressorFunctions={main.compressorFunctions}
             />
             <Row>
               <Col>

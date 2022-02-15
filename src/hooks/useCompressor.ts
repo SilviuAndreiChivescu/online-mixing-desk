@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useGain } from "./useGain";
 
 const useCompressor = (
@@ -52,6 +52,7 @@ const useCompressor = (
       },
     });
   };
+
   const compressorControlAttack = (value: number, setMain: any, main: any) => {
     compressor["attack"].value = value;
     setMain({
@@ -65,6 +66,7 @@ const useCompressor = (
       },
     });
   };
+
   const compressorControlRelease = (value: number, setMain: any, main: any) => {
     compressor["release"].value = value;
     setMain({
@@ -88,6 +90,14 @@ const useCompressor = (
     release: compressor.release.value,
     dryWetKnob: 0.5,
   });
+
+  const gainReductionRef = useRef<number>();
+  useEffect(() => {
+    gainReductionRef.current = parseFloat(compressor.reduction.toFixed(2));
+    setInterval(() => {
+      gainReductionRef.current = parseFloat(compressor.reduction.toFixed(2));
+    }, 1000);
+  }, []);
 
   const [dryGainNode, dryGainControl] = useGain(audioCtx);
   const [wetGainNode, wetGainControl] = useGain(audioCtx);
@@ -146,6 +156,7 @@ const useCompressor = (
     disconnectCompressor: disconnectCompressor,
     setDryWetKnob: setDryWetKnob,
     compressorOutput: compressorOutput,
+    gainReductionRef: gainReductionRef,
   });
 
   return [compressorFunctions] as const;
