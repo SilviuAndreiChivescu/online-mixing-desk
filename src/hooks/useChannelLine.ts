@@ -103,6 +103,9 @@ const useChannelLine = (
         .then((stream) => {
           const microphone = audioCtx.createMediaStreamSource(stream);
           console.log(microphone); // am ramas aici, vezi daca asta la dragos pe soundcard are channelCount > 2
+          // also if it shows > 2 and they are "slient" as they said online, try what's here (https://bugs.chromium.org/p/chromium/issues/detail?id=1116042)
+          // also am gasit cv aici (https://stackoverflow.com/questions/55165335/how-do-you-combine-many-audio-tracks-into-one-for-mediarecorder-api)
+          // gen ce face la linku de mai sus e, da de 2 ori call la .getUserMedia si fiecare ala e un nod, sper ca o sa fie asa si n o sa fie tot soundcardu intr-un nod
           audioCtx.resume();
           microphone.connect(inputConnectionNode).connect(channelGainNode);
         })
