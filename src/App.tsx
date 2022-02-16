@@ -10,9 +10,6 @@ import ChannelLine from "./components/ChannelLine";
 
 import InputsAndOutputs from "./components/InputsAndOutputs";
 
-// change the channels from channel 2 to what it should be (make new branch for this haha)
-
-// background color to white or smthing, and to black only the "hardware"
 // do the select input / output stuff (try with multiple bluetooth connections)
 // create help modal?
 const App: React.FC = () => {

@@ -97,7 +97,9 @@ const useChannelLine = (
   const connectChannel = () => {
     if (navigator.mediaDevices) {
       navigator.mediaDevices
-        .getUserMedia({ audio: true })
+        .getUserMedia({
+          audio: true,
+        })
         .then((stream) => {
           const microphone = audioCtx.createMediaStreamSource(stream);
           audioCtx.resume();
