@@ -102,6 +102,7 @@ const useChannelLine = (
         })
         .then((stream) => {
           const microphone = audioCtx.createMediaStreamSource(stream);
+          console.log(microphone); // am ramas aici, vezi daca asta la dragos pe soundcard are channelCount > 2
           audioCtx.resume();
           microphone.connect(inputConnectionNode).connect(channelGainNode);
         })

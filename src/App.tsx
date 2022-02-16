@@ -50,7 +50,6 @@ const App: React.FC = () => {
       <Container fluid>
         <Row className="p-2 align-items-end">
           <Col>
-            {/* className="m-0 p-0" */}
             <ChannelLine
               channelNo={1}
               channelFunctions={channelOneFunctions}
