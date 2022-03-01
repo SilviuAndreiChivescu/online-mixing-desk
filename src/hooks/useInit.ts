@@ -88,30 +88,30 @@ const useInit = () => {
   // Control "Play / Pause / Stop"
   const play = () => {
     audioCtx.resume();
-    channelOneFunctions.audioElement.play();
-    channelTwoFunctions.audioElement.play();
-    channelThreeFunctions.audioElement.play();
-    channelFourFunctions.audioElement.play();
-    channelFiveFunctions.audioElement.play();
-    channelSixFunctions.audioElement.play();
+    channelOneFunctions.audioElement.start(0);
+    channelTwoFunctions.audioElement.start(0);
+    channelThreeFunctions.audioElement.start(0);
+    channelFourFunctions.audioElement.start(0);
+    channelFiveFunctions.audioElement.start(0);
+    channelSixFunctions.audioElement.start(0);
   };
 
   const pause = () => {
-    channelOneFunctions.audioElement.pause();
-    channelTwoFunctions.audioElement.pause();
-    channelThreeFunctions.audioElement.pause();
-    channelFourFunctions.audioElement.pause();
-    channelFiveFunctions.audioElement.pause();
-    channelSixFunctions.audioElement.pause();
+    channelOneFunctions.audioElement.stop();
+    channelTwoFunctions.audioElement.stop();
+    channelThreeFunctions.audioElement.stop();
+    channelFourFunctions.audioElement.stop();
+    channelFiveFunctions.audioElement.stop();
+    channelSixFunctions.audioElement.stop();
   };
 
   const replay = () => {
-    channelOneFunctions.audioElement.load();
-    channelTwoFunctions.audioElement.load();
-    channelThreeFunctions.audioElement.load();
-    channelFourFunctions.audioElement.load();
-    channelFiveFunctions.audioElement.load();
-    channelSixFunctions.audioElement.load();
+    // channelOneFunctions.audioElement.load();
+    // channelTwoFunctions.audioElement.load();
+    // channelThreeFunctions.audioElement.load();
+    // channelFourFunctions.audioElement.load();
+    // channelFiveFunctions.audioElement.load();
+    // channelSixFunctions.audioElement.load();
   };
 
   // Below states are used to control all compressors

@@ -43,12 +43,38 @@ const useChannelLine = (
     else disconnectCue();
   }, [UI.cueOn]);
 
-  const [audioElement] = useState(
-    () => new Audio(`/assets/samples/${sampleName}`)
-  );
-  const [audioSourceNode] = useState(() =>
-    audioCtx.createMediaElementSource(audioElement)
-  );
+  // const [audioSourceNode] = useState(() =>
+  //   fetch(`${sampleName}.wav`)
+  //     .then((response) => response.arrayBuffer())
+  //     .then((buffer) => audioCtx.decodeAudioData(buffer))
+  //     .then((buffer) => {
+  //       var track = audioCtx.createBufferSource();
+  //       track.buffer = buffer;
+  //       return track;
+  //     })
+  // );
+  const [audioSourceNode] = useState(() => audioCtx.createBufferSource());
+
+  useEffect(() => {
+    console.log(sampleName);
+    fetch(`/assets/samples/${sampleName}`)
+      .then((response) => response.arrayBuffer())
+      .then((buffer) => audioCtx.decodeAudioData(buffer))
+      .then((buffer) => {
+        audioSourceNode.buffer = buffer;
+      });
+  }, []);
+  // var audioFile = fetch("sounds/cut/24.wav")
+  //   .then((response) => response.arrayBuffer())
+  //   .then((buffer) => audioCtx.decodeAudioData(buffer))
+  //   .then((buffer) => {
+  //     var track = audioCtx.createBufferSource();
+  //     track.buffer = buffer;
+  //     return buffer;
+  //   });
+  // const [audioSourceNode] = useState(() =>
+  //   audioCtx.createMediaElementSource(audioElement)
+  // );
 
   const [analyserNode] = useState(() => audioCtx.createAnalyser());
   const { drawSoundLevel } = useSoundMeter(analyserNode);
@@ -141,7 +167,7 @@ const useChannelLine = (
     compressorFunctions: compressorFunctions,
     FXUnitFunctions: FXUnitFunctions,
     drawSoundLevel: drawSoundLevel,
-    audioElement: audioElement,
+    audioElement: audioSourceNode,
   });
   return [channelLineFunctions, UI, setUI] as const;
 };
