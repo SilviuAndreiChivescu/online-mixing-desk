@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
-import "./App.css";
 import { useInit } from "./hooks/useInit";
 import Compressor from "./components/Compressor";
 import FXUnit from "./components/FXUnit";
 import MasterFilter from "./components/MasterFilter";
 import Master from "./components/Master";
 import ChannelLine from "./components/ChannelLine";
+import "./App.css";
 
 import InputsAndOutputs from "./components/InputsAndOutputs";
 

@@ -8,19 +8,19 @@
   }
 
   /* Customize the marks */
-  .css-19l5h75-MuiSlider-markLabel {
+  .css-19l5h75-MuiSlider-markLabel, .css-h4b7ul {
     color: white !important;
   }
 
-  .css-xxsb21-MuiSlider-markLabel {
+  .css-xxsb21-MuiSlider-markLabel, .css-14b3fhv {
     color: white !important;
   }
-  .css-xxsb21-MuiSlider-markLabel, .css-19l5h75-MuiSlider-markLabel  {
+  .css-xxsb21-MuiSlider-markLabel,.css-14b3fhv, .css-19l5h75-MuiSlider-markLabel, .css-h4b7ul  {
     left: -45px !important;
   }
 
   /* Make volume slider look more like a volume slider */
-  .css-y35fuw-MuiSlider-thumb {
+  .css-y35fuw-MuiSlider-thumb, .css-1dklv9c {
   width: 60px !important;
   height: 10px !important;
   border-radius: 15px !important;

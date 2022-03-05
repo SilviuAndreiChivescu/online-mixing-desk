@@ -1,7 +1,4 @@
-import React from "react";
 import { Col, Row } from "react-bootstrap";
-import { MyRangeSlider } from "./MyRangeSlider";
-
 import Stack from "@mui/material/Stack";
 import Slider from "@mui/material/Slider";
 interface VolumeSliderProps {
