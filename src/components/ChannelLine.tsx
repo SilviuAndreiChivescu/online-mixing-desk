@@ -169,7 +169,7 @@ const ChannelLine: React.FC<ChannelLineProps> = ({
           </ToggleButtonGroup>
         </Col>
       </Row>
-      <section className="border p-3 d-flex justify-content-center align-items-center mt-2 mb-2">
+      <section className="border-top border-bottom p-3 d-flex justify-content-center align-items-center mt-2 mb-2">
         <Row>
           <VolumeSlider controlSliderVolumeNode={controlSliderVolumeNode} />
           <SoundMeter draw={drawSoundLevel} />

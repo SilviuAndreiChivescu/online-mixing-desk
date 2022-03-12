@@ -8,7 +8,7 @@ interface GainProps {
 
 function Gain({ controlChannelGainNode }: GainProps) {
   return (
-    <section className="border mt-2 pt-3 mb-0">
+    <section className="border-top border-bottom mt-2 pt-3 mb-0">
       <Row>
         <Col className="d-flex justify-content-center align-items-center">
           <Knob
