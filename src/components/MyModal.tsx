@@ -12,7 +12,6 @@ function MyModal({ show, closeModal, isChecked, setIsChecked }: MyModalProps) {
   return (
     <Modal
       show={show}
-      size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       fullscreen
     >
