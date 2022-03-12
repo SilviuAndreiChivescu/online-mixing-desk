@@ -23,7 +23,7 @@ function MyModal({ show, closeModal, isChecked, setIsChecked }: MyModalProps) {
       <Modal.Body>
         <h5 className="text-center mb-3">
           Depending on your screen resolution, you might have to adjust the zoom
-          of the browser page. It should look similar to this:
+          of the browser page. The mixer should look similar to this:
         </h5>
         <section className="d-flex justify-content-center">
           <Image width="1200" src="assets/images/mixer-front-end.png" />
