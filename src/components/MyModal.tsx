@@ -15,7 +15,6 @@ function MyModal({ show, closeModal, isChecked, setIsChecked }: MyModalProps) {
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       fullscreen
-      style={{ maxWidth: "100% !important", maxHeight: "100% !important" }}
     >
       <Modal.Header className="justify-content-center">
         <Modal.Title id="contained-modal-title-vcenter">
