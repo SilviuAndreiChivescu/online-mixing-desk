@@ -8,7 +8,7 @@ import Master from "./components/Master";
 import ChannelLine from "./components/ChannelLine";
 import "./App.css";
 
-import InputsAndOutputs from "./components/InputsAndOutputs";
+import ControlCenter from "./components/ControlCenter";
 
 // do the select input / output stuff (try with multiple bluetooth connections)
 // create help modal?
@@ -99,7 +99,7 @@ const App: React.FC = () => {
             />
           </Col>
           <Col lg={5}>
-            <InputsAndOutputs play={play} pause={pause} replay={replay} />
+            <ControlCenter play={play} pause={pause} replay={replay} />
             <Compressor
               setMain={setMain}
               main={main}

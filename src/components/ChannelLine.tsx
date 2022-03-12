@@ -125,6 +125,7 @@ const ChannelLine: React.FC<ChannelLineProps> = ({
       <h3>{channelNo}</h3>
       <OnOffButton
         id="eqOn"
+        isMic={true}
         onChange={() =>
           setChannelUI({ ...channelUI, channelOn: !channelUI.channelOn })
         }
