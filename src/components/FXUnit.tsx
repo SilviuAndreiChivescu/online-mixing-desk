@@ -4,7 +4,6 @@ import ChannelDropdown from "./ChannelDropdown";
 import ReverbDropdown from "./ReverbDropdown";
 import OnOffButton from "./OnOffButton";
 import WetDryKnob from "./WetDryKnob";
-// todo change these from any to its own
 
 interface FXUnitProps {
   controlWhichChannel: any;

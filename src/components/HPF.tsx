@@ -28,9 +28,10 @@ interface HPFProps {
     cueOn: boolean;
     channelOn: boolean;
   };
+  channelNo: number;
 }
 
-function HPF({ HPFFunctions, setChannelUI, channelUI }: HPFProps) {
+function HPF({ HPFFunctions, setChannelUI, channelUI, channelNo }: HPFProps) {
   const { controlHighPassCutOff } = HPFFunctions;
   return (
     <section className="border-top pt-3 mt-2 mb-2">
@@ -42,7 +43,7 @@ function HPF({ HPFFunctions, setChannelUI, channelUI }: HPFProps) {
       <Row className="mt-1 mb-3">
         <Col>
           <OnOffButton
-            id="hpfOn"
+            id={`hpfOnOff-${channelNo}`}
             onChange={() =>
               setChannelUI({ ...channelUI, hpfOn: !channelUI.hpfOn })
             }

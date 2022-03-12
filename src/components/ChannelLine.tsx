@@ -124,7 +124,7 @@ const ChannelLine: React.FC<ChannelLineProps> = ({
     <section className="bg-black">
       <h3>{channelNo}</h3>
       <OnOffButton
-        id="eqOn"
+        id={`onOffMic-${channelNo}`}
         isMic={true}
         onChange={() =>
           setChannelUI({ ...channelUI, channelOn: !channelUI.channelOn })
@@ -134,11 +134,13 @@ const ChannelLine: React.FC<ChannelLineProps> = ({
       <Gain controlChannelGainNode={controlChannelGainNode} />
 
       <EQ
+        channelNo={channelNo}
         setChannelUI={setChannelUI}
         channelUI={channelUI}
         EQFunctions={EQFunctions}
       />
       <HPF
+        channelNo={channelNo}
         setChannelUI={setChannelUI}
         channelUI={channelUI}
         HPFFunctions={HPFFunctions}
@@ -159,7 +161,7 @@ const ChannelLine: React.FC<ChannelLineProps> = ({
               }}
               variant="outline-warning"
               size="sm"
-              id="cueOn"
+              id={`cueOnOff-${channelNo}`}
               value="1"
             >
               Cue

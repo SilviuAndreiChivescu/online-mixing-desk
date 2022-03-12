@@ -1,13 +1,6 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Col,
-  Row,
-  ToggleButton,
-  ToggleButtonGroup,
-} from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import Knob from "./Knob";
-import { MyRangeSlider } from "./MyRangeSlider";
 import OnOffButton from "./OnOffButton";
 
 interface EQProps {
@@ -39,9 +32,10 @@ interface EQProps {
     cueOn: boolean;
     channelOn: boolean;
   };
+  channelNo: number;
 }
 
-function EQ({ EQFunctions, setChannelUI, channelUI }: EQProps) {
+function EQ({ EQFunctions, setChannelUI, channelUI, channelNo }: EQProps) {
   const { controlHigh, controlMid, controlLow } = EQFunctions.EQControl;
 
   const [slidersInfo] = useState([
@@ -59,7 +53,7 @@ function EQ({ EQFunctions, setChannelUI, channelUI }: EQProps) {
       <Row className="mt-1 mb-2">
         <Col>
           <OnOffButton
-            id="eqOn"
+            id={`eqOnOff-${channelNo}`}
             onChange={() =>
               setChannelUI({ ...channelUI, eqOn: !channelUI.eqOn })
             }
