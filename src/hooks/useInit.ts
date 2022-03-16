@@ -336,9 +336,9 @@ const useInit = () => {
   // am ramas aici cu inputs, merge sa selectez se pare.
   // useEffect(() => {
   //   navigator.mediaDevices.enumerateDevices().then((response) => {
-  //     //@ts-ignore
+  //     // @ts-ignore
   //     let inputs = response.filter((e: any) => e.kind === "audioinput");
-
+  //     console.log(inputs);
   //     if (navigator.mediaDevices) {
   //       navigator.mediaDevices
   //         .getUserMedia({
@@ -347,8 +347,8 @@ const useInit = () => {
   //           },
   //         })
   //         .then((stream) => {
-  //           // console.log(stream);
   //           const microphone = audioCtx.createMediaStreamSource(stream);
+  //           console.log("hello", microphone);
   //         })
   //         .catch((err) => {
   //           // browser unable to access microphone
@@ -362,6 +362,7 @@ const useInit = () => {
   //     }
 
   //     let outputs = response.filter((e: any) => e.kind === "audiooutput");
+  //     console.log(outputs);
   //     if (navigator.mediaDevices) {
   //       navigator.mediaDevices
   //         .getUserMedia({
@@ -371,18 +372,18 @@ const useInit = () => {
   //           },
   //         })
   //         .then((stream) => {
-  //           // console.log(stream);
-  //           // const destination = audioCtx.createMediaStreamDestination();
-  //           var audioCtxDestination = audioCtx.destination
+  //           console.log(stream);
+  //           const destination = audioCtx.createMediaStreamDestination();
+  //           var audioCtxDestination = audioCtx.destination;
   //           audioCtxDestination.channelCount = 1;
   //           console.log(audioCtxDestination);
-  //           // console.log(destination);
-  //           // console.log(audioCtx.destination);
+  //           console.log(destination);
+  //           console.log(audioCtx.destination);
   //           // Booth
   //           masterFilterFunctions.masterFilterOutput
   //             .connect(masterFunctions.booth.node)
   //             .connect(audioCtx.destination); // destination (back left and right) - todo
-  //           // const microphone = audioCtx.createMediaStreamSource(stream);
+  //           const microphone = audioCtx.createMediaStreamSource(stream);
   //         })
   //         .catch((err) => {
   //           // browser unable to access microphone
@@ -494,28 +495,37 @@ const useInit = () => {
   //* Connections
   // The connections below need to be made in a useEffect hook otherwise it breaks when rerenders
   useEffect(() => {
-    // // Booth
-    // masterFilterFunctions.masterFilterOutput
-    //   .connect(masterFunctions.booth.node)
-    //   .connect(audioCtx.destination); // destination (back left and right) - todo
     // Master
-    // am ramas aici, a mers asta sa coneectez doar la un output, gen la un left, si ma gandesc ca asa o sa fie cu cate outputs are soundcard
-    // la fel cred ca e si cu input, nu e pe device, habar n-am, vezi cf la dragos
-    var splitter = audioCtx.createChannelSplitter(2);
-    var merger = audioCtx.createChannelMerger(2);
+
+    var back_splitter = audioCtx.createChannelSplitter(6);
+    back_splitter.channelInterpretation = "discrete";
+    var front_splitter = audioCtx.createChannelSplitter(2);
+    var hf_splitter = audioCtx.createChannelSplitter(2);
+    var merger = audioCtx.createChannelMerger(6);
+    merger.channelInterpretation = "discrete";
+    console.log(audioCtx.destination);
+    // Booth
+    masterFilterFunctions.masterFilterOutput
+      .connect(masterFunctions.booth.node)
+      .connect(front_splitter)
+      .connect(merger, 0, 2);
+    front_splitter.connect(merger, 1, 3);
+
+    // back left and right
     masterFilterFunctions.masterFilterOutput
       .connect(masterFunctions.master.node)
-      .connect(splitter)
-      .connect(merger, 0, 0)
-      .connect(audioCtx.destination);
+      .connect(back_splitter)
+      .connect(merger, 0, 0);
+    back_splitter.connect(merger, 1, 1);
 
-    // masterFilterFunctions.masterFilterOutput
-    // .connect(masterFunctions.master.node)
-    // .connect(audioCtx.destination); // destination (front left and right) - todo
-    // // HeadPhones
-    // masterFilterCueFunctions.masterFilterOutput
-    //   .connect(masterFunctions.headphones.node)
-    //   .connect(audioCtx.destination); // destination headhpones L and R
+    // HeadPhones
+    masterFilterCueFunctions.masterFilterOutput
+      .connect(masterFunctions.headphones.node)
+      .connect(hf_splitter)
+      .connect(merger, 0, 4);
+    hf_splitter.connect(merger, 1, 5);
+
+    merger.connect(audioCtx.destination);
   }, []);
 
   return [
