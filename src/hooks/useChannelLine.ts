@@ -24,7 +24,6 @@ const useChannelLine = (
 
   // These connections will be made based on the value of the buttons
   useEffect(() => {
-    console.log("s");
     if (UI.eqOn) EQFunctions.connectEQ();
     else EQFunctions.disconnectEQ();
   }, [UI.eqOn]);

@@ -424,22 +424,100 @@ const useInit = () => {
     }
   }, [masterFilterOn]);
 
+  const enumerateDevices = () => {
+    if (navigator.mediaDevices) {
+      navigator.mediaDevices.enumerateDevices().then((devices) => {
+        const inputs = devices.filter((el) => el.kind === "audioinput");
+        const outputs = devices.filter((el) => el.kind === "audiooutput");
+        console.log("Inputs: ", inputs);
+        console.log("Outputs: ", outputs);
+      });
+    } else {
+      // browser unable to access media devices
+      // (update your browser)
+      console.log("browser unable to access media devices");
+    }
+  };
+  // * For Inputs
+  useEffect(() => {
+    enumerateDevices();
+
+    if (navigator.mediaDevices) {
+      navigator.mediaDevices
+        .getUserMedia({
+          audio: {
+            // We can select which deviceId we find in console.log to here
+            deviceId:
+              "81122946d9295389cc2c44668aea30c0b3819e14c9df51cf193de475a0d6135d",
+          },
+        })
+        .then((stream) => {
+          console.log("Stream: ", stream);
+          const microphone = audioCtx.createMediaStreamSource(stream);
+          console.log("Microphone: ", microphone);
+        })
+        .catch((err) => {
+          // browser unable to access microphone
+          // (check to see if microphone is attached)
+          console.log(err);
+        });
+    } else {
+      // browser unable to access media devices
+      // (update your browser)
+      console.log("browser unable to access media devices");
+    }
+  }, []);
+
   //* Connections
   useEffect(() => {
+    console.log("Audio destination: ", audioCtx.destination);
+    // do the split - merger now, also put it to console log stuff
+
+    const merger = audioCtx.createChannelMerger(6);
+    const boothSplitter = audioCtx.createChannelSplitter(2);
+    const masterSplitter = audioCtx.createChannelSplitter(2);
+    const HPSplitter = audioCtx.createChannelSplitter(2);
+
     // Booth
     masterFilterFunctions.masterFilterOutput
       .connect(masterFunctions.booth.node)
-      .connect(audioCtx.destination); // destination (back left and right)
+      .connect(boothSplitter)
+      .connect(merger, 0, 0); // destination back left
+    boothSplitter.connect(merger, 1, 1); // destination back right
+
     // Master
     masterFilterFunctions.masterFilterOutput
       .connect(masterFunctions.master.node)
-      .connect(audioCtx.destination); // destination (front left and right)
+      .connect(masterSplitter)
+      .connect(merger, 0, 2); // destination front left
+    masterSplitter.connect(merger, 1, 3); // destination front right
+
     // HeadPhones
     masterFilterCueFunctions.masterFilterOutput
       .connect(masterFunctions.headphones.node)
-      .connect(audioCtx.destination); // destination headhpones L and R
+      .connect(HPSplitter)
+      .connect(merger, 0, 4); // destination HP left
+    HPSplitter.connect(merger, 1, 5); // destination HP right
+
+    // Connect all of them to the destination
+    merger.connect(audioCtx.destination);
   }, []);
 
+  //! Connections from before
+  // useEffect(() => {
+  //   // Booth
+  //   masterFilterFunctions.masterFilterOutput
+  //     .connect(masterFunctions.booth.node)
+  //     .connect(audioCtx.destination); // destination (back left and right)
+  //   // Master
+  //   masterFilterFunctions.masterFilterOutput
+  //     .connect(masterFunctions.master.node)
+  //     .connect(audioCtx.destination); // destination (front left and right)
+  //   // HeadPhones
+  //   masterFilterCueFunctions.masterFilterOutput
+  //     .connect(masterFunctions.headphones.node)
+  //     .connect(audioCtx.destination); // destination headhpones L and R
+  // }, []);
   return [
     channelOneFunctions,
     channelOneUI,
