@@ -55,15 +55,20 @@ const useChannelLine = (
   // );
   const [audioSourceNode] = useState(() => audioCtx.createBufferSource());
 
-  useEffect(() => {
-    console.log(sampleName);
-    fetch(`/assets/samples/${sampleName}`)
+  const fetchAndStartAudio = () => {
+    fetch(`https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3`)
       .then((response) => response.arrayBuffer())
       .then((buffer) => audioCtx.decodeAudioData(buffer))
       .then((buffer) => {
         audioSourceNode.buffer = buffer;
+        audioSourceNode.start();
       });
+  };
+
+  useEffect(() => {
+    fetchAndStartAudio();
   }, []);
+
   // var audioFile = fetch("sounds/cut/24.wav")
   //   .then((response) => response.arrayBuffer())
   //   .then((buffer) => audioCtx.decodeAudioData(buffer))

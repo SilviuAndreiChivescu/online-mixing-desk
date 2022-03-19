@@ -88,24 +88,26 @@ const useInit = () => {
   // Control "Play / Pause / Stop"
   const play = () => {
     audioCtx.resume();
-    channelOneFunctions.audioElement.start(0);
-    channelTwoFunctions.audioElement.start(0);
-    channelThreeFunctions.audioElement.start(0);
-    channelFourFunctions.audioElement.start(0);
-    channelFiveFunctions.audioElement.start(0);
-    channelSixFunctions.audioElement.start(0);
+    // channelOneFunctions.audioElement.start(0);
+    // channelTwoFunctions.audioElement.start(0);
+    // channelThreeFunctions.audioElement.start(0);
+    // channelFourFunctions.audioElement.start(0);
+    // channelFiveFunctions.audioElement.start(0);
+    // channelSixFunctions.audioElement.start(0);
   };
 
   const pause = () => {
-    channelOneFunctions.audioElement.stop();
-    channelTwoFunctions.audioElement.stop();
-    channelThreeFunctions.audioElement.stop();
-    channelFourFunctions.audioElement.stop();
-    channelFiveFunctions.audioElement.stop();
-    channelSixFunctions.audioElement.stop();
+    audioCtx.suspend();
+    // channelOneFunctions.audioElement.stop();
+    // channelTwoFunctions.audioElement.stop();
+    // channelThreeFunctions.audioElement.stop();
+    // channelFourFunctions.audioElement.stop();
+    // channelFiveFunctions.audioElement.stop();
+    // channelSixFunctions.audioElement.stop();
   };
 
   const replay = () => {
+    audioCtx.close();
     // channelOneFunctions.audioElement.load();
     // channelTwoFunctions.audioElement.load();
     // channelThreeFunctions.audioElement.load();
