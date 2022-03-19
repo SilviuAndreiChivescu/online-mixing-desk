@@ -72,7 +72,7 @@ const useChannelLine = (
   // The connections below need to be made in a useEffect hook because needs to be rerendered only at mounting, otherwise it breaks when rerenders
   const [connectionNode] = useGain(audioCtx);
   useEffect(() => {
-    audioSourceNode.connect(channelGainNode).connect(analyserNode);
+    channelGainNode.connect(analyserNode);
     channelGainNode.connect(analyserNode);
     HPFFunctions.HPFOutput.connect(pannerNode);
     FXUnitFunctions.FXUnitOutput.connect(sliderVolumeNode);
@@ -92,34 +92,14 @@ const useChannelLine = (
     FXUnitFunctions.FXUnitOutput.connect(sliderVolumeNode);
   };
 
-  const [inputConnectionNode] = useGain(audioCtx);
   // Channel ON
   const connectChannel = () => {
-    if (navigator.mediaDevices) {
-      navigator.mediaDevices
-        .getUserMedia({
-          audio: true,
-        })
-        .then((stream) => {
-          const microphone = audioCtx.createMediaStreamSource(stream);
-          audioCtx.resume();
-          microphone.connect(inputConnectionNode).connect(channelGainNode);
-        })
-        .catch((err) => {
-          // browser unable to access microphone
-          // (check to see if microphone is attached)
-          console.log(err);
-        });
-    } else {
-      // browser unable to access media devices
-      // (update your browser)
-      console.log("browser unable to access media devices");
-    }
+    audioSourceNode.connect(channelGainNode);
   };
 
   // Channel OFF
   const disconnectChannel = () => {
-    inputConnectionNode.disconnect();
+    audioSourceNode.disconnect();
   };
 
   // Put everything to export into an object

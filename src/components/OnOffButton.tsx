@@ -14,7 +14,7 @@ function OnOffButton({ id, onChange, checkedArray, isMic }: OnOffButtonProps) {
   return (
     <ToggleButtonGroup type="checkbox" value={checkedArray} onChange={onChange}>
       <ToggleButton variant="outline-warning" id={id} value={1}>
-        {isMic ? <FontAwesomeIcon icon={faMicrophone} /> : "In"}
+        In
       </ToggleButton>
     </ToggleButtonGroup>
   );
