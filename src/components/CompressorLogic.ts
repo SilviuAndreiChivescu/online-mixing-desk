@@ -18,7 +18,7 @@ const useCompressorLogic = (main: any) => {
       min: -100,
       max: 0,
       defaultValue: threshold,
-      step: 20,
+      step: 1,
       leftLabel: "-40",
       rightLabel: "20",
       onChangeFunction: compressorControlThreshold,
