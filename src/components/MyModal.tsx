@@ -29,18 +29,13 @@ function MyModal({ show, closeModal, isChecked, setIsChecked }: MyModalProps) {
           <Image width="1200" src="assets/images/mixer-front-end.png" />
         </section>
         <h5 className="text-center mb-3">
-          The "Microphone" button will connect the specific channel to the
-          microphone. The "Play", "Pause", "Stop" buttons control audio samples
-          that are embeded on each audio channel so that the mixer can be tested
-          without the need of multiple inputs. The "Info" button will open this
-          page.
+          The "Play", "Pause", "Stop" buttons control audio samples that are
+          embeded on each audio channel. The "Info" button will open this page.
         </h5>
         <h5 className="text-center mb-3">
           At the moment, the 3 master controlers "Master", "Booth" and
           "Headphones" control the same output since the browser do not yet
-          support multiple channels. Also because of this, multiple inputs are
-          not possible either, only duplicates of one audio input signal from
-          your device.
+          support multiple channels from an external audio interface.
         </h5>
         <section className="d-flex justify-content-center fs-4">
           <Form>
