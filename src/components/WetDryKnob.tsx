@@ -51,8 +51,6 @@ function WetDryKnob({
             width={80}
             knobSize={22}
             progressSize={10}
-            // verticalOffset="50rem"
-            // renderLabelValue={null}
             knobPosition="bottom"
             knobColor="#FFFAF0"
             progressColorFrom="#808080"

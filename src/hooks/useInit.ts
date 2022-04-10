@@ -3,7 +3,6 @@ import { useChannelLine } from "./useChannelLine";
 import { useGain } from "./useGain";
 import { useMaster } from "./useMaster";
 import { useMasterFilter } from "./useMasterFilter";
-// dupa prob testing la scl despre cue and booth singal and stuff? (test first on my pc to get my audio etc)
 const useInit = () => {
   const [AudioContext] = useState(
     () => window.AudioContext || window.webkitAudioContext

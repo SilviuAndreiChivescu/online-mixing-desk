@@ -30,14 +30,6 @@ function CompressorKnob({
   setMain,
   main,
 }: CompressorKnobProps) {
-  //   const [value, setValue] = useState(0);
-  //   useEffect(() => {
-  //     setValue(defaultValue);
-  //   }, [defaultValue]);
-  //   useEffect(() => {
-  //     onChangeFunction(value, setMain, main);
-  //   }, [value]);
-
   const getDataForKnob = () => {
     let data = [];
     for (let i = min; i <= max; i = i + step) {
@@ -60,8 +52,6 @@ function CompressorKnob({
             width={80}
             knobSize={22}
             progressSize={10}
-            // verticalOffset="50rem"
-            // renderLabelValue={null}
             knobPosition="bottom"
             knobColor="#FFFAF0"
             progressColorFrom="#808080"

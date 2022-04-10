@@ -55,8 +55,6 @@ function Knob({
             width={80}
             knobSize={22}
             progressSize={10}
-            // verticalOffset="50rem"
-            // renderLabelValue={null}
             knobPosition="bottom"
             knobColor="#FFFAF0"
             progressColorFrom="#808080"
@@ -74,32 +72,3 @@ function Knob({
   );
 }
 export default Knob;
-
-// below was from when the first knob was breaking the app, the below is the original rangeSlider which works
-// <>
-//   {label ? (
-//     <Row className="mt-2">
-//       <Col> {label} </Col>
-//     </Row>
-//   ) : null}
-//   <Form.Group as={Row}>
-//     <Col className="d-flex align-items-end justify-content-center" lg={3}>
-//       <p>{leftLabel}</p>
-//     </Col>
-//     <Col>
-//       <RangeSlider
-//         variant="secondary"
-//         size="lg"
-//         tooltip="off"
-//         min={min}
-//         max={max}
-//         step={step}
-//         value={value}
-//         onChange={(e: any) => setValue(e.target.value)}
-//       />
-//     </Col>
-//     <Col className="d-flex align-items-end justify-content-center" lg={3}>
-//       <p>{rightLabel}</p>
-//     </Col>
-//   </Form.Group>
-// </>

@@ -9,7 +9,7 @@ const useFXUnit = (audioCtx: AudioContext, compressorOutput: GainNode) => {
 
   // States to use for changing between channels
   const [FXUnitUIStates] = useState({
-    reverb: "LargeHall", // this will only help if I want to show as active the reverb used
+    reverb: "LargeHall",
     dryWetKnob: 0.5,
   });
   // Control reverb showing reverb used

@@ -10,8 +10,6 @@ import "./App.css";
 
 import ControlCenter from "./components/ControlCenter";
 
-// do the select input / output stuff (try with multiple bluetooth connections)
-// create help modal?
 const App: React.FC = () => {
   const [
     channelOneFunctions,
